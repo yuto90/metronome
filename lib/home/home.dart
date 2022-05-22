@@ -29,7 +29,11 @@ class Home extends StatelessWidget {
                     ),
                     Text(
                       model.tempo.toString(),
-                      style: Theme.of(context).textTheme.headline3,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 90,
+                        color: Colors.black,
+                      ),
                     ),
                     Slider(
                       value: model.tempo.toDouble(),
