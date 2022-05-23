@@ -76,6 +76,21 @@ class Home extends StatelessWidget {
                         Spacer(),
                       ],
                     ),
+                    ElevatedButton(
+                      child: const Text('Tap'),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.white,
+                        onPrimary: Colors.black,
+                        shape: const CircleBorder(
+                          side: BorderSide(
+                            color: Colors.black,
+                            width: 1,
+                            style: BorderStyle.solid,
+                          ),
+                        ),
+                      ),
+                      onPressed: () => model.tap(),
+                    ),
                   ],
                 ),
               ),

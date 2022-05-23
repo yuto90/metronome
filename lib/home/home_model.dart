@@ -74,4 +74,7 @@ class HomeModel extends ChangeNotifier {
     tempo = defaultTempo;
     notifyListeners();
   }
+
+  // ボタンをタップした時
+  void tap() {}
 }
