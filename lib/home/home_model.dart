@@ -7,7 +7,12 @@ import 'Dart:async';
 class HomeModel extends ChangeNotifier {
   int defaultTempo = 60;
   int tempo = 60;
+  int oneBeat = 0;
   bool run = false;
+
+  int tempoDuration = 0;
+  Alignment alignment = Alignment.bottomRight;
+
   Soundpool beatPool = Soundpool(streamType: StreamType.alarm);
   late int beat;
   Soundpool finishPool = Soundpool(streamType: StreamType.alarm);
@@ -49,7 +54,9 @@ class HomeModel extends ChangeNotifier {
 
   // 無限ループするメトロノーム
   void runMetronome() {
-    var duration = Duration(microseconds: (60000000 ~/ tempo)); // tempo = 60;
+    // テンポの計算
+    tempoDuration = 60000000 ~/ tempo;
+    var duration = Duration(microseconds: tempoDuration);
     Timer.periodic(duration, (Timer t) => beatLoop(t));
   }
 
@@ -59,6 +66,12 @@ class HomeModel extends ChangeNotifier {
       t.cancel();
     }
     beatPool.play(beat); // 一拍の音`
+
+    if (this.alignment == Alignment.bottomRight) {
+      this.alignment = Alignment.bottomLeft;
+    } else {
+      this.alignment = Alignment.bottomRight;
+    }
     notifyListeners();
   }
 

@@ -24,6 +24,16 @@ class Home extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
+                    AnimatedAlign(
+                      alignment: model.alignment,
+                      duration: Duration(microseconds: model.tempoDuration),
+                      child: Container(
+                        width: 100,
+                        height: 100,
+                        color: Colors.blue,
+                      ),
+                      curve: Curves.easeInOut,
+                    ),
                     Text(
                       'now BPM',
                     ),
