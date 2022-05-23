@@ -65,7 +65,7 @@ class HomeModel extends ChangeNotifier {
     if (!run) {
       t.cancel();
     }
-    beatPool.play(beat); // 一拍の音`
+    clickPool.play(click); // 一拍の音`
 
     if (this.alignment == Alignment.bottomRight) {
       this.alignment = Alignment.bottomLeft;
