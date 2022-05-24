@@ -56,7 +56,9 @@ class HomeModel extends ChangeNotifier {
   void runMetronome() {
     // テンポの計算
     tempoDuration = 60000000 ~/ tempo;
+    print(tempoDuration);
     var duration = Duration(microseconds: tempoDuration);
+    print(duration);
     Timer.periodic(duration, (Timer t) => beatLoop(t));
   }
 
@@ -89,5 +91,7 @@ class HomeModel extends ChangeNotifier {
   }
 
   // ボタンをタップした時
-  void tap() {}
+  void tap() {
+    //if(tempoDuration)
+  }
 }

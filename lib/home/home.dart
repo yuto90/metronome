@@ -20,89 +20,157 @@ class Home extends StatelessWidget {
             ),
             body: Container(
               color: Colors.white,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    AnimatedAlign(
-                      alignment: model.alignment,
-                      duration: Duration(microseconds: model.tempoDuration),
-                      child: Container(
-                        width: 100,
-                        height: 100,
-                        color: Colors.blue,
-                      ),
-                      curve: Curves.easeInOut,
-                    ),
-                    Text(
-                      'now BPM',
-                    ),
-                    Text(
-                      model.tempo.toString(),
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 90,
-                        color: Colors.black,
-                      ),
-                    ),
-                    Slider(
-                      value: model.tempo.toDouble(),
-                      min: 1,
-                      max: 200,
-                      divisions: 200,
-                      label: model.tempo.toString(),
-                      onChanged: (double value) {
-                        model.changeTempo(value);
-                      },
-                    ),
-                    Row(
-                      children: [
-                        Spacer(),
-                        ElevatedButton(
-                          onPressed: model.metronomeReset,
-                          child: Text(
-                            'RESET',
-                            style: TextStyle(
-                              color: Colors.green,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                    flex: 2,
+                    child: Container(
+                      color: Colors.green,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Spacer(),
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Container(
+                              color: Colors.red,
+                              child: AnimatedAlign(
+                                alignment: model.alignment,
+                                duration:
+                                    Duration(microseconds: model.tempoDuration),
+                                child: Container(
+                                  width: 100,
+                                  height: 100,
+                                  color: Colors.blue,
+                                ),
+                                curve: Curves.easeInOut,
+                              ),
                             ),
                           ),
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.white, //ボタンの背景色
+                          Spacer(),
+                          Row(
+                            children: [
+                              Spacer(),
+                              Container(
+                                width: 10,
+                                height: 10,
+                                color: Colors.blue,
+                              ),
+                              Spacer(),
+                              Container(
+                                width: 10,
+                                height: 10,
+                                color: Colors.blue,
+                              ),
+                              Spacer(),
+                              Container(
+                                width: 10,
+                                height: 10,
+                                color: Colors.blue,
+                              ),
+                              Spacer(),
+                              Container(
+                                width: 10,
+                                height: 10,
+                                color: Colors.blue,
+                              ),
+                              Spacer(),
+                            ],
                           ),
-                        ),
-                        Spacer(),
-                        ElevatedButton(
-                          onPressed: model.toggleMetronome,
-                          child: Text(
-                            model.run ? 'STOP' : 'START',
-                            style: TextStyle(
-                              color: model.run ? Colors.blue : Colors.orange,
+                          Spacer(),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 5,
+                    child: Container(
+                      color: Colors.yellow, // Expandedの色
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            'now BPM',
+                          ),
+                          Center(
+                            child: Text(
+                              model.tempo.toString(),
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 50,
+                                color: Colors.black,
+                              ),
                             ),
                           ),
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.white, //ボタンの背景色
+                          Slider(
+                            value: model.tempo.toDouble(),
+                            min: 1,
+                            max: 200,
+                            divisions: 200,
+                            label: model.tempo.toString(),
+                            onChanged: (double value) {
+                              model.changeTempo(value);
+                            },
                           ),
-                        ),
-                        Spacer(),
-                      ],
-                    ),
-                    ElevatedButton(
-                      child: const Text('Tap'),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.white,
-                        onPrimary: Colors.black,
-                        shape: const CircleBorder(
-                          side: BorderSide(
-                            color: Colors.black,
-                            width: 1,
-                            style: BorderStyle.solid,
+                          Row(
+                            children: [
+                              Spacer(),
+                              ElevatedButton(
+                                onPressed: model.metronomeReset,
+                                child: Text(
+                                  'RESET',
+                                  style: TextStyle(
+                                    color: Colors.green,
+                                  ),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.white, //ボタンの背景色
+                                ),
+                              ),
+                              Spacer(),
+                              ElevatedButton(
+                                onPressed: model.toggleMetronome,
+                                child: Text(
+                                  model.run ? 'STOP' : 'START',
+                                  style: TextStyle(
+                                    color:
+                                        model.run ? Colors.blue : Colors.orange,
+                                  ),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.white, //ボタンの背景色
+                                ),
+                              ),
+                              Spacer(),
+                            ],
                           ),
-                        ),
+                          Spacer(),
+                          SizedBox(
+                            height: 100,
+                            width: 100,
+                            child: ElevatedButton(
+                              child: const Text('Tap'),
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.white,
+                                onPrimary: Colors.black,
+                                shape: const CircleBorder(
+                                  side: BorderSide(
+                                    color: Colors.black,
+                                    width: 1,
+                                    style: BorderStyle.solid,
+                                  ),
+                                ),
+                              ),
+                              onPressed: () => model.tap(),
+                            ),
+                          ),
+                          Spacer(),
+                        ],
                       ),
-                      onPressed: () => model.tap(),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           );
