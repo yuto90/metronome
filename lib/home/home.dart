@@ -41,7 +41,7 @@ class Home extends StatelessWidget {
                                     Duration(microseconds: model.tempoDuration),
                                 child: Container(
                                   width: 100,
-                                  height: 100,
+                                  height: 30,
                                   color: Colors.blue,
                                 ),
                                 curve: Curves.easeInOut,
@@ -53,27 +53,35 @@ class Home extends StatelessWidget {
                             children: [
                               Spacer(),
                               Container(
-                                width: 10,
-                                height: 10,
-                                color: Colors.blue,
+                                width: 30,
+                                height: 30,
+                                color: model.nowBeat == 1
+                                    ? Colors.blue
+                                    : Colors.grey,
                               ),
                               Spacer(),
                               Container(
-                                width: 10,
-                                height: 10,
-                                color: Colors.blue,
+                                width: 30,
+                                height: 30,
+                                color: model.nowBeat == 2
+                                    ? Colors.blue
+                                    : Colors.grey,
                               ),
                               Spacer(),
                               Container(
-                                width: 10,
-                                height: 10,
-                                color: Colors.blue,
+                                width: 30,
+                                height: 30,
+                                color: model.nowBeat == 3
+                                    ? Colors.blue
+                                    : Colors.grey,
                               ),
                               Spacer(),
                               Container(
-                                width: 10,
-                                height: 10,
-                                color: Colors.blue,
+                                width: 30,
+                                height: 30,
+                                color: model.nowBeat == 4
+                                    ? Colors.blue
+                                    : Colors.grey,
                               ),
                               Spacer(),
                             ],

@@ -13,6 +13,9 @@ class HomeModel extends ChangeNotifier {
   int tempoDuration = 0;
   Alignment alignment = Alignment.bottomRight;
 
+  // todo 4拍以外も作る
+  int nowBeat = 0;
+
   Soundpool beatPool = Soundpool(streamType: StreamType.alarm);
   late int beat;
   Soundpool finishPool = Soundpool(streamType: StreamType.alarm);
@@ -68,6 +71,7 @@ class HomeModel extends ChangeNotifier {
       t.cancel();
     }
     clickPool.play(click); // 一拍の音`
+    stepBeat();
 
     if (this.alignment == Alignment.bottomRight) {
       this.alignment = Alignment.bottomLeft;
@@ -87,7 +91,14 @@ class HomeModel extends ChangeNotifier {
   void metronomeReset() {
     run = false;
     tempo = defaultTempo;
+    nowBeat = 0;
     notifyListeners();
+  }
+
+  // 何拍目かを更新
+  void stepBeat() {
+    if (nowBeat == 4) nowBeat = 0;
+    nowBeat++;
   }
 
   // ボタンをタップした時
