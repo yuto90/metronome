@@ -71,6 +71,10 @@ class HomeModel extends ChangeNotifier {
       t.cancel();
     }
     clickPool.play(click); // 一拍の音`
+
+    // click時の時間を格納
+    DateTime now = DateTime.now();
+
     stepBeat();
 
     if (this.alignment == Alignment.bottomRight) {
@@ -102,7 +106,5 @@ class HomeModel extends ChangeNotifier {
   }
 
   // ボタンをタップした時
-  void tap() {
-    //if(tempoDuration)
-  }
+  void tap() {}
 }

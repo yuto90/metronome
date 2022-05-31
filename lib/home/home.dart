@@ -12,7 +12,7 @@ class Home extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               title: Text(
-                'Metronome',
+                'Just Beat',
                 style: TextStyle(color: Colors.black),
               ),
               backgroundColor: Colors.white,
@@ -23,10 +23,11 @@ class Home extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+                  //! ---------------------------------------------------------------
                   Expanded(
                     flex: 2,
                     child: Container(
-                      color: Colors.green,
+                      color: Colors.white, // Expandedの色
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -34,7 +35,7 @@ class Home extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Container(
-                              color: Colors.red,
+                              color: Colors.white,
                               child: AnimatedAlign(
                                 alignment: model.alignment,
                                 duration:
@@ -42,7 +43,7 @@ class Home extends StatelessWidget {
                                 child: Container(
                                   width: 100,
                                   height: 30,
-                                  color: Colors.blue,
+                                  color: Colors.black,
                                 ),
                                 curve: Curves.easeInOut,
                               ),
@@ -55,33 +56,45 @@ class Home extends StatelessWidget {
                               Container(
                                 width: 30,
                                 height: 30,
-                                color: model.nowBeat == 1
-                                    ? Colors.blue
-                                    : Colors.grey,
+                                decoration: BoxDecoration(
+                                  color: model.nowBeat == 1
+                                      ? Colors.blue
+                                      : Colors.grey[700],
+                                  shape: BoxShape.circle,
+                                ),
                               ),
                               Spacer(),
                               Container(
                                 width: 30,
                                 height: 30,
-                                color: model.nowBeat == 2
-                                    ? Colors.blue
-                                    : Colors.grey,
+                                decoration: BoxDecoration(
+                                  color: model.nowBeat == 2
+                                      ? Colors.blue
+                                      : Colors.grey[700],
+                                  shape: BoxShape.circle,
+                                ),
                               ),
                               Spacer(),
                               Container(
                                 width: 30,
                                 height: 30,
-                                color: model.nowBeat == 3
-                                    ? Colors.blue
-                                    : Colors.grey,
+                                decoration: BoxDecoration(
+                                  color: model.nowBeat == 3
+                                      ? Colors.blue
+                                      : Colors.grey[700],
+                                  shape: BoxShape.circle,
+                                ),
                               ),
                               Spacer(),
                               Container(
                                 width: 30,
                                 height: 30,
-                                color: model.nowBeat == 4
-                                    ? Colors.blue
-                                    : Colors.grey,
+                                decoration: BoxDecoration(
+                                  color: model.nowBeat == 4
+                                      ? Colors.blue
+                                      : Colors.grey[700],
+                                  shape: BoxShape.circle,
+                                ),
                               ),
                               Spacer(),
                             ],
@@ -91,13 +104,15 @@ class Home extends StatelessWidget {
                       ),
                     ),
                   ),
+                  //! ---------------------------------------------------------------
                   Expanded(
-                    flex: 5,
+                    flex: 10,
                     child: Container(
-                      color: Colors.yellow, // Expandedの色
+                      color: Colors.white, // Expandedの色
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
+                          Spacer(),
                           Text(
                             'now BPM',
                           ),
@@ -121,44 +136,15 @@ class Home extends StatelessWidget {
                               model.changeTempo(value);
                             },
                           ),
-                          Row(
-                            children: [
-                              Spacer(),
-                              ElevatedButton(
-                                onPressed: model.metronomeReset,
-                                child: Text(
-                                  'RESET',
-                                  style: TextStyle(
-                                    color: Colors.green,
-                                  ),
-                                ),
-                                style: ElevatedButton.styleFrom(
-                                  primary: Colors.white, //ボタンの背景色
-                                ),
-                              ),
-                              Spacer(),
-                              ElevatedButton(
-                                onPressed: model.toggleMetronome,
-                                child: Text(
-                                  model.run ? 'STOP' : 'START',
-                                  style: TextStyle(
-                                    color:
-                                        model.run ? Colors.blue : Colors.orange,
-                                  ),
-                                ),
-                                style: ElevatedButton.styleFrom(
-                                  primary: Colors.white, //ボタンの背景色
-                                ),
-                              ),
-                              Spacer(),
-                            ],
-                          ),
                           Spacer(),
                           SizedBox(
-                            height: 100,
-                            width: 100,
+                            height: 200,
+                            width: 200,
                             child: ElevatedButton(
-                              child: const Text('Tap'),
+                              child: const Text(
+                                'Tap',
+                                style: TextStyle(fontSize: 24),
+                              ),
                               style: ElevatedButton.styleFrom(
                                 primary: Colors.white,
                                 onPrimary: Colors.black,
@@ -171,6 +157,61 @@ class Home extends StatelessWidget {
                                 ),
                               ),
                               onPressed: () => model.tap(),
+                            ),
+                          ),
+                          Spacer(),
+                        ],
+                      ),
+                    ),
+                  ),
+                  //! ---------------------------------------------------------------
+                  Expanded(
+                    flex: 2,
+                    child: Container(
+                      color: Colors.white, // Expandedの色
+                      child: Row(
+                        children: [
+                          Spacer(),
+                          SizedBox(
+                            height: 40,
+                            width: 40,
+                            child: FloatingActionButton(
+                              backgroundColor: Colors.blueGrey[100],
+                              mini: true, // trueにするととで小さくなる
+                              onPressed: model.metronomeReset,
+                              elevation: 0, // 通常時のエレベーション
+                              hoverElevation: 0, // マウスホバー時のエレベーション
+                              highlightElevation: 0, // ボタン押下時のエレベーション
+                              child: Icon(Icons.replay, color: Colors.pink),
+                            ),
+                          ),
+                          Spacer(),
+                          SizedBox(
+                            height: 50,
+                            width: 50,
+                            child: FloatingActionButton(
+                              mini: true, // trueにするととで小さくなる
+                              onPressed: model.toggleMetronome,
+                              elevation: 0, // 通常時のエレベーション
+                              hoverElevation: 0, // マウスホバー時のエレベーション
+                              highlightElevation: 0, // ボタン押下時のエレベーション
+                              child: model.run
+                                  ? Icon(Icons.stop, color: Colors.white)
+                                  : Icon(Icons.play_arrow, color: Colors.white),
+                            ),
+                          ),
+                          Spacer(),
+                          SizedBox(
+                            height: 40,
+                            width: 40,
+                            child: FloatingActionButton(
+                              backgroundColor: Colors.blueGrey[100],
+                              mini: true, // trueにするととで小さくなる
+                              onPressed: model.metronomeReset,
+                              elevation: 0, // 通常時のエレベーション
+                              hoverElevation: 0, // マウスホバー時のエレベーション
+                              highlightElevation: 0, // ボタン押下時のエレベーション
+                              child: Icon(Icons.replay, color: Colors.pink),
                             ),
                           ),
                           Spacer(),
