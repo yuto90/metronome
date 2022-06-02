@@ -47,7 +47,7 @@ class Home extends StatelessWidget {
                                   key: model
                                       .widgetKey, // 座標を取得したいWidgetにkeyを付けると、後から参照できる
                                 ),
-                                curve: Curves.easeInOut,
+                                curve: Curves.linear,
                               ),
                             ),
                           ),
