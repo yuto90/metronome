@@ -5,25 +5,43 @@ import 'package:soundpool/soundpool.dart';
 import 'Dart:async';
 
 class HomeModel extends ChangeNotifier {
-  int defaultTempo = 60;
-  int tempo = 60;
-  int oneBeat = 0;
-  bool run = false;
+  int defaultTempo = 60; // デフォルトで設定するBPM
+  int sliderTempo = 60; // 画面スライダーで設定したBPM
+  bool run = false; //メトロノームの動作on/off
 
-  int tempoDuration = 0;
+  // 振り子座標の上限
+  double leftXPosition = 10.0;
+  double rightXPosition = 301.4;
+
+  int tempoDuration = 0; // 1拍にかかるの時間のマイクロ秒
   Alignment alignment = Alignment.bottomRight;
+  // Right: Offset(301.4, 124.4)
+  // Left: Offset(10.0, 124.4)
 
   // todo 4拍以外も作る
   int nowBeat = 0;
 
-  Soundpool beatPool = Soundpool(streamType: StreamType.alarm);
-  late int beat;
-  Soundpool finishPool = Soundpool(streamType: StreamType.alarm);
-  late int finish;
-  Soundpool clickPool = Soundpool(streamType: StreamType.alarm);
-  late int click;
-  DateTime check = DateTime.now();
+  // 座標を追跡するWidgetに渡すkey
+  final widgetKey = GlobalKey();
+  // タップの判定フラグ
+  bool isJustBeat = false;
 
+  Soundpool beatPool = Soundpool.fromOptions(
+    options: SoundpoolOptions(streamType: StreamType.alarm),
+  );
+  late int beat;
+
+  Soundpool finishPool = Soundpool.fromOptions(
+    options: SoundpoolOptions(streamType: StreamType.alarm),
+  );
+  late int finish;
+
+  Soundpool clickPool = Soundpool.fromOptions(
+    options: SoundpoolOptions(streamType: StreamType.alarm),
+  );
+  late int click;
+
+  // init処理
   HomeModel() {
     Future(() async {
       beat = await rootBundle
@@ -46,11 +64,11 @@ class HomeModel extends ChangeNotifier {
 
   // メトロノームの起動処理
   void toggleMetronome() {
+    // メトロノームの起動チェック
     if (run) {
       run = false;
-      notifyListeners();
     } else {
-      run = true;
+      run = true; // メトロノームを起動
       runMetronome();
     }
   }
@@ -58,10 +76,8 @@ class HomeModel extends ChangeNotifier {
   // 無限ループするメトロノーム
   void runMetronome() {
     // テンポの計算
-    tempoDuration = 60000000 ~/ tempo;
-    print(tempoDuration);
-    var duration = Duration(microseconds: tempoDuration);
-    print(duration);
+    tempoDuration = 60000 ~/ sliderTempo;
+    Duration duration = Duration(milliseconds: tempoDuration);
     Timer.periodic(duration, (Timer t) => beatLoop(t));
   }
 
@@ -70,41 +86,55 @@ class HomeModel extends ChangeNotifier {
     if (!run) {
       t.cancel();
     }
+
     clickPool.play(click); // 一拍の音`
+    // メトロノームスタート直後の1拍目は音を鳴らさない
+    //if (nowBeat != -1) clickPool.play(click); // 一拍の音`
 
-    // click時の時間を格納
-    DateTime now = DateTime.now();
-
-    stepBeat();
+    // 今何拍子目かを更新
+    if (nowBeat == 4) nowBeat = 0;
+    nowBeat++;
 
     if (this.alignment == Alignment.bottomRight) {
       this.alignment = Alignment.bottomLeft;
     } else {
       this.alignment = Alignment.bottomRight;
     }
+
     notifyListeners();
+    isJustBeat = false;
   }
 
   // シークバーでテンポを変える
   void changeTempo(double value) {
-    tempo = value.toInt();
+    sliderTempo = value.toInt();
     notifyListeners();
   }
 
   // メトロノームをリセットする
   void metronomeReset() {
     run = false;
-    tempo = defaultTempo;
+    sliderTempo = defaultTempo;
     nowBeat = 0;
+    alignment = Alignment.bottomRight;
     notifyListeners();
   }
 
-  // 何拍目かを更新
-  void stepBeat() {
-    if (nowBeat == 4) nowBeat = 0;
-    nowBeat++;
-  }
-
   // ボタンをタップした時
-  void tap() {}
+  void tap() {
+    if (run) {
+      // widgetKeyを付けたWidgetのグローバル座標を取得する
+      final RenderBox box =
+          widgetKey.currentContext!.findRenderObject() as RenderBox;
+      final globalOffset = box.localToGlobal(Offset.zero);
+
+      if ((rightXPosition - globalOffset.dx <= 3.0) ||
+          (globalOffset.dx - leftXPosition <= 3.0)) {
+        print('just!!!___$nowBeat');
+        isJustBeat = true;
+        notifyListeners();
+      }
+      print('---------------------------------');
+    }
+  }
 }

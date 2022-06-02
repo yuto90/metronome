@@ -35,15 +35,17 @@ class Home extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Container(
-                              color: Colors.white,
+                              color: Colors.blueGrey[100],
                               child: AnimatedAlign(
                                 alignment: model.alignment,
                                 duration:
-                                    Duration(microseconds: model.tempoDuration),
+                                    Duration(milliseconds: model.tempoDuration),
                                 child: Container(
                                   width: 100,
                                   height: 30,
                                   color: Colors.black,
+                                  key: model
+                                      .widgetKey, // 座標を取得したいWidgetにkeyを付けると、後から参照できる
                                 ),
                                 curve: Curves.easeInOut,
                               ),
@@ -118,7 +120,7 @@ class Home extends StatelessWidget {
                           ),
                           Center(
                             child: Text(
-                              model.tempo.toString(),
+                              model.sliderTempo.toString(),
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 50,
@@ -127,15 +129,20 @@ class Home extends StatelessWidget {
                             ),
                           ),
                           Slider(
-                            value: model.tempo.toDouble(),
+                            value: model.sliderTempo.toDouble(),
                             min: 1,
                             max: 200,
                             divisions: 200,
-                            label: model.tempo.toString(),
+                            label: model.sliderTempo.toString(),
                             onChanged: (double value) {
                               model.changeTempo(value);
                             },
                           ),
+                          // todo 後で消す ----------------------------------
+                          Text(
+                            model.isJustBeat ? 'just!!!!!' : '',
+                          ),
+                          // todo 後で消す ----------------------------------
                           Spacer(),
                           SizedBox(
                             height: 200,
@@ -151,7 +158,7 @@ class Home extends StatelessWidget {
                                 shape: const CircleBorder(
                                   side: BorderSide(
                                     color: Colors.black,
-                                    width: 1,
+                                    width: 3,
                                     style: BorderStyle.solid,
                                   ),
                                 ),
