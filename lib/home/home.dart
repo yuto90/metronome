@@ -129,12 +129,6 @@ class Home extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          // todo 後で消す ----------------------------------
-                          Spacer(),
-                          Text(
-                            model.isJustBeat ? 'just!!!!!' : '',
-                          ),
-                          // todo 後で消す ----------------------------------
                           Spacer(),
                           Text(
                             'now BPM',
@@ -169,7 +163,9 @@ class Home extends StatelessWidget {
                                 style: TextStyle(fontSize: 24),
                               ),
                               style: ElevatedButton.styleFrom(
-                                primary: Colors.white,
+                                primary: model.isJustBeat
+                                    ? Colors.green[200]
+                                    : Colors.white,
                                 onPrimary: Colors.black,
                                 shape: const CircleBorder(
                                   side: BorderSide(
@@ -207,6 +203,7 @@ class Home extends StatelessWidget {
                                 width: 90,
                                 child: ElevatedButton(
                                   child: Icon(Icons.hdr_strong),
+                                  //child: Icon(Icons.keyboard_control_outlined),
                                   style: ElevatedButton.styleFrom(
                                     primary: model.isClick
                                         ? Colors.white

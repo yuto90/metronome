@@ -133,8 +133,8 @@ class HomeModel extends ChangeNotifier {
           widgetKey.currentContext!.findRenderObject() as RenderBox;
       final globalOffset = box.localToGlobal(Offset.zero);
 
-      if ((rightXPosition - globalOffset.dx <= 10.0) ||
-          (globalOffset.dx - leftXPosition <= 10.0)) {
+      // Left:280, right:10
+      if (globalOffset.dx >= 275.0 || globalOffset.dx <= 15.0) {
         print('just!!!___$nowBeat');
         isJustBeat = true;
       } else {
