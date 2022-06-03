@@ -9,6 +9,11 @@ class HomeModel extends ChangeNotifier {
   int sliderTempo = 60; // 画面スライダーで設定したBPM
   bool run = false; //メトロノームの動作on/off
 
+  // 振り子の表示フラグ
+  bool isPendulum = true;
+  // 拍子の表示フラグ
+  bool isClick = true;
+
   // 振り子座標の上限
   double leftXPosition = 10.0;
   double rightXPosition = 301.4;
@@ -128,13 +133,27 @@ class HomeModel extends ChangeNotifier {
           widgetKey.currentContext!.findRenderObject() as RenderBox;
       final globalOffset = box.localToGlobal(Offset.zero);
 
-      if ((rightXPosition - globalOffset.dx <= 3.0) ||
-          (globalOffset.dx - leftXPosition <= 3.0)) {
+      if ((rightXPosition - globalOffset.dx <= 10.0) ||
+          (globalOffset.dx - leftXPosition <= 10.0)) {
         print('just!!!___$nowBeat');
         isJustBeat = true;
-        notifyListeners();
+      } else {
+        isJustBeat = false;
       }
+      notifyListeners();
       print('---------------------------------');
     }
+  }
+
+  // 振り子の画面表示フラグを切り替える関数
+  void togglePendulum() {
+    isPendulum = !isPendulum;
+    notifyListeners();
+  }
+
+  // クリックの画面表示フラグを切り替える関数
+  void toggleClick() {
+    isClick = !isClick;
+    notifyListeners();
   }
 }

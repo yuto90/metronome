@@ -35,7 +35,9 @@ class Home extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Container(
-                              color: Colors.blueGrey[100],
+                              color: model.isPendulum
+                                  ? Colors.blueGrey[100]
+                                  : Colors.white,
                               child: AnimatedAlign(
                                 alignment: model.alignment,
                                 duration:
@@ -43,7 +45,9 @@ class Home extends StatelessWidget {
                                 child: Container(
                                   width: 100,
                                   height: 30,
-                                  color: Colors.black,
+                                  color: model.isPendulum
+                                      ? Colors.black
+                                      : Colors.white,
                                   key: model
                                       .widgetKey, // 座標を取得したいWidgetにkeyを付けると、後から参照できる
                                 ),
@@ -58,10 +62,13 @@ class Home extends StatelessWidget {
                               Container(
                                 width: 30,
                                 height: 30,
+                                // todo ↓ 三項内に三項ってどうなの？
                                 decoration: BoxDecoration(
-                                  color: model.nowBeat == 1
-                                      ? Colors.blue
-                                      : Colors.grey[700],
+                                  color: model.isClick
+                                      ? model.nowBeat == 1
+                                          ? Colors.blue
+                                          : Colors.grey[700]
+                                      : Colors.white,
                                   shape: BoxShape.circle,
                                 ),
                               ),
@@ -69,10 +76,13 @@ class Home extends StatelessWidget {
                               Container(
                                 width: 30,
                                 height: 30,
+                                // todo ↓ 三項内に三項ってどうなの？
                                 decoration: BoxDecoration(
-                                  color: model.nowBeat == 2
-                                      ? Colors.blue
-                                      : Colors.grey[700],
+                                  color: model.isClick
+                                      ? model.nowBeat == 2
+                                          ? Colors.blue
+                                          : Colors.grey[700]
+                                      : Colors.white,
                                   shape: BoxShape.circle,
                                 ),
                               ),
@@ -80,10 +90,13 @@ class Home extends StatelessWidget {
                               Container(
                                 width: 30,
                                 height: 30,
+                                // todo ↓ 三項内に三項ってどうなの？
                                 decoration: BoxDecoration(
-                                  color: model.nowBeat == 3
-                                      ? Colors.blue
-                                      : Colors.grey[700],
+                                  color: model.isClick
+                                      ? model.nowBeat == 3
+                                          ? Colors.blue
+                                          : Colors.grey[700]
+                                      : Colors.white,
                                   shape: BoxShape.circle,
                                 ),
                               ),
@@ -91,17 +104,19 @@ class Home extends StatelessWidget {
                               Container(
                                 width: 30,
                                 height: 30,
+                                // todo ↓ 三項内に三項ってどうなの？
                                 decoration: BoxDecoration(
-                                  color: model.nowBeat == 4
-                                      ? Colors.blue
-                                      : Colors.grey[700],
+                                  color: model.isClick
+                                      ? model.nowBeat == 4
+                                          ? Colors.blue
+                                          : Colors.grey[700]
+                                      : Colors.white,
                                   shape: BoxShape.circle,
                                 ),
                               ),
                               Spacer(),
                             ],
                           ),
-                          Spacer(),
                         ],
                       ),
                     ),
@@ -114,6 +129,12 @@ class Home extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
+                          // todo 後で消す ----------------------------------
+                          Spacer(),
+                          Text(
+                            model.isJustBeat ? 'just!!!!!' : '',
+                          ),
+                          // todo 後で消す ----------------------------------
                           Spacer(),
                           Text(
                             'now BPM',
@@ -138,11 +159,6 @@ class Home extends StatelessWidget {
                               model.changeTempo(value);
                             },
                           ),
-                          // todo 後で消す ----------------------------------
-                          Text(
-                            model.isJustBeat ? 'just!!!!!' : '',
-                          ),
-                          // todo 後で消す ----------------------------------
                           Spacer(),
                           SizedBox(
                             height: 200,
@@ -165,6 +181,42 @@ class Home extends StatelessWidget {
                               ),
                               onPressed: () => model.tap(),
                             ),
+                          ),
+                          Spacer(),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              // todo もっと直感的に分かりやすくしたい
+                              SizedBox(
+                                height: 40,
+                                width: 90,
+                                child: ElevatedButton(
+                                  child: Icon(Icons.settings_ethernet_rounded),
+                                  //child: Icon(Icons.sync_alt),
+                                  style: ElevatedButton.styleFrom(
+                                    primary: model.isPendulum
+                                        ? Colors.white
+                                        : Colors.grey,
+                                    onPrimary: Colors.black,
+                                  ),
+                                  onPressed: () => model.togglePendulum(),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 40,
+                                width: 90,
+                                child: ElevatedButton(
+                                  child: Icon(Icons.hdr_strong),
+                                  style: ElevatedButton.styleFrom(
+                                    primary: model.isClick
+                                        ? Colors.white
+                                        : Colors.grey,
+                                    onPrimary: Colors.black,
+                                  ),
+                                  onPressed: () => model.toggleClick(),
+                                ),
+                              ),
+                            ],
                           ),
                           Spacer(),
                         ],
