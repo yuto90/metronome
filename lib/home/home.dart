@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../size_config.dart';
 import 'home_model.dart';
 
 class Home extends StatelessWidget {
@@ -9,6 +10,8 @@ class Home extends StatelessWidget {
       create: (_) => HomeModel(),
       child: Consumer<HomeModel>(
         builder: (context, model, child) {
+          // SizeConfigを初期化
+          SizeConfig().init(context);
           return Scaffold(
             appBar: AppBar(
               title: Text(
@@ -33,7 +36,9 @@ class Home extends StatelessWidget {
                         children: [
                           Spacer(),
                           Padding(
-                            padding: const EdgeInsets.all(10.0),
+                            padding: EdgeInsets.all(
+                              SizeConfig.blockSizeVertical! * 2,
+                            ),
                             child: Container(
                               color: model.isPendulum
                                   ? Colors.blueGrey[100]
@@ -43,8 +48,8 @@ class Home extends StatelessWidget {
                                 duration:
                                     Duration(milliseconds: model.tempoDuration),
                                 child: Container(
-                                  width: 100,
-                                  height: 30,
+                                  width: SizeConfig.blockSizeHorizontal! * 20,
+                                  height: SizeConfig.blockSizeVertical! * 4,
                                   color: model.isPendulum
                                       ? Colors.black
                                       : Colors.white,
@@ -60,8 +65,8 @@ class Home extends StatelessWidget {
                             children: [
                               Spacer(),
                               Container(
-                                width: 30,
-                                height: 30,
+                                width: SizeConfig.blockSizeHorizontal! * 10,
+                                height: SizeConfig.blockSizeVertical! * 4,
                                 // todo ↓ 三項内に三項ってどうなの？
                                 decoration: BoxDecoration(
                                   color: model.isClick
@@ -74,8 +79,8 @@ class Home extends StatelessWidget {
                               ),
                               Spacer(),
                               Container(
-                                width: 30,
-                                height: 30,
+                                width: SizeConfig.blockSizeHorizontal! * 10,
+                                height: SizeConfig.blockSizeVertical! * 4,
                                 // todo ↓ 三項内に三項ってどうなの？
                                 decoration: BoxDecoration(
                                   color: model.isClick
@@ -88,8 +93,8 @@ class Home extends StatelessWidget {
                               ),
                               Spacer(),
                               Container(
-                                width: 30,
-                                height: 30,
+                                width: SizeConfig.blockSizeHorizontal! * 10,
+                                height: SizeConfig.blockSizeVertical! * 4,
                                 // todo ↓ 三項内に三項ってどうなの？
                                 decoration: BoxDecoration(
                                   color: model.isClick
@@ -102,8 +107,8 @@ class Home extends StatelessWidget {
                               ),
                               Spacer(),
                               Container(
-                                width: 30,
-                                height: 30,
+                                width: SizeConfig.blockSizeHorizontal! * 10,
+                                height: SizeConfig.blockSizeVertical! * 4,
                                 // todo ↓ 三項内に三項ってどうなの？
                                 decoration: BoxDecoration(
                                   color: model.isClick
@@ -138,7 +143,7 @@ class Home extends StatelessWidget {
                               model.sliderTempo.toString(),
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 50,
+                                fontSize: SizeConfig.blockSizeVertical! * 6,
                                 color: Colors.black,
                               ),
                             ),
@@ -155,12 +160,14 @@ class Home extends StatelessWidget {
                           ),
                           Spacer(),
                           SizedBox(
-                            height: 200,
-                            width: 200,
+                            width: SizeConfig.blockSizeHorizontal! * 50,
+                            height: SizeConfig.blockSizeVertical! * 20,
                             child: ElevatedButton(
-                              child: const Text(
+                              child: Text(
                                 'Tap',
-                                style: TextStyle(fontSize: 24),
+                                style: TextStyle(
+                                  fontSize: SizeConfig.blockSizeVertical! * 3,
+                                ),
                               ),
                               style: ElevatedButton.styleFrom(
                                 primary: model.isJustBeat
@@ -184,8 +191,8 @@ class Home extends StatelessWidget {
                             children: [
                               // todo もっと直感的に分かりやすくしたい
                               SizedBox(
-                                height: 40,
-                                width: 90,
+                                width: SizeConfig.blockSizeHorizontal! * 20,
+                                height: SizeConfig.blockSizeVertical! * 6,
                                 child: ElevatedButton(
                                   child: Icon(Icons.settings_ethernet_rounded),
                                   //child: Icon(Icons.sync_alt),
@@ -199,8 +206,8 @@ class Home extends StatelessWidget {
                                 ),
                               ),
                               SizedBox(
-                                height: 40,
-                                width: 90,
+                                width: SizeConfig.blockSizeHorizontal! * 20,
+                                height: SizeConfig.blockSizeVertical! * 6,
                                 child: ElevatedButton(
                                   child: Icon(Icons.hdr_strong),
                                   //child: Icon(Icons.keyboard_control_outlined),
@@ -229,8 +236,8 @@ class Home extends StatelessWidget {
                         children: [
                           Spacer(),
                           SizedBox(
-                            height: 40,
-                            width: 40,
+                            width: SizeConfig.blockSizeHorizontal! * 10,
+                            height: SizeConfig.blockSizeVertical! * 6,
                             child: FloatingActionButton(
                               backgroundColor: Colors.blueGrey[100],
                               mini: true, // trueにするととで小さくなる
@@ -243,8 +250,8 @@ class Home extends StatelessWidget {
                           ),
                           Spacer(),
                           SizedBox(
-                            height: 50,
-                            width: 50,
+                            width: SizeConfig.blockSizeHorizontal! * 20,
+                            height: SizeConfig.blockSizeVertical! * 6,
                             child: FloatingActionButton(
                               mini: true, // trueにするととで小さくなる
                               onPressed: model.toggleMetronome,
@@ -258,8 +265,8 @@ class Home extends StatelessWidget {
                           ),
                           Spacer(),
                           SizedBox(
-                            height: 40,
-                            width: 40,
+                            width: SizeConfig.blockSizeHorizontal! * 10,
+                            height: SizeConfig.blockSizeVertical! * 6,
                             child: FloatingActionButton(
                               backgroundColor: Colors.blueGrey[100],
                               mini: true, // trueにするととで小さくなる
