@@ -35,29 +35,65 @@ class Home extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Spacer(),
-                          Padding(
-                            padding: EdgeInsets.all(
-                              SizeConfig.blockSizeVertical! * 2,
-                            ),
-                            child: Container(
-                              color: model.isPendulum
-                                  ? Colors.blueGrey[100]
-                                  : Colors.white,
-                              child: AnimatedAlign(
-                                alignment: model.alignment,
-                                duration:
-                                    Duration(milliseconds: model.tempoDuration),
-                                child: Container(
-                                  width: SizeConfig.blockSizeHorizontal! * 20,
-                                  height: SizeConfig.blockSizeVertical! * 4,
-                                  color: model.isPendulum
-                                      ? Colors.black
-                                      : Colors.white,
-                                  key: model
-                                      .widgetKey, // 座標を取得したいWidgetにkeyを付けると、後から参照できる
-                                ),
-                                curve: Curves.linear,
+                          // 左側の最大振り子位置の取得用のWidget
+                          Container(
+                            width: SizeConfig.blockSizeHorizontal! * 90,
+                            height: SizeConfig.blockSizeVertical! * 1,
+                            // todo カラーを白にする
+                            color: Colors.white,
+                            child: Align(
+                              alignment: Alignment.bottomLeft,
+                              child: Container(
+                                width: SizeConfig.blockSizeHorizontal! *
+                                        model.pendulumWidth +
+                                    model.safeWidth,
+                                height: SizeConfig.blockSizeVertical! * 1,
+                                color: Colors.white,
+                                key: model
+                                    .leftGlobalKey, // 座標を取得したいWidgetにkeyを付けると、後から参照できる
                               ),
+                            ),
+                          ),
+                          // 右側の最大振り子位置の取得用のWidget
+                          Container(
+                            width: SizeConfig.blockSizeHorizontal! * 90,
+                            height: SizeConfig.blockSizeVertical! * 1,
+                            // todo カラーを白にする
+                            color: Colors.white,
+                            child: Align(
+                              alignment: Alignment.bottomRight,
+                              child: Container(
+                                width: SizeConfig.blockSizeHorizontal! *
+                                        model.pendulumWidth +
+                                    model.safeWidth,
+                                height: SizeConfig.blockSizeVertical! * 1,
+                                color: Colors.white,
+                                key: model
+                                    .rightGlobalKey, // 座標を取得したいWidgetにkeyを付けると、後から参照できる
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: SizeConfig.blockSizeHorizontal! * 90,
+                            height: SizeConfig.blockSizeVertical! * 4,
+                            color: model.isPendulum
+                                ? Colors.blueGrey[100]
+                                : Colors.white,
+                            child: AnimatedAlign(
+                              alignment: model.alignment,
+                              duration:
+                                  Duration(milliseconds: model.tempoDuration),
+                              child: Container(
+                                width: SizeConfig.blockSizeHorizontal! *
+                                    model.pendulumWidth,
+                                height: SizeConfig.blockSizeVertical! * 4,
+                                color: model.isPendulum
+                                    ? Colors.black
+                                    : Colors.white,
+                                key: model
+                                    .pendulumGlobalKey, // 座標を取得したいWidgetにkeyを付けると、後から参照できる
+                              ),
+                              curve: Curves.linear,
                             ),
                           ),
                           Spacer(),

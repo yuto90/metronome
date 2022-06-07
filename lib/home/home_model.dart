@@ -5,9 +5,11 @@ import 'package:soundpool/soundpool.dart';
 import 'Dart:async';
 
 class HomeModel extends ChangeNotifier {
+  // 変数 ------------------------------------------------------
   int defaultTempo = 60; // デフォルトで設定するBPM
   int sliderTempo = 60; // 画面スライダーで設定したBPM
   bool run = false; //メトロノームの動作on/off
+  int count = 0;
 
   // 振り子の表示フラグ
   bool isPendulum = true;
@@ -20,14 +22,24 @@ class HomeModel extends ChangeNotifier {
 
   int tempoDuration = 0; // 1拍にかかるの時間のマイクロ秒
   Alignment alignment = Alignment.bottomRight;
-  // Right: Offset(301.4, 124.4)
-  // Left: Offset(10.0, 124.4)
 
   // todo 4拍以外も作る
   int nowBeat = 0;
 
   // 座標を追跡するWidgetに渡すkey
-  final widgetKey = GlobalKey();
+  final rightGlobalKey = GlobalKey();
+  final leftGlobalKey = GlobalKey();
+  final pendulumGlobalKey = GlobalKey();
+
+  // late:初期化を遅らせるだけ。使う前には初期化が必要
+  late Offset limitRight;
+  late Offset limitLeft;
+
+  double pendulumWidth = 20;
+
+  // ジャストタイミングとして許容する幅
+  double safeWidth = 5.0;
+
   // タップの判定フラグ
   bool isJustBeat = false;
 
@@ -45,6 +57,7 @@ class HomeModel extends ChangeNotifier {
     options: SoundpoolOptions(streamType: StreamType.alarm),
   );
   late int click;
+  // 変数 ------------------------------------------------------
 
   // init処理
   HomeModel() {
@@ -67,8 +80,27 @@ class HomeModel extends ChangeNotifier {
     });
   }
 
+  // メトロノームの初回処理
+  void initMetronome() {
+    // 右側限界値の座標を取得
+    RenderBox rightRenderBox =
+        rightGlobalKey.currentContext!.findRenderObject() as RenderBox;
+    limitRight = rightRenderBox.localToGlobal(Offset.zero);
+
+    //左側限界値の座標を取得
+    RenderBox leftRenderBox =
+        leftGlobalKey.currentContext!.findRenderObject() as RenderBox;
+    limitLeft = leftRenderBox.localToGlobal(Offset.zero);
+  }
+
   // メトロノームの起動処理
   void toggleMetronome() {
+    // 初回起動時のみ実行
+    if (count == 0) {
+      initMetronome();
+      count++;
+    }
+
     // メトロノームの起動チェック
     if (run) {
       run = false;
@@ -129,19 +161,17 @@ class HomeModel extends ChangeNotifier {
   void tap() {
     if (run) {
       // widgetKeyを付けたWidgetのグローバル座標を取得する
-      final RenderBox box =
-          widgetKey.currentContext!.findRenderObject() as RenderBox;
-      final globalOffset = box.localToGlobal(Offset.zero);
+      final RenderBox pendulumBox =
+          pendulumGlobalKey.currentContext!.findRenderObject() as RenderBox;
+      final pendulumWidget = pendulumBox.localToGlobal(Offset.zero);
 
-      // Left:280, right:10
-      if (globalOffset.dx >= 275.0 || globalOffset.dx <= 15.0) {
-        print('just!!!___$nowBeat');
+      if (pendulumWidget.dx <= limitLeft.dx + safeWidth ||
+          pendulumWidget.dx >= limitRight.dx - safeWidth) {
         isJustBeat = true;
       } else {
         isJustBeat = false;
       }
       notifyListeners();
-      print('---------------------------------');
     }
   }
 
