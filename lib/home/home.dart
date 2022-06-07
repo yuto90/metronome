@@ -186,7 +186,7 @@ class Home extends StatelessWidget {
                           ),
                           Slider(
                             value: model.sliderTempo.toDouble(),
-                            min: 1,
+                            min: 40,
                             max: 200,
                             divisions: 200,
                             label: model.sliderTempo.toString(),
