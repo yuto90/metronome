@@ -1,4 +1,4 @@
-import 'dart:typed_data';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:soundpool/soundpool.dart';
@@ -9,7 +9,6 @@ class HomeModel extends ChangeNotifier {
   int defaultTempo = 60; // デフォルトで設定するBPM
   int sliderTempo = 60; // 画面スライダーで設定したBPM
   bool run = false; //メトロノームの動作on/off
-  int count = 0;
 
   // 振り子の表示フラグ
   bool isPendulum = true;
@@ -94,18 +93,14 @@ class HomeModel extends ChangeNotifier {
   }
 
   // メトロノームの起動処理
-  void toggleMetronome() {
-    // 初回起動時のみ実行
-    if (count == 0) {
-      initMetronome();
-      count++;
-    }
-
+  Future<void> toggleMetronome() async {
     // メトロノームの起動チェック
     if (run) {
       run = false;
     } else {
       run = true; // メトロノームを起動
+      // メトロノームの初期化
+      initMetronome();
       runMetronome();
     }
   }
@@ -124,20 +119,22 @@ class HomeModel extends ChangeNotifier {
       t.cancel();
     }
 
-    clickPool.setVolume(volume: 0.5);
-    clickPool.play(click); // 一拍の音`
-    // メトロノームスタート直後の1拍目は音を鳴らさない
-    //if (nowBeat != -1) clickPool.play(click); // 一拍の音`
-
-    // 今何拍子目かを更新
-    if (nowBeat == 4) nowBeat = 0;
     nowBeat++;
-
-    if (this.alignment == Alignment.bottomRight) {
-      this.alignment = Alignment.bottomLeft;
-    } else {
-      this.alignment = Alignment.bottomRight;
+    if (nowBeat == 5) {
+      nowBeat = 1;
     }
+
+    // todo 設定で鳴らすか選択させる
+    // 4拍目でfinishを鳴らす
+    if (nowBeat == 4) {
+      finishPool.play(finish); // 4拍目の音
+    } else {
+      beatPool.play(beat); // 1拍の音`
+    }
+
+    this.alignment = this.alignment == Alignment.bottomRight
+        ? this.alignment = Alignment.bottomLeft
+        : this.alignment = Alignment.bottomRight;
 
     notifyListeners();
     isJustBeat = false;
