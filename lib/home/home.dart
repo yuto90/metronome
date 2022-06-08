@@ -28,7 +28,7 @@ class Home extends StatelessWidget {
                 children: <Widget>[
                   //! ---------------------------------------------------------------
                   Expanded(
-                    flex: 2,
+                    flex: 3,
                     child: Container(
                       color: Colors.white, // Expandedの色
                       child: Column(
@@ -39,7 +39,6 @@ class Home extends StatelessWidget {
                           Container(
                             width: SizeConfig.blockSizeHorizontal! * 90,
                             height: SizeConfig.blockSizeVertical! * 1,
-                            // todo カラーを白にする
                             color: Colors.white,
                             child: Align(
                               alignment: Alignment.bottomLeft,
@@ -58,7 +57,6 @@ class Home extends StatelessWidget {
                           Container(
                             width: SizeConfig.blockSizeHorizontal! * 90,
                             height: SizeConfig.blockSizeVertical! * 1,
-                            // todo カラーを白にする
                             color: Colors.white,
                             child: Align(
                               alignment: Alignment.bottomRight,
@@ -73,6 +71,7 @@ class Home extends StatelessWidget {
                               ),
                             ),
                           ),
+                          // 振り子本体
                           Container(
                             width: SizeConfig.blockSizeHorizontal! * 90,
                             height: SizeConfig.blockSizeVertical! * 4,
@@ -225,6 +224,7 @@ class Home extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+                              Spacer(flex: 3),
                               // todo もっと直感的に分かりやすくしたい
                               SizedBox(
                                 width: SizeConfig.blockSizeHorizontal! * 20,
@@ -241,6 +241,7 @@ class Home extends StatelessWidget {
                                   onPressed: () => model.togglePendulum(),
                                 ),
                               ),
+                              Spacer(flex: 1),
                               SizedBox(
                                 width: SizeConfig.blockSizeHorizontal! * 20,
                                 height: SizeConfig.blockSizeVertical! * 6,
@@ -256,6 +257,7 @@ class Home extends StatelessWidget {
                                   onPressed: () => model.toggleClick(),
                                 ),
                               ),
+                              Spacer(flex: 3),
                             ],
                           ),
                           Spacer(),
@@ -274,15 +276,6 @@ class Home extends StatelessWidget {
                           SizedBox(
                             width: SizeConfig.blockSizeHorizontal! * 10,
                             height: SizeConfig.blockSizeVertical! * 6,
-                            child: FloatingActionButton(
-                              backgroundColor: Colors.blueGrey[100],
-                              mini: true, // trueにするととで小さくなる
-                              onPressed: model.metronomeReset,
-                              elevation: 0, // 通常時のエレベーション
-                              hoverElevation: 0, // マウスホバー時のエレベーション
-                              highlightElevation: 0, // ボタン押下時のエレベーション
-                              child: Icon(Icons.replay, color: Colors.pink),
-                            ),
                           ),
                           Spacer(),
                           SizedBox(
