@@ -44,22 +44,22 @@ class HomeModel extends ChangeNotifier {
   bool isJustBeat = false;
 
   Soundpool beatPool = Soundpool.fromOptions(
-    options: SoundpoolOptions(streamType: StreamType.alarm),
+    options: SoundpoolOptions(streamType: StreamType.music),
   );
   late int beat;
 
   Soundpool finishPool = Soundpool.fromOptions(
-    options: SoundpoolOptions(streamType: StreamType.alarm),
+    options: SoundpoolOptions(streamType: StreamType.music),
   );
   late int finish;
 
   Soundpool clickPool = Soundpool.fromOptions(
-    options: SoundpoolOptions(streamType: StreamType.alarm),
+    options: SoundpoolOptions(streamType: StreamType.music),
   );
   late int click;
   // 変数 ------------------------------------------------------
 
-  // init処理
+  // 画面読み込み時のinit処理
   HomeModel() {
     Future(() async {
       beat = await rootBundle
@@ -80,7 +80,7 @@ class HomeModel extends ChangeNotifier {
     });
   }
 
-  // メトロノームの初回処理
+  // メトロノームの初回init処理
   void initMetronome() {
     // 右側限界値の座標を取得
     RenderBox rightRenderBox =
@@ -124,6 +124,7 @@ class HomeModel extends ChangeNotifier {
       t.cancel();
     }
 
+    clickPool.setVolume(volume: 0.5);
     clickPool.play(click); // 一拍の音`
     // メトロノームスタート直後の1拍目は音を鳴らさない
     //if (nowBeat != -1) clickPool.play(click); // 一拍の音`
