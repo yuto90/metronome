@@ -18,296 +18,344 @@ class Home extends StatelessWidget {
                 'Just Beat',
                 style: TextStyle(color: Colors.black),
               ),
-              backgroundColor: Colors.white,
+              backgroundColor: Colors.grey[200],
               elevation: 0,
             ),
             body: Container(
-              color: Colors.white,
+              color: Colors.grey[200],
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   //! ---------------------------------------------------------------
                   Expanded(
-                    flex: 3,
-                    child: Container(
-                      color: Colors.white, // Expandedの色
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Spacer(),
-                          // 左側の最大振り子位置の取得用のWidget
-                          Container(
-                            width: SizeConfig.blockSizeHorizontal! * 90,
-                            height: SizeConfig.blockSizeVertical! * 1,
-                            color: Colors.white,
-                            child: Align(
-                              alignment: Alignment.bottomLeft,
-                              child: Container(
-                                width: SizeConfig.blockSizeHorizontal! *
-                                        model.pendulumWidth +
-                                    model.safeWidth,
-                                height: SizeConfig.blockSizeVertical! * 1,
-                                color: Colors.white,
-                                key: model
-                                    .leftGlobalKey, // 座標を取得したいWidgetにkeyを付けると、後から参照できる
+                    flex: 4,
+                    child: Padding(
+                      padding:
+                          EdgeInsets.all(SizeConfig.blockSizeHorizontal! * 2),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black),
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white, // Expandedの色
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Spacer(),
+                            // 左側の最大振り子位置の取得用のWidget
+                            Container(
+                              width: SizeConfig.blockSizeHorizontal! * 90,
+                              height: SizeConfig.blockSizeVertical! * 1,
+                              color: Colors.white,
+                              child: Align(
+                                alignment: Alignment.bottomLeft,
+                                child: Container(
+                                  width: SizeConfig.blockSizeHorizontal! *
+                                          model.pendulumWidth +
+                                      model.safeWidth,
+                                  height: SizeConfig.blockSizeVertical! * 1,
+                                  color: Colors.white,
+                                  key: model
+                                      .leftGlobalKey, // 座標を取得したいWidgetにkeyを付けると、後から参照できる
+                                ),
                               ),
                             ),
-                          ),
-                          // 右側の最大振り子位置の取得用のWidget
-                          Container(
-                            width: SizeConfig.blockSizeHorizontal! * 90,
-                            height: SizeConfig.blockSizeVertical! * 1,
-                            color: Colors.white,
-                            child: Align(
-                              alignment: Alignment.bottomRight,
-                              child: Container(
-                                width: SizeConfig.blockSizeHorizontal! *
-                                        model.pendulumWidth +
-                                    model.safeWidth,
-                                height: SizeConfig.blockSizeVertical! * 1,
-                                color: Colors.white,
-                                key: model
-                                    .rightGlobalKey, // 座標を取得したいWidgetにkeyを付けると、後から参照できる
+                            // 右側の最大振り子位置の取得用のWidget
+                            Container(
+                              width: SizeConfig.blockSizeHorizontal! * 90,
+                              height: SizeConfig.blockSizeVertical! * 1,
+                              color: Colors.white,
+                              child: Align(
+                                alignment: Alignment.bottomRight,
+                                child: Container(
+                                  width: SizeConfig.blockSizeHorizontal! *
+                                          model.pendulumWidth +
+                                      model.safeWidth,
+                                  height: SizeConfig.blockSizeVertical! * 1,
+                                  color: Colors.white,
+                                  key: model
+                                      .rightGlobalKey, // 座標を取得したいWidgetにkeyを付けると、後から参照できる
+                                ),
                               ),
                             ),
-                          ),
-                          // 振り子本体
-                          Container(
-                            width: SizeConfig.blockSizeHorizontal! * 90,
-                            height: SizeConfig.blockSizeVertical! * 4,
-                            color: model.isPendulum
-                                ? Colors.blueGrey[100]
-                                : Colors.white,
-                            child: AnimatedAlign(
-                              alignment: model.alignment,
-                              duration:
-                                  Duration(milliseconds: model.tempoDuration),
-                              child: Container(
-                                width: SizeConfig.blockSizeHorizontal! *
-                                    model.pendulumWidth,
-                                height: SizeConfig.blockSizeVertical! * 4,
-                                color: model.isPendulum
-                                    ? Colors.black
-                                    : Colors.white,
-                                key: model
-                                    .pendulumGlobalKey, // 座標を取得したいWidgetにkeyを付けると、後から参照できる
+                            // 振り子本体
+                            Container(
+                              width: SizeConfig.blockSizeHorizontal! * 90,
+                              height: SizeConfig.blockSizeVertical! * 4,
+                              color: model.isPendulum
+                                  ? Colors.blueGrey[100]
+                                  : Colors.white,
+                              child: AnimatedAlign(
+                                alignment: model.alignment,
+                                duration:
+                                    Duration(milliseconds: model.tempoDuration),
+                                child: Container(
+                                  width: SizeConfig.blockSizeHorizontal! *
+                                      model.pendulumWidth,
+                                  height: SizeConfig.blockSizeVertical! * 4,
+                                  color: model.isPendulum
+                                      ? Colors.blue
+                                      : Colors.white,
+                                  key: model
+                                      .pendulumGlobalKey, // 座標を取得したいWidgetにkeyを付けると、後から参照できる
+                                ),
+                                curve: Curves.linear,
                               ),
-                              curve: Curves.linear,
                             ),
-                          ),
-                          Spacer(),
-                          Row(
-                            children: [
-                              Spacer(),
-                              Container(
-                                width: SizeConfig.blockSizeHorizontal! * 10,
-                                height: SizeConfig.blockSizeVertical! * 4,
-                                // todo ↓ 三項内に三項ってどうなの？
-                                decoration: BoxDecoration(
-                                  color: model.isClick
-                                      ? model.nowBeat == 1
-                                          ? Colors.blue
-                                          : Colors.grey[700]
-                                      : Colors.white,
-                                  shape: BoxShape.circle,
+                            Spacer(),
+                            Row(
+                              children: [
+                                Spacer(),
+                                Container(
+                                  width: SizeConfig.blockSizeHorizontal! * 10,
+                                  height: SizeConfig.blockSizeVertical! * 4,
+                                  // todo ↓ 三項内に三項ってどうなの？
+                                  decoration: BoxDecoration(
+                                    color: model.isClick
+                                        ? model.nowBeat == 1
+                                            ? Colors.blue
+                                            : Colors.grey[700]
+                                        : Colors.white,
+                                    shape: BoxShape.circle,
+                                  ),
                                 ),
-                              ),
-                              Spacer(),
-                              Container(
-                                width: SizeConfig.blockSizeHorizontal! * 10,
-                                height: SizeConfig.blockSizeVertical! * 4,
-                                // todo ↓ 三項内に三項ってどうなの？
-                                decoration: BoxDecoration(
-                                  color: model.isClick
-                                      ? model.nowBeat == 2
-                                          ? Colors.blue
-                                          : Colors.grey[700]
-                                      : Colors.white,
-                                  shape: BoxShape.circle,
+                                Spacer(),
+                                Container(
+                                  width: SizeConfig.blockSizeHorizontal! * 10,
+                                  height: SizeConfig.blockSizeVertical! * 4,
+                                  // todo ↓ 三項内に三項ってどうなの？
+                                  decoration: BoxDecoration(
+                                    color: model.isClick
+                                        ? model.nowBeat == 2
+                                            ? Colors.blue
+                                            : Colors.grey[700]
+                                        : Colors.white,
+                                    shape: BoxShape.circle,
+                                  ),
                                 ),
-                              ),
-                              Spacer(),
-                              Container(
-                                width: SizeConfig.blockSizeHorizontal! * 10,
-                                height: SizeConfig.blockSizeVertical! * 4,
-                                // todo ↓ 三項内に三項ってどうなの？
-                                decoration: BoxDecoration(
-                                  color: model.isClick
-                                      ? model.nowBeat == 3
-                                          ? Colors.blue
-                                          : Colors.grey[700]
-                                      : Colors.white,
-                                  shape: BoxShape.circle,
+                                Spacer(),
+                                Container(
+                                  width: SizeConfig.blockSizeHorizontal! * 10,
+                                  height: SizeConfig.blockSizeVertical! * 4,
+                                  // todo ↓ 三項内に三項ってどうなの？
+                                  decoration: BoxDecoration(
+                                    color: model.isClick
+                                        ? model.nowBeat == 3
+                                            ? Colors.blue
+                                            : Colors.grey[700]
+                                        : Colors.white,
+                                    shape: BoxShape.circle,
+                                  ),
                                 ),
-                              ),
-                              Spacer(),
-                              Container(
-                                width: SizeConfig.blockSizeHorizontal! * 10,
-                                height: SizeConfig.blockSizeVertical! * 4,
-                                // todo ↓ 三項内に三項ってどうなの？
-                                decoration: BoxDecoration(
-                                  color: model.isClick
-                                      ? model.nowBeat == 4
-                                          ? Colors.blue
-                                          : Colors.grey[700]
-                                      : Colors.white,
-                                  shape: BoxShape.circle,
+                                Spacer(),
+                                Container(
+                                  width: SizeConfig.blockSizeHorizontal! * 10,
+                                  height: SizeConfig.blockSizeVertical! * 4,
+                                  // todo ↓ 三項内に三項ってどうなの？
+                                  decoration: BoxDecoration(
+                                    color: model.isClick
+                                        ? model.nowBeat == 4
+                                            ? Colors.blue
+                                            : Colors.grey[700]
+                                        : Colors.white,
+                                    shape: BoxShape.circle,
+                                  ),
                                 ),
-                              ),
-                              Spacer(),
-                            ],
-                          ),
-                        ],
+                                Spacer(),
+                              ],
+                            ),
+                            Spacer(),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                   //! ---------------------------------------------------------------
                   Expanded(
-                    flex: 10,
-                    child: Container(
-                      color: Colors.white, // Expandedの色
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Spacer(),
-                          Text(
-                            'now BPM',
-                          ),
-                          Center(
-                            child: Text(
-                              model.sliderTempo.toString(),
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: SizeConfig.blockSizeVertical! * 6,
-                                color: Colors.black,
-                              ),
+                    flex: 4,
+                    child: Padding(
+                      padding:
+                          EdgeInsets.all(SizeConfig.blockSizeHorizontal! * 2),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black),
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white, // Expandedの色
+                        ),
+                        child: Column(
+                          children: [
+                            Spacer(),
+                            Text(
+                              'now BPM',
                             ),
-                          ),
-                          Slider(
-                            value: model.sliderTempo.toDouble(),
-                            min: 40,
-                            max: 200,
-                            divisions: 200,
-                            label: model.sliderTempo.toString(),
-                            onChanged: (double value) {
-                              model.changeTempo(value);
-                            },
-                          ),
-                          Spacer(),
-                          SizedBox(
-                            width: SizeConfig.blockSizeHorizontal! * 50,
-                            height: SizeConfig.blockSizeVertical! * 20,
-                            child: ElevatedButton(
+                            Center(
                               child: Text(
-                                'Tap',
+                                model.sliderTempo.toString(),
                                 style: TextStyle(
-                                  fontSize: SizeConfig.blockSizeVertical! * 3,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: SizeConfig.blockSizeVertical! * 6,
+                                  color: Colors.black,
                                 ),
                               ),
-                              style: ElevatedButton.styleFrom(
-                                primary: model.isJustBeat
-                                    ? Colors.green[200]
-                                    : Colors.white,
-                                onPrimary: Colors.black,
-                                shape: const CircleBorder(
-                                  side: BorderSide(
-                                    color: Colors.black,
-                                    width: 3,
-                                    style: BorderStyle.solid,
-                                  ),
-                                ),
-                              ),
-                              onPressed: () => model.tap(),
                             ),
-                          ),
-                          Spacer(),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Spacer(flex: 3),
-                              // todo もっと直感的に分かりやすくしたい
-                              SizedBox(
-                                width: SizeConfig.blockSizeHorizontal! * 20,
-                                height: SizeConfig.blockSizeVertical! * 6,
-                                child: ElevatedButton(
-                                  child: Icon(Icons.settings_ethernet_rounded),
-                                  //child: Icon(Icons.sync_alt),
-                                  style: ElevatedButton.styleFrom(
-                                    primary: model.isPendulum
-                                        ? Colors.white
-                                        : Colors.grey,
-                                    onPrimary: Colors.black,
+                            Slider(
+                              value: model.sliderTempo.toDouble(),
+                              min: 40,
+                              max: 200,
+                              divisions: 200,
+                              label: model.sliderTempo.toString(),
+                              onChanged: (double value) {
+                                model.changeTempo(value);
+                              },
+                            ),
+                            Spacer(),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  //! ---------------------------------------------------------------
+                  Expanded(
+                    flex: 6,
+                    child: Padding(
+                      padding:
+                          EdgeInsets.all(SizeConfig.blockSizeHorizontal! * 2),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black),
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white, // Expandedの色
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Spacer(),
+                            SizedBox(
+                              width: SizeConfig.blockSizeHorizontal! * 50,
+                              height: SizeConfig.blockSizeVertical! * 20,
+                              child: ElevatedButton(
+                                child: Text(
+                                  'Tap',
+                                  style: TextStyle(
+                                    fontSize: SizeConfig.blockSizeVertical! * 3,
                                   ),
-                                  onPressed: () => model.togglePendulum(),
                                 ),
-                              ),
-                              Spacer(flex: 1),
-                              SizedBox(
-                                width: SizeConfig.blockSizeHorizontal! * 20,
-                                height: SizeConfig.blockSizeVertical! * 6,
-                                child: ElevatedButton(
-                                  child: Icon(Icons.hdr_strong),
-                                  //child: Icon(Icons.keyboard_control_outlined),
-                                  style: ElevatedButton.styleFrom(
-                                    primary: model.isClick
-                                        ? Colors.white
-                                        : Colors.grey,
-                                    onPrimary: Colors.black,
+                                style: ElevatedButton.styleFrom(
+                                  primary: model.isJustBeat
+                                      ? Colors.green[200]
+                                      : Colors.white,
+                                  onPrimary: Colors.black,
+                                  shape: const CircleBorder(
+                                    side: BorderSide(
+                                      color: Colors.black,
+                                      width: 3,
+                                      style: BorderStyle.solid,
+                                    ),
                                   ),
-                                  onPressed: () => model.toggleClick(),
                                 ),
+                                onPressed: () => model.tap(),
                               ),
-                              Spacer(flex: 3),
-                            ],
-                          ),
-                          Spacer(),
-                        ],
+                            ),
+                            Spacer(),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Spacer(flex: 3),
+                                // todo もっと直感的に分かりやすくしたい
+                                SizedBox(
+                                  width: SizeConfig.blockSizeHorizontal! * 20,
+                                  height: SizeConfig.blockSizeVertical! * 6,
+                                  child: ElevatedButton(
+                                    child:
+                                        Icon(Icons.settings_ethernet_rounded),
+                                    //child: Icon(Icons.sync_alt),
+                                    style: ElevatedButton.styleFrom(
+                                      primary: model.isPendulum
+                                          ? Colors.white
+                                          : Colors.grey,
+                                      onPrimary: Colors.black,
+                                    ),
+                                    onPressed: () => model.togglePendulum(),
+                                  ),
+                                ),
+                                Spacer(flex: 1),
+                                SizedBox(
+                                  width: SizeConfig.blockSizeHorizontal! * 20,
+                                  height: SizeConfig.blockSizeVertical! * 6,
+                                  child: ElevatedButton(
+                                    child: Icon(Icons.hdr_strong),
+                                    //child: Icon(Icons.keyboard_control_outlined),
+                                    style: ElevatedButton.styleFrom(
+                                      primary: model.isClick
+                                          ? Colors.white
+                                          : Colors.grey,
+                                      onPrimary: Colors.black,
+                                    ),
+                                    onPressed: () => model.toggleClick(),
+                                  ),
+                                ),
+                                Spacer(flex: 3),
+                              ],
+                            ),
+                            Spacer(),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                   //! ---------------------------------------------------------------
                   Expanded(
                     flex: 2,
-                    child: Container(
-                      color: Colors.white, // Expandedの色
-                      child: Row(
-                        children: [
-                          Spacer(),
-                          SizedBox(
-                            width: SizeConfig.blockSizeHorizontal! * 10,
-                            height: SizeConfig.blockSizeVertical! * 6,
-                          ),
-                          Spacer(),
-                          SizedBox(
-                            width: SizeConfig.blockSizeHorizontal! * 20,
-                            height: SizeConfig.blockSizeVertical! * 6,
-                            child: FloatingActionButton(
-                              mini: true, // trueにするととで小さくなる
-                              onPressed: model.toggleMetronome,
-                              elevation: 0, // 通常時のエレベーション
-                              hoverElevation: 0, // マウスホバー時のエレベーション
-                              highlightElevation: 0, // ボタン押下時のエレベーション
-                              child: model.run
-                                  ? Icon(Icons.stop, color: Colors.white)
-                                  : Icon(Icons.play_arrow, color: Colors.white),
+                    child: Padding(
+                      padding:
+                          EdgeInsets.all(SizeConfig.blockSizeHorizontal! * 2),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black),
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white, // Expandedの色
+                        ),
+                        child: Row(
+                          children: [
+                            // todo  音量ミュートボタンを追加する
+                            Spacer(),
+                            SizedBox(
+                              width: SizeConfig.blockSizeHorizontal! * 10,
+                              height: SizeConfig.blockSizeVertical! * 6,
                             ),
-                          ),
-                          Spacer(),
-                          SizedBox(
-                            width: SizeConfig.blockSizeHorizontal! * 10,
-                            height: SizeConfig.blockSizeVertical! * 6,
-                            child: FloatingActionButton(
-                              backgroundColor: Colors.blueGrey[100],
-                              mini: true, // trueにするととで小さくなる
-                              onPressed: model.metronomeReset,
-                              elevation: 0, // 通常時のエレベーション
-                              hoverElevation: 0, // マウスホバー時のエレベーション
-                              highlightElevation: 0, // ボタン押下時のエレベーション
-                              child: Icon(Icons.replay, color: Colors.pink),
+                            Spacer(),
+                            SizedBox(
+                              width: SizeConfig.blockSizeHorizontal! * 20,
+                              height: SizeConfig.blockSizeVertical! * 6,
+                              child: FloatingActionButton(
+                                mini: true, // trueにするととで小さくなる
+                                onPressed: model.toggleMetronome,
+                                elevation: 0, // 通常時のエレベーション
+                                hoverElevation: 0, // マウスホバー時のエレベーション
+                                highlightElevation: 0, // ボタン押下時のエレベーション
+                                child: model.run
+                                    ? Icon(Icons.stop, color: Colors.white)
+                                    : Icon(Icons.play_arrow,
+                                        color: Colors.white),
+                              ),
                             ),
-                          ),
-                          Spacer(),
-                        ],
+                            Spacer(),
+                            SizedBox(
+                              width: SizeConfig.blockSizeHorizontal! * 10,
+                              height: SizeConfig.blockSizeVertical! * 6,
+                              child: FloatingActionButton(
+                                backgroundColor: Colors.blueGrey[100],
+                                mini: true, // trueにするととで小さくなる
+                                onPressed: model.metronomeReset,
+                                elevation: 0, // 通常時のエレベーション
+                                hoverElevation: 0, // マウスホバー時のエレベーション
+                                highlightElevation: 0, // ボタン押下時のエレベーション
+                                child: Icon(Icons.replay, color: Colors.pink),
+                              ),
+                            ),
+                            Spacer(),
+                          ],
+                        ),
                       ),
                     ),
                   ),
