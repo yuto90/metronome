@@ -3,7 +3,8 @@ import 'package:flutter/widgets.dart';
 
 class HomeProperty {
   /// 白ベースのWidgetに影をつける\
-  /// ※こっちでcolorプロパティ済み
+  /// ※こっちでcolorプロパティ済み\
+  /// @return BoxDecorationプロパティ
   BoxDecoration smooth() {
     return BoxDecoration(
       color: Colors.white,

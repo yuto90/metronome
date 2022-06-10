@@ -111,10 +111,7 @@ class Home extends StatelessWidget {
                         SizeConfig.blockSizeHorizontal! * 6,
                         SizeConfig.blockSizeVertical! * 1,
                       ),
-                      child: Container(
-                        decoration: model.homeProperty.smooth(),
-                        child: Tap(model: model),
-                      ),
+                      child: Tap(model: model),
                     ),
                   ),
                   //! ---------------------------------------------------------------

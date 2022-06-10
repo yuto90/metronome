@@ -13,28 +13,51 @@ class Tap extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Spacer(),
-        SizedBox(
-          width: SizeConfig.blockSizeHorizontal! * 50,
-          height: SizeConfig.blockSizeVertical! * 20,
-          child: ElevatedButton(
-            child: Text(
-              'Tap',
-              style: TextStyle(
-                fontSize: SizeConfig.blockSizeVertical! * 3,
-              ),
+        GestureDetector(
+          // Widgetを押した時
+          onTapDown: (_) => model.tapDown(),
+          // Widgetを離した時
+          onTapUp: (_) => model.tapUp(),
+          // Widgetを押している最中に指が範囲外に出た時
+          onTapCancel: () => model.tapUp(),
+          child: AnimatedContainer(
+            duration: Duration(milliseconds: 100),
+            width: SizeConfig.blockSizeHorizontal! * 50,
+            height: SizeConfig.blockSizeVertical! * 20,
+            child: Icon(
+              Icons.touch_app,
+              color: model.isJustBeat ? Colors.red : Colors.blue,
+              size: SizeConfig.blockSizeVertical! * 10,
             ),
-            style: ElevatedButton.styleFrom(
-              primary: model.isJustBeat ? Colors.green[200] : Colors.white,
-              onPrimary: Colors.black,
-              shape: const CircleBorder(
-                side: BorderSide(
-                  color: Colors.black,
-                  width: 3,
-                  style: BorderStyle.solid,
-                ),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: model.isMainButtonTap
+                    ? Colors.grey.shade200
+                    : Colors.grey.shade300,
               ),
+              boxShadow: model.isMainButtonTap
+                  ? [
+                      // ボタン押下時は影を無くす
+                    ]
+                  : [
+                      BoxShadow(
+                        color: model.isJustBeat
+                            ? Colors.red
+                            : Colors.grey.shade500,
+                        offset: Offset(6, 6),
+                        blurRadius: 15,
+                        spreadRadius: 1,
+                      ),
+                      BoxShadow(
+                        color: model.isJustBeat ? Colors.red : Colors.white,
+                        offset: Offset(-6, -6),
+                        blurRadius: 15,
+                        spreadRadius: 1,
+                      )
+                    ],
             ),
-            onPressed: () => model.tap(),
           ),
         ),
         Spacer(),

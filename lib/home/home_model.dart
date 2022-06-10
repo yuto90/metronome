@@ -40,10 +40,12 @@ class HomeModel extends ChangeNotifier {
   double pendulumWidth = 20;
 
   // ジャストタイミングとして許容する幅
-  double safeWidth = 5.0;
+  double safeWidth = 20.0;
 
   // タップの判定フラグ
   bool isJustBeat = false;
+  // ボタンタップ判定フラグ
+  bool isMainButtonTap = false;
 
   Soundpool beatPool = Soundpool.fromOptions(
     options: SoundpoolOptions(streamType: StreamType.music),
@@ -143,7 +145,6 @@ class HomeModel extends ChangeNotifier {
         : this.alignment = Alignment.bottomRight;
 
     notifyListeners();
-    isJustBeat = false;
   }
 
   // シークバーでテンポを変える
@@ -162,21 +163,31 @@ class HomeModel extends ChangeNotifier {
   }
 
   // ボタンをタップした時
-  void tap() {
+  void tapDown() {
+    isMainButtonTap = true;
+
     if (run) {
       // widgetKeyを付けたWidgetのグローバル座標を取得する
       final RenderBox pendulumBox =
           pendulumGlobalKey.currentContext!.findRenderObject() as RenderBox;
       final pendulumWidget = pendulumBox.localToGlobal(Offset.zero);
 
+      print(pendulumWidget);
       if (pendulumWidget.dx <= limitLeft.dx + safeWidth ||
           pendulumWidget.dx >= limitRight.dx - safeWidth) {
         isJustBeat = true;
+        print(isJustBeat);
       } else {
         isJustBeat = false;
       }
-      notifyListeners();
     }
+    notifyListeners();
+  }
+
+  /// ボタンを離した時
+  void tapUp() {
+    isMainButtonTap = false;
+    notifyListeners();
   }
 
   // 振り子の画面表示フラグを切り替える関数
