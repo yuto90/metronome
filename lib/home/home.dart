@@ -22,26 +22,30 @@ class Home extends StatelessWidget {
                 'Just Beat',
                 style: TextStyle(color: Colors.black),
               ),
-              backgroundColor: Colors.grey[200],
+              backgroundColor: Colors.grey[300],
               elevation: 0,
+              //backgroundColor: Colors.white,
+              //elevation: 6,
+              //shadowColor: Colors.grey.shade500,
             ),
             body: Container(
-              color: Colors.grey[200],
+              color: Colors.grey[300],
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   //! ---------------------------------------------------------------
+                  SizedBox(height: SizeConfig.blockSizeVertical! * 2),
                   Expanded(
-                    flex: 4,
+                    flex: 3,
                     child: Padding(
-                      padding:
-                          EdgeInsets.all(SizeConfig.blockSizeHorizontal! * 2),
+                      padding: EdgeInsets.fromLTRB(
+                        SizeConfig.blockSizeHorizontal! * 2,
+                        SizeConfig.blockSizeVertical! * 1,
+                        SizeConfig.blockSizeHorizontal! * 2,
+                        SizeConfig.blockSizeVertical! * 1,
+                      ),
                       child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white, // Expandedの色
-                        ),
+                        decoration: model.homeProperty.smooth(),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -59,20 +63,18 @@ class Home extends StatelessWidget {
                   Expanded(
                     flex: 4,
                     child: Padding(
-                      padding:
-                          EdgeInsets.all(SizeConfig.blockSizeHorizontal! * 2),
+                      padding: EdgeInsets.fromLTRB(
+                        SizeConfig.blockSizeHorizontal! * 6,
+                        SizeConfig.blockSizeVertical! * 1,
+                        SizeConfig.blockSizeHorizontal! * 6,
+                        SizeConfig.blockSizeVertical! * 1,
+                      ),
                       child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white, // Expandedの色
-                        ),
+                        decoration: model.homeProperty.smooth(),
                         child: Column(
                           children: [
                             Spacer(),
-                            Text(
-                              'now BPM',
-                            ),
+                            Text('now BPM'),
                             Center(
                               child: Text(
                                 model.sliderTempo.toString(),
@@ -103,14 +105,14 @@ class Home extends StatelessWidget {
                   Expanded(
                     flex: 6,
                     child: Padding(
-                      padding:
-                          EdgeInsets.all(SizeConfig.blockSizeHorizontal! * 2),
+                      padding: EdgeInsets.fromLTRB(
+                        SizeConfig.blockSizeHorizontal! * 6,
+                        SizeConfig.blockSizeVertical! * 1,
+                        SizeConfig.blockSizeHorizontal! * 6,
+                        SizeConfig.blockSizeVertical! * 1,
+                      ),
                       child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white, // Expandedの色
-                        ),
+                        decoration: model.homeProperty.smooth(),
                         child: Tap(model: model),
                       ),
                     ),
@@ -119,14 +121,14 @@ class Home extends StatelessWidget {
                   Expanded(
                     flex: 2,
                     child: Padding(
-                      padding:
-                          EdgeInsets.all(SizeConfig.blockSizeHorizontal! * 2),
+                      padding: EdgeInsets.fromLTRB(
+                        SizeConfig.blockSizeHorizontal! * 6,
+                        SizeConfig.blockSizeVertical! * 1,
+                        SizeConfig.blockSizeHorizontal! * 6,
+                        SizeConfig.blockSizeVertical! * 1,
+                      ),
                       child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white, // Expandedの色
-                        ),
+                        decoration: model.homeProperty.smooth(),
                         child: Footer(model: model),
                       ),
                     ),

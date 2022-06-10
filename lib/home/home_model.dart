@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:metronome/property/home_property.dart';
 import 'package:soundpool/soundpool.dart';
 import 'Dart:async';
 
@@ -34,6 +35,8 @@ class HomeModel extends ChangeNotifier {
   late Offset limitRight;
   late Offset limitLeft;
 
+  late HomeProperty homeProperty;
+
   double pendulumWidth = 20;
 
   // ジャストタイミングとして許容する幅
@@ -60,6 +63,9 @@ class HomeModel extends ChangeNotifier {
 
   // 画面読み込み時のinit処理
   HomeModel() {
+    // プロパティ用のclassをインスタンス化
+    homeProperty = HomeProperty();
+
     Future(() async {
       beat = await rootBundle
           .load('assets/sound/hammer.wav')
