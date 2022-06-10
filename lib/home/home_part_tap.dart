@@ -65,33 +65,20 @@ class Tap extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Spacer(flex: 3),
-            // todo もっと直感的に分かりやすくしたい
-            SizedBox(
-              width: SizeConfig.blockSizeHorizontal! * 20,
-              height: SizeConfig.blockSizeVertical! * 6,
-              child: ElevatedButton(
-                child: Icon(Icons.settings_ethernet_rounded),
-                //child: Icon(Icons.sync_alt),
-                style: ElevatedButton.styleFrom(
-                  primary: model.isPendulum ? Colors.white : Colors.grey,
-                  onPrimary: Colors.black,
-                ),
-                onPressed: () => model.togglePendulum(),
-              ),
+            GestureDetector(
+              onTap: () => model.togglePendulum(),
+              onTapCancel: () => null,
+              child: model.homeProperty.smoothButton(
+                  model.isPendulumButtonTap, Icons.settings_ethernet_rounded),
+              //child: Icon(Icons.sync_alt),
             ),
             Spacer(flex: 1),
-            SizedBox(
-              width: SizeConfig.blockSizeHorizontal! * 20,
-              height: SizeConfig.blockSizeVertical! * 6,
-              child: ElevatedButton(
-                child: Icon(Icons.hdr_strong),
-                //child: Icon(Icons.keyboard_control_outlined),
-                style: ElevatedButton.styleFrom(
-                  primary: model.isClick ? Colors.white : Colors.grey,
-                  onPrimary: Colors.black,
-                ),
-                onPressed: () => model.toggleClick(),
-              ),
+            GestureDetector(
+              onTap: () => model.toggleClick(),
+              onTapCancel: () => null,
+              child: model.homeProperty
+                  .smoothButton(model.isClickButtonTap, Icons.hdr_strong),
+              //child: Icon(Icons.keyboard_control_outlined),
             ),
             Spacer(flex: 3),
           ],

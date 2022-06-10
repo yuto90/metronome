@@ -46,6 +46,10 @@ class HomeModel extends ChangeNotifier {
   bool isJustBeat = false;
   // ボタンタップ判定フラグ
   bool isMainButtonTap = false;
+  // 振り子の可視化切り替えボタンのタップ判定フラグ
+  bool isPendulumButtonTap = false;
+  // 拍の可視化切り替えボタンのタップ判定フラグ
+  bool isClickButtonTap = false;
 
   Soundpool beatPool = Soundpool.fromOptions(
     options: SoundpoolOptions(streamType: StreamType.music),
@@ -193,12 +197,14 @@ class HomeModel extends ChangeNotifier {
   // 振り子の画面表示フラグを切り替える関数
   void togglePendulum() {
     isPendulum = !isPendulum;
+    isPendulumButtonTap = !isPendulumButtonTap;
     notifyListeners();
   }
 
   // クリックの画面表示フラグを切り替える関数
   void toggleClick() {
     isClick = !isClick;
+    isClickButtonTap = !isClickButtonTap;
     notifyListeners();
   }
 }
