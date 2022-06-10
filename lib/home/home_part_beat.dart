@@ -21,7 +21,7 @@ class Beat extends StatelessWidget {
             color: model.isClick
                 ? model.nowBeat == 1
                     ? Colors.blue
-                    : Colors.grey[700]
+                    : Colors.grey[300]
                 : Colors.white,
             shape: BoxShape.circle,
           ),
@@ -35,7 +35,7 @@ class Beat extends StatelessWidget {
             color: model.isClick
                 ? model.nowBeat == 2
                     ? Colors.blue
-                    : Colors.grey[700]
+                    : Colors.grey[300]
                 : Colors.white,
             shape: BoxShape.circle,
           ),
@@ -49,7 +49,7 @@ class Beat extends StatelessWidget {
             color: model.isClick
                 ? model.nowBeat == 3
                     ? Colors.blue
-                    : Colors.grey[700]
+                    : Colors.grey[300]
                 : Colors.white,
             shape: BoxShape.circle,
           ),
@@ -63,7 +63,7 @@ class Beat extends StatelessWidget {
             color: model.isClick
                 ? model.nowBeat == 4
                     ? Colors.blue
-                    : Colors.grey[700]
+                    : Colors.grey[300]
                 : Colors.white,
             shape: BoxShape.circle,
           ),
