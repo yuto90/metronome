@@ -49,14 +49,14 @@ class Pendulum extends StatelessWidget {
         Container(
           width: SizeConfig.blockSizeHorizontal! * 90,
           height: SizeConfig.blockSizeVertical! * 3,
-          color: model.isPendulum ? Colors.grey[300] : Colors.white,
+          color: model.isPendulum ? Colors.white : Colors.grey[300],
           child: AnimatedAlign(
             alignment: model.alignment,
             duration: Duration(milliseconds: model.tempoDuration),
             child: Container(
               width: SizeConfig.blockSizeHorizontal! * model.pendulumWidth,
               height: SizeConfig.blockSizeVertical! * 4,
-              color: model.isPendulum ? Colors.blue : Colors.white,
+              color: model.isPendulum ? Colors.white : Colors.blue,
               key: model.pendulumGlobalKey, // 座標を取得したいWidgetにkeyを付けると、後から参照できる
             ),
             curve: Curves.linear,

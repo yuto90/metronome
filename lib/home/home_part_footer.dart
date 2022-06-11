@@ -39,7 +39,7 @@ class Footer extends StatelessWidget {
           child: FloatingActionButton(
             backgroundColor: Colors.blueGrey[100],
             mini: true, // trueにするととで小さくなる
-            onPressed: model.metronomeReset,
+            onPressed: model.displayReset,
             elevation: 0, // 通常時のエレベーション
             hoverElevation: 0, // マウスホバー時のエレベーション
             highlightElevation: 0, // ボタン押下時のエレベーション

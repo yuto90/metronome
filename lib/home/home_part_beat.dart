@@ -19,10 +19,10 @@ class Beat extends StatelessWidget {
           // todo ↓ 三項内に三項ってどうなの？
           decoration: BoxDecoration(
             color: model.isClick
-                ? model.nowBeat == 1
+                ? Colors.white
+                : model.nowBeat == 1
                     ? Colors.blue
-                    : Colors.grey[300]
-                : Colors.white,
+                    : Colors.grey[300],
             shape: BoxShape.circle,
           ),
         ),
@@ -33,10 +33,10 @@ class Beat extends StatelessWidget {
           // todo ↓ 三項内に三項ってどうなの？
           decoration: BoxDecoration(
             color: model.isClick
-                ? model.nowBeat == 2
+                ? Colors.white
+                : model.nowBeat == 2
                     ? Colors.blue
-                    : Colors.grey[300]
-                : Colors.white,
+                    : Colors.grey[300],
             shape: BoxShape.circle,
           ),
         ),
@@ -47,10 +47,10 @@ class Beat extends StatelessWidget {
           // todo ↓ 三項内に三項ってどうなの？
           decoration: BoxDecoration(
             color: model.isClick
-                ? model.nowBeat == 3
+                ? Colors.white
+                : model.nowBeat == 3
                     ? Colors.blue
-                    : Colors.grey[300]
-                : Colors.white,
+                    : Colors.grey[300],
             shape: BoxShape.circle,
           ),
         ),
@@ -61,10 +61,10 @@ class Beat extends StatelessWidget {
           // todo ↓ 三項内に三項ってどうなの？
           decoration: BoxDecoration(
             color: model.isClick
-                ? model.nowBeat == 4
+                ? Colors.white
+                : model.nowBeat == 4
                     ? Colors.blue
-                    : Colors.grey[300]
-                : Colors.white,
+                    : Colors.grey[300],
             shape: BoxShape.circle,
           ),
         ),

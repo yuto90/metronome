@@ -12,9 +12,9 @@ class HomeModel extends ChangeNotifier {
   bool run = false; //メトロノームの動作on/off
 
   // 振り子の表示フラグ
-  bool isPendulum = true;
+  bool isPendulum = false;
   // 拍子の表示フラグ
-  bool isClick = true;
+  bool isClick = false;
 
   // 振り子座標の上限
   double leftXPosition = 10.0;
@@ -46,10 +46,6 @@ class HomeModel extends ChangeNotifier {
   bool isJustBeat = false;
   // ボタンタップ判定フラグ
   bool isMainButtonTap = false;
-  // 振り子の可視化切り替えボタンのタップ判定フラグ
-  bool isPendulumButtonTap = false;
-  // 拍の可視化切り替えボタンのタップ判定フラグ
-  bool isClickButtonTap = false;
 
   Soundpool beatPool = Soundpool.fromOptions(
     options: SoundpoolOptions(streamType: StreamType.music),
@@ -157,12 +153,16 @@ class HomeModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // メトロノームをリセットする
-  void metronomeReset() {
+  // 画面をリセットする
+  void displayReset() {
     run = false;
     sliderTempo = defaultTempo;
     nowBeat = 0;
     alignment = Alignment.bottomRight;
+    isJustBeat = false;
+    isMainButtonTap = false;
+    isPendulum = false;
+    isClick = false;
     notifyListeners();
   }
 
@@ -197,14 +197,12 @@ class HomeModel extends ChangeNotifier {
   // 振り子の画面表示フラグを切り替える関数
   void togglePendulum() {
     isPendulum = !isPendulum;
-    isPendulumButtonTap = !isPendulumButtonTap;
     notifyListeners();
   }
 
   // クリックの画面表示フラグを切り替える関数
   void toggleClick() {
     isClick = !isClick;
-    isClickButtonTap = !isClickButtonTap;
     notifyListeners();
   }
 }

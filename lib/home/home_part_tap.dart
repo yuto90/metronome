@@ -69,7 +69,9 @@ class Tap extends StatelessWidget {
               onTap: () => model.togglePendulum(),
               onTapCancel: () => null,
               child: model.homeProperty.smoothButton(
-                  model.isPendulumButtonTap, Icons.settings_ethernet_rounded),
+                model.isPendulum,
+                Icons.settings_ethernet_rounded,
+              ),
               //child: Icon(Icons.sync_alt),
             ),
             Spacer(flex: 1),
@@ -77,7 +79,7 @@ class Tap extends StatelessWidget {
               onTap: () => model.toggleClick(),
               onTapCancel: () => null,
               child: model.homeProperty
-                  .smoothButton(model.isClickButtonTap, Icons.hdr_strong),
+                  .smoothButton(model.isClick, Icons.hdr_strong),
               //child: Icon(Icons.keyboard_control_outlined),
             ),
             Spacer(flex: 3),
