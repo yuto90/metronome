@@ -1,12 +1,15 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:metronome/property/home_property.dart';
 import 'package:soundpool/soundpool.dart';
 import 'Dart:async';
 
 class HomeModel extends ChangeNotifier {
   // 変数 ------------------------------------------------------
+  late BannerAd myBanner;
+
   int defaultTempo = 60; // デフォルトで設定するBPM
   int sliderTempo = 60; // 画面スライダーで設定したBPM
   bool run = false; //メトロノームの動作on/off
@@ -89,6 +92,32 @@ class HomeModel extends ChangeNotifier {
         return clickPool.load(soundData);
       });
     });
+
+    // バナー広告をインスタンス化
+    myBanner = BannerAd(
+      adUnitId: getTestAdBannerUnitId(),
+      //adUnitId: 'ca-app-pub-8474156868822041/2299618878',
+      size: AdSize.banner,
+      request: const AdRequest(),
+      listener: const BannerAdListener(),
+    );
+    // バナー広告の読み込み
+    myBanner.load();
+  }
+
+  // プラットフォーム（iOS / Android）に合わせてデモ用広告IDを返す
+  String getTestAdBannerUnitId() {
+    String testBannerUnitId = "";
+    if (Platform.isAndroid) {
+      // Android のとき
+      testBannerUnitId =
+          "ca-app-pub-3940256099942544/6300978111"; // Androidのデモ用バナー広告ID
+    } else if (Platform.isIOS) {
+      // iOSのとき
+      testBannerUnitId =
+          "ca-app-pub-3940256099942544/2934735716"; // iOSのデモ用バナー広告ID
+    }
+    return testBannerUnitId;
   }
 
   // メトロノームの初回init処理

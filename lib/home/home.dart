@@ -106,9 +106,9 @@ class Home extends StatelessWidget {
                     flex: 6,
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(
-                        SizeConfig.blockSizeHorizontal! * 6,
+                        SizeConfig.blockSizeHorizontal! * 2,
                         SizeConfig.blockSizeVertical! * 1,
-                        SizeConfig.blockSizeHorizontal! * 6,
+                        SizeConfig.blockSizeHorizontal! * 2,
                         SizeConfig.blockSizeVertical! * 1,
                       ),
                       child: Tap(model: model),
