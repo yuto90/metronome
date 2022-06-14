@@ -124,10 +124,7 @@ class Home extends StatelessWidget {
                         SizeConfig.blockSizeHorizontal! * 6,
                         SizeConfig.blockSizeVertical! * 1,
                       ),
-                      child: Container(
-                        decoration: model.homeProperty.smooth(),
-                        child: Footer(model: model),
-                      ),
+                      child: Footer(model: model),
                     ),
                   ),
                 ],

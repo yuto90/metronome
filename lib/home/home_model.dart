@@ -15,6 +15,10 @@ class HomeModel extends ChangeNotifier {
   bool isPendulum = false;
   // 拍子の表示フラグ
   bool isClick = false;
+  // ボリュームのミュートフラグ
+  bool isMute = false;
+  // リセットボタン押下フラグ
+  bool isReset = false;
 
   // 振り子座標の上限
   double leftXPosition = 10.0;
@@ -40,7 +44,7 @@ class HomeModel extends ChangeNotifier {
   double pendulumWidth = 20;
 
   // ジャストタイミングとして許容する幅
-  double safeWidth = 20.0;
+  double safeWidth = 30.0;
 
   // タップの判定フラグ
   bool isJustBeat = false;
@@ -155,6 +159,7 @@ class HomeModel extends ChangeNotifier {
 
   // 画面をリセットする
   void displayReset() {
+    isReset = !isReset;
     run = false;
     sliderTempo = defaultTempo;
     nowBeat = 0;
@@ -163,6 +168,7 @@ class HomeModel extends ChangeNotifier {
     isMainButtonTap = false;
     isPendulum = false;
     isClick = false;
+    isMute = false;
     notifyListeners();
   }
 
@@ -203,6 +209,18 @@ class HomeModel extends ChangeNotifier {
   // クリックの画面表示フラグを切り替える関数
   void toggleClick() {
     isClick = !isClick;
+    notifyListeners();
+  }
+
+  /// ボリュームのミュートフラグを切り替える関数
+  void toggleMute() {
+    isMute = !isMute;
+    notifyListeners();
+  }
+
+  /// リセットボタンを押した時
+  void tapUpReset() {
+    isReset = false;
     notifyListeners();
   }
 }
