@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../size_config.dart';
@@ -6,6 +7,8 @@ import 'package:metronome/home/home_part_beat.dart';
 import 'package:metronome/home/home_part_footer.dart';
 import 'package:metronome/home/home_part_pendulum.dart';
 import 'package:metronome/home/home_part_tap.dart';
+
+import 'home_part_bpm.dart';
 
 class Home extends StatelessWidget {
   @override
@@ -69,53 +72,7 @@ class Home extends StatelessWidget {
                         SizeConfig.blockSizeHorizontal! * 6,
                         SizeConfig.blockSizeVertical! * 1,
                       ),
-                      child: Container(
-                        decoration: model.homeProperty.smooth(),
-                        child: Column(
-                          children: [
-                            Spacer(flex: 5),
-                            Text('now BPM'),
-                            Row(
-                              children: [
-                                Spacer(),
-                                Container(
-                                  width: SizeConfig.blockSizeHorizontal! * 20,
-                                  height: SizeConfig.blockSizeVertical! * 13,
-                                  color: Colors.red,
-                                ),
-                                Spacer(),
-                                Text(
-                                  model.sliderTempo.toString(),
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: SizeConfig.blockSizeVertical! * 6,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                Spacer(),
-                                Container(
-                                  width: SizeConfig.blockSizeHorizontal! * 20,
-                                  height: SizeConfig.blockSizeVertical! * 13,
-                                  color: Colors.red,
-                                ),
-                                Spacer(),
-                              ],
-                            ),
-                            Spacer(flex: 2),
-                            Slider(
-                              value: model.sliderTempo.toDouble(),
-                              min: 40,
-                              max: 200,
-                              divisions: 200,
-                              label: model.sliderTempo.toString(),
-                              onChanged: (double value) {
-                                model.changeTempo(value);
-                              },
-                            ),
-                            Spacer(flex: 1),
-                          ],
-                        ),
-                      ),
+                      child: BPM(model: model),
                     ),
                   ),
                   //! ---------------------------------------------------------------

@@ -8,6 +8,28 @@ import 'Dart:async';
 
 class HomeModel extends ChangeNotifier {
   // 変数 ------------------------------------------------------
+  /// 音符のパスを格納
+  List note = [
+    'assets/images/1.png',
+    'assets/images/2.png',
+    'assets/images/3.png',
+    'assets/images/4.png',
+  ];
+
+  /// 拍子の種類を格納
+  List beatType = [
+    '1/4',
+    '2/4',
+    '3/4',
+    '4/4',
+  ];
+
+  /// 今どの音符がpickされているかを格納
+  int selectedNoteIndex = 0;
+
+  /// 今どの拍子がpickされているかを格納
+  int selectedBeatType = 0;
+
   late BannerAd myBanner;
 
   int defaultTempo = 60; // デフォルトで設定するBPM
@@ -186,21 +208,6 @@ class HomeModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // 画面をリセットする
-  void displayReset() {
-    isReset = !isReset;
-    run = false;
-    sliderTempo = defaultTempo;
-    nowBeat = 0;
-    alignment = Alignment.bottomRight;
-    isJustBeat = false;
-    isMainButtonTap = false;
-    isPendulum = false;
-    isClick = false;
-    isMute = false;
-    notifyListeners();
-  }
-
   // ボタンをタップした時
   void tapDown() {
     isMainButtonTap = true;
@@ -250,6 +257,35 @@ class HomeModel extends ChangeNotifier {
   /// リセットボタンを押した時
   void tapUpReset() {
     isReset = false;
+    notifyListeners();
+  }
+
+  /// 音符をタップした時
+  void pickNote(int index) {
+    selectedNoteIndex = index;
+    notifyListeners();
+  }
+
+  /// 音符をタップした時
+  void pickBeatType(int index) {
+    selectedBeatType = index;
+    notifyListeners();
+  }
+
+  /// 画面をリセットする
+  void displayReset() {
+    isReset = !isReset;
+    run = false;
+    sliderTempo = defaultTempo;
+    nowBeat = 0;
+    alignment = Alignment.bottomRight;
+    isJustBeat = false;
+    isMainButtonTap = false;
+    isPendulum = false;
+    isClick = false;
+    isMute = false;
+    //selectedNoteIndex = 0;
+    //selectedBeatType = 0;
     notifyListeners();
   }
 }
