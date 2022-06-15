@@ -73,18 +73,35 @@ class Home extends StatelessWidget {
                         decoration: model.homeProperty.smooth(),
                         child: Column(
                           children: [
-                            Spacer(),
+                            Spacer(flex: 5),
                             Text('now BPM'),
-                            Center(
-                              child: Text(
-                                model.sliderTempo.toString(),
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: SizeConfig.blockSizeVertical! * 6,
-                                  color: Colors.black,
+                            Row(
+                              children: [
+                                Spacer(),
+                                Container(
+                                  width: SizeConfig.blockSizeHorizontal! * 20,
+                                  height: SizeConfig.blockSizeVertical! * 13,
+                                  color: Colors.red,
                                 ),
-                              ),
+                                Spacer(),
+                                Text(
+                                  model.sliderTempo.toString(),
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: SizeConfig.blockSizeVertical! * 6,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                Spacer(),
+                                Container(
+                                  width: SizeConfig.blockSizeHorizontal! * 20,
+                                  height: SizeConfig.blockSizeVertical! * 13,
+                                  color: Colors.red,
+                                ),
+                                Spacer(),
+                              ],
                             ),
+                            Spacer(flex: 2),
                             Slider(
                               value: model.sliderTempo.toDouble(),
                               min: 40,
@@ -95,7 +112,7 @@ class Home extends StatelessWidget {
                                 model.changeTempo(value);
                               },
                             ),
-                            Spacer(),
+                            Spacer(flex: 1),
                           ],
                         ),
                       ),

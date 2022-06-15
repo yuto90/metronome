@@ -37,7 +37,7 @@ class HomeProperty {
   AnimatedContainer smoothButton(bool isButtonTap, IconData icon) {
     return AnimatedContainer(
       duration: Duration(milliseconds: 100),
-      width: SizeConfig.blockSizeHorizontal! * 20,
+      width: SizeConfig.blockSizeHorizontal! * 15,
       height: SizeConfig.blockSizeVertical! * 6,
       child: Icon(
         icon,
