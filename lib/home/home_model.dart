@@ -180,12 +180,14 @@ class HomeModel extends ChangeNotifier {
         nowBeat = 1;
       }
 
-      // todo 設定で鳴らすか選択させる
-      // 4拍目でfinishを鳴らす
-      if (nowBeat == 4) {
-        finishPool.play(finish); // 4拍目の音
-      } else {
-        beatPool.play(beat); // 1拍の音`
+      // ミュートボタンが押されている場合は音を出さない
+      if (!isMute) {
+        // 4拍目でfinishを鳴らす
+        if (nowBeat == 4) {
+          finishPool.play(finish); // 4拍目の音
+        } else {
+          beatPool.play(beat); // 1拍の音`
+        }
       }
 
       this.alignment = this.alignment == Alignment.bottomRight
