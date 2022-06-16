@@ -17,28 +17,26 @@ class Settings extends StatelessWidget {
         children: [
           Container(
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  width: SizeConfig.blockSizeHorizontal! * 7,
-                  height: SizeConfig.blockSizeVertical! * 3,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SizedBox(
+                    width: SizeConfig.blockSizeHorizontal! * 10,
+                    height: SizeConfig.blockSizeVertical! * 3,
+                  ),
                 ),
-                Spacer(),
                 Text('Settings'),
-                Spacer(),
                 // 設定ボタン
-                Align(
-                  alignment: Alignment.topRight,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: GestureDetector(
-                      onTap: () => model.toggleSettings(),
-                      onTapCancel: () => null,
-                      child: Container(
-                        width: SizeConfig.blockSizeHorizontal! * 7,
-                        height: SizeConfig.blockSizeVertical! * 3,
-                        color: Colors.white,
-                        child: Icon(Icons.keyboard_return),
-                      ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GestureDetector(
+                    onTap: () => model.toggleSettings(),
+                    onTapCancel: () => null,
+                    child: SizedBox(
+                      width: SizeConfig.blockSizeHorizontal! * 10,
+                      height: SizeConfig.blockSizeVertical! * 3,
+                      child: Icon(Icons.keyboard_return),
                     ),
                   ),
                 ),

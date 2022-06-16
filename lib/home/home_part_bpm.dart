@@ -20,23 +20,23 @@ class BPM extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(
-                      width: SizeConfig.blockSizeHorizontal! * 7,
-                      height: SizeConfig.blockSizeVertical! * 3,
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        width: SizeConfig.blockSizeHorizontal! * 10,
+                        height: SizeConfig.blockSizeVertical! * 3,
+                      ),
                     ),
                     Text('now BPM'),
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: GestureDetector(
-                          onTap: () => model.toggleSettings(),
-                          onTapCancel: () => null,
-                          child: SizedBox(
-                            width: SizeConfig.blockSizeHorizontal! * 7,
-                            height: SizeConfig.blockSizeVertical! * 3,
-                            child: Icon(Icons.settings),
-                          ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        onTap: () => model.toggleSettings(),
+                        onTapCancel: () => null,
+                        child: SizedBox(
+                          width: SizeConfig.blockSizeHorizontal! * 10,
+                          height: SizeConfig.blockSizeVertical! * 3,
+                          child: Icon(Icons.settings),
                         ),
                       ),
                     ),
