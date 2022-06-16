@@ -47,7 +47,7 @@ class Settings extends StatelessWidget {
           ),
           SizedBox(
             width: double.infinity,
-            height: SizeConfig.blockSizeVertical! * 50,
+            height: SizeConfig.blockSizeVertical! * 38,
             child: ListView(
               children: [
                 // todo 別ファイルに切り分け

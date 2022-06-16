@@ -62,12 +62,6 @@ class Tap extends StatelessWidget {
           ),
         ),
         Spacer(),
-        Container(
-          decoration: model.homeProperty.smooth(),
-          width: double.infinity,
-          height: SizeConfig.blockSizeVertical! * 10,
-          child: AdWidget(ad: model.myBanner),
-        ),
       ],
     );
   }
