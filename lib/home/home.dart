@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'home_model.dart';
-import 'home_part_beat.dart';
-import 'home_part_footer.dart';
-import 'home_part_pendulum.dart';
-import 'home_part_tap.dart';
-import 'home_part_adsense.dart';
-import 'home_part_bpm.dart';
+import 'beat.dart';
+import 'footer.dart';
+import 'pendulum.dart';
+import 'tap.dart';
+import 'bpm.dart';
+import 'adsense.dart';
 import '../size_config.dart';
 
 class Home extends StatelessWidget {
