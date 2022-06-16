@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:metronome/home/rhythm/rhythm.dart';
 import 'package:provider/provider.dart';
 import 'home_model.dart';
-import 'beat.dart';
 import 'footer.dart';
-import 'pendulum.dart';
 import 'tap.dart';
 import 'bpm.dart';
 import 'adsense.dart';
@@ -36,27 +35,7 @@ class Home extends StatelessWidget {
               SizedBox(height: SizeConfig.blockSizeVertical! * 2),
               Expanded(
                 flex: 3,
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(
-                    SizeConfig.blockSizeHorizontal! * 2,
-                    SizeConfig.blockSizeVertical! * 1,
-                    SizeConfig.blockSizeHorizontal! * 2,
-                    SizeConfig.blockSizeVertical! * 1,
-                  ),
-                  child: Container(
-                    decoration: model.homeProperty.smooth(),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Spacer(),
-                        Pendulum(model: model),
-                        Spacer(),
-                        Beat(model: model),
-                        Spacer(),
-                      ],
-                    ),
-                  ),
-                ),
+                child: Rhythm(model: model),
               ),
               //! ---------------------------------------------------------------
               Expanded(

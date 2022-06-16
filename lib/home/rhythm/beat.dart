@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../size_config.dart';
-import 'home_model.dart';
+import '../../size_config.dart';
+import '../home_model.dart';
 
 class Beat extends StatelessWidget {
   const Beat({Key? key, required this.model}) : super(key: key);

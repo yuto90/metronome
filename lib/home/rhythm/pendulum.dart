@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:metronome/home/home_model.dart';
 
-import '../size_config.dart';
+import '../../size_config.dart';
 
 class Pendulum extends StatelessWidget {
   const Pendulum({Key? key, required this.model}) : super(key: key);
