@@ -160,8 +160,10 @@ class HomeModel extends ChangeNotifier {
     // メトロノームの起動チェック
     if (run) {
       run = false;
+      notifyListeners();
     } else {
       run = true; // メトロノームを起動
+      nowBeat = 0;
       // メトロノームの初期化
       initMetronome();
       runMetronome();
@@ -169,37 +171,30 @@ class HomeModel extends ChangeNotifier {
   }
 
   // 無限ループするメトロノーム
-  void runMetronome() {
+  Future<void> runMetronome() async {
     // テンポの計算
     tempoDuration = 60000 ~/ sliderTempo;
-    Duration duration = Duration(milliseconds: tempoDuration);
-    Timer.periodic(duration, (Timer t) => beatLoop(t));
-  }
+    while (run) {
+      nowBeat++;
+      if (nowBeat == 5) {
+        nowBeat = 1;
+      }
 
-  // Timerで繰り返し処理する用
-  void beatLoop(Timer t) {
-    if (!run) {
-      t.cancel();
+      // todo 設定で鳴らすか選択させる
+      // 4拍目でfinishを鳴らす
+      if (nowBeat == 4) {
+        finishPool.play(finish); // 4拍目の音
+      } else {
+        beatPool.play(beat); // 1拍の音`
+      }
+
+      this.alignment = this.alignment == Alignment.bottomRight
+          ? this.alignment = Alignment.bottomLeft
+          : this.alignment = Alignment.bottomRight;
+
+      notifyListeners();
+      await Future.delayed(Duration(milliseconds: tempoDuration));
     }
-
-    nowBeat++;
-    if (nowBeat == 5) {
-      nowBeat = 1;
-    }
-
-    // todo 設定で鳴らすか選択させる
-    // 4拍目でfinishを鳴らす
-    if (nowBeat == 4) {
-      finishPool.play(finish); // 4拍目の音
-    } else {
-      beatPool.play(beat); // 1拍の音`
-    }
-
-    this.alignment = this.alignment == Alignment.bottomRight
-        ? this.alignment = Alignment.bottomLeft
-        : this.alignment = Alignment.bottomRight;
-
-    notifyListeners();
   }
 
   // シークバーでテンポを変える

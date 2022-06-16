@@ -74,7 +74,7 @@ class Footer extends StatelessWidget {
             child: Icon(
               model.run ? Icons.stop : Icons.play_arrow,
               size: SizeConfig.blockSizeVertical! * 4,
-              color: model.run ? Colors.black : Colors.white,
+              color: Colors.white,
             ),
             decoration: BoxDecoration(
               color: Colors.blue,
