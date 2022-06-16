@@ -44,6 +44,8 @@ class HomeModel extends ChangeNotifier {
   bool isMute = false;
   // リセットボタン押下フラグ
   bool isReset = false;
+  // 設定ボタン押下フラグ
+  bool isSettings = false;
 
   // 振り子座標の上限
   double leftXPosition = 10.0;
@@ -248,6 +250,12 @@ class HomeModel extends ChangeNotifier {
   /// ボリュームのミュートフラグを切り替える関数
   void toggleMute() {
     isMute = !isMute;
+    notifyListeners();
+  }
+
+  /// 設定ボタンフラグを切り替える関数
+  void toggleSettings() {
+    isSettings = !isSettings;
     notifyListeners();
   }
 

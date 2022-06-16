@@ -64,7 +64,7 @@ class Home extends StatelessWidget {
                   ),
                   //! ---------------------------------------------------------------
                   Expanded(
-                    flex: 4,
+                    flex: model.isSettings ? 10 : 4,
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(
                         SizeConfig.blockSizeHorizontal! * 6,
@@ -76,18 +76,20 @@ class Home extends StatelessWidget {
                     ),
                   ),
                   //! ---------------------------------------------------------------
-                  Expanded(
-                    flex: 6,
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(
-                        SizeConfig.blockSizeHorizontal! * 2,
-                        SizeConfig.blockSizeVertical! * 1,
-                        SizeConfig.blockSizeHorizontal! * 2,
-                        SizeConfig.blockSizeVertical! * 1,
-                      ),
-                      child: Tap(model: model),
-                    ),
-                  ),
+                  model.isSettings
+                      ? Container()
+                      : Expanded(
+                          flex: 6,
+                          child: Padding(
+                            padding: EdgeInsets.fromLTRB(
+                              SizeConfig.blockSizeHorizontal! * 2,
+                              SizeConfig.blockSizeVertical! * 1,
+                              SizeConfig.blockSizeHorizontal! * 2,
+                              SizeConfig.blockSizeVertical! * 1,
+                            ),
+                            child: Tap(model: model),
+                          ),
+                        ),
                   //! ---------------------------------------------------------------
                   Expanded(
                     flex: 2,
