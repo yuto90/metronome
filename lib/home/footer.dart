@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:metronome/home/rhythm/rhythm_model.dart';
+import 'package:provider/src/provider.dart';
 import '../size_config.dart';
 import 'home_model.dart';
 
@@ -14,16 +16,18 @@ class Footer extends StatelessWidget {
         Spacer(),
         // 音量ミュートボタン
         GestureDetector(
-          onTap: () => model.toggleMute(),
+          onTap: () => context.read<RhythmModel>().toggleMute(),
           onTapCancel: () => null,
-          child:
-              model.homeProperty.smoothButton(model.isMute, Icons.volume_off),
+          child: model.homeProperty.smoothButton(
+            context.read<RhythmModel>().isMute,
+            Icons.volume_off,
+          ),
         ),
         Spacer(),
         // 設定リセットボタン
         GestureDetector(
           // Widgetを押した時
-          onTapDown: (_) => model.displayReset(),
+          onTapDown: (_) => model.displayReset(context),
           // Widgetを離した時
           onTapUp: (_) => model.tapUpReset(),
           // Widgetを押している最中に指が範囲外に出た時
@@ -63,7 +67,7 @@ class Footer extends StatelessWidget {
         ),
         Spacer(),
         GestureDetector(
-          onTap: () => model.toggleMetronome(),
+          onTap: () => context.read<RhythmModel>().toggleMetronome(),
           onTapCancel: () => null,
           //child:
           //model.homeProperty.smoothButton(model.isMute, Icons.play_arrow),
@@ -72,7 +76,7 @@ class Footer extends StatelessWidget {
             width: SizeConfig.blockSizeHorizontal! * 20,
             height: SizeConfig.blockSizeVertical! * 7,
             child: Icon(
-              model.run ? Icons.stop : Icons.play_arrow,
+              context.read<RhythmModel>().run ? Icons.stop : Icons.play_arrow,
               size: SizeConfig.blockSizeVertical! * 4,
               color: Colors.white,
             ),
@@ -80,9 +84,11 @@ class Footer extends StatelessWidget {
               color: Colors.blue,
               shape: BoxShape.circle,
               border: Border.all(
-                color: model.run ? Colors.grey.shade200 : Colors.grey.shade300,
+                color: context.read<RhythmModel>().run
+                    ? Colors.grey.shade200
+                    : Colors.grey.shade300,
               ),
-              boxShadow: model.run
+              boxShadow: context.read<RhythmModel>().run
                   ? []
                   : [
                       BoxShadow(
@@ -103,20 +109,20 @@ class Footer extends StatelessWidget {
         ),
         Spacer(),
         GestureDetector(
-          onTap: () => model.togglePendulum(),
+          onTap: () => context.read<RhythmModel>().togglePendulum(),
           onTapCancel: () => null,
           child: model.homeProperty.smoothButton(
-            model.isPendulum,
+            context.read<RhythmModel>().isPendulum,
             Icons.settings_ethernet_rounded,
           ),
           //child: Icon(Icons.sync_alt),
         ),
         Spacer(),
         GestureDetector(
-          onTap: () => model.toggleClick(),
+          onTap: () => context.read<RhythmModel>().toggleClick(),
           onTapCancel: () => null,
-          child:
-              model.homeProperty.smoothButton(model.isClick, Icons.hdr_strong),
+          child: model.homeProperty.smoothButton(
+              context.read<RhythmModel>().isClick, Icons.hdr_strong),
           //child: Icon(Icons.keyboard_control_outlined),
         ),
         Spacer(),

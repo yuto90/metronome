@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:metronome/home/home_model.dart';
-
 import '../../size_config.dart';
+import 'rhythm_model.dart';
 
 class Pendulum extends StatelessWidget {
   const Pendulum({Key? key, required this.model}) : super(key: key);
 
-  final HomeModel model;
+  final RhythmModel model;
 
   @override
   Widget build(BuildContext context) {

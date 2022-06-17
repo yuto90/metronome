@@ -1,13 +1,13 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:metronome/property/home_property.dart';
-import 'package:soundpool/soundpool.dart';
-import 'Dart:async';
+import 'package:provider/src/provider.dart';
+import 'rhythm/rhythm_model.dart';
 
 class HomeModel extends ChangeNotifier {
-  // 変数 ------------------------------------------------------
+  RhythmModel rhythmModel = RhythmModel();
+
   /// 音符のパスを格納
   List note = [
     'assets/images/1.png',
@@ -33,15 +33,7 @@ class HomeModel extends ChangeNotifier {
   late BannerAd myBanner;
 
   int defaultTempo = 60; // デフォルトで設定するBPM
-  int sliderTempo = 60; // 画面スライダーで設定したBPM
-  bool run = false; //メトロノームの動作on/off
 
-  // 振り子の表示フラグ
-  bool isPendulum = false;
-  // 拍子の表示フラグ
-  bool isClick = false;
-  // ボリュームのミュートフラグ
-  bool isMute = false;
   // リセットボタン押下フラグ
   bool isReset = false;
   // 設定ボタン押下フラグ
@@ -51,72 +43,11 @@ class HomeModel extends ChangeNotifier {
   double leftXPosition = 10.0;
   double rightXPosition = 301.4;
 
-  int tempoDuration = 0; // 1拍にかかるの時間のマイクロ秒
-  Alignment alignment = Alignment.bottomRight;
-
-  // todo 4拍以外も作る
-  int nowBeat = 0;
-
-  // 座標を追跡するWidgetに渡すkey
-  final rightGlobalKey = GlobalKey();
-  final leftGlobalKey = GlobalKey();
-  final pendulumGlobalKey = GlobalKey();
-
-  // late:初期化を遅らせるだけ。使う前には初期化が必要
-  late Offset limitRight;
-  late Offset limitLeft;
-
-  late HomeProperty homeProperty;
-
-  double pendulumWidth = 20;
-
-  // ジャストタイミングとして許容する幅
-  double safeWidth = 30.0;
-
-  // タップの判定フラグ
-  bool isJustBeat = false;
-  // ボタンタップ判定フラグ
-  bool isMainButtonTap = false;
-
-  Soundpool beatPool = Soundpool.fromOptions(
-    options: SoundpoolOptions(streamType: StreamType.music),
-  );
-  late int beat;
-
-  Soundpool finishPool = Soundpool.fromOptions(
-    options: SoundpoolOptions(streamType: StreamType.music),
-  );
-  late int finish;
-
-  Soundpool clickPool = Soundpool.fromOptions(
-    options: SoundpoolOptions(streamType: StreamType.music),
-  );
-  late int click;
-  // 変数 ------------------------------------------------------
+  // プロパティ用のclassをインスタンス化
+  HomeProperty homeProperty = HomeProperty();
 
   // 画面読み込み時のinit処理
   HomeModel() {
-    // プロパティ用のclassをインスタンス化
-    homeProperty = HomeProperty();
-
-    Future(() async {
-      beat = await rootBundle
-          .load('assets/sound/hammer.wav')
-          .then((ByteData soundData) {
-        return beatPool.load(soundData);
-      });
-      finish = await rootBundle
-          .load('assets/sound/finish.wav')
-          .then((ByteData soundData) {
-        return finishPool.load(soundData);
-      });
-      click = await rootBundle
-          .load('assets/sound/click.wav')
-          .then((ByteData soundData) {
-        return clickPool.load(soundData);
-      });
-    });
-
     // バナー広告をインスタンス化
     myBanner = BannerAd(
       adUnitId: getTestAdBannerUnitId(),
@@ -144,115 +75,6 @@ class HomeModel extends ChangeNotifier {
     return testBannerUnitId;
   }
 
-  // メトロノームの初回init処理
-  void initMetronome() {
-    // 右側限界値の座標を取得
-    RenderBox rightRenderBox =
-        rightGlobalKey.currentContext!.findRenderObject() as RenderBox;
-    limitRight = rightRenderBox.localToGlobal(Offset.zero);
-
-    //左側限界値の座標を取得
-    RenderBox leftRenderBox =
-        leftGlobalKey.currentContext!.findRenderObject() as RenderBox;
-    limitLeft = leftRenderBox.localToGlobal(Offset.zero);
-  }
-
-  // メトロノームの起動処理
-  Future<void> toggleMetronome() async {
-    // メトロノームの起動チェック
-    if (run) {
-      run = false;
-      notifyListeners();
-    } else {
-      run = true; // メトロノームを起動
-      nowBeat = 0;
-      // メトロノームの初期化
-      initMetronome();
-      runMetronome();
-    }
-  }
-
-  // 無限ループするメトロノーム
-  Future<void> runMetronome() async {
-    // テンポの計算
-    tempoDuration = 60000 ~/ sliderTempo;
-    while (run) {
-      nowBeat++;
-      if (nowBeat == 5) {
-        nowBeat = 1;
-      }
-
-      // ミュートボタンが押されている場合は音を出さない
-      if (!isMute) {
-        // 4拍目でfinishを鳴らす
-        if (nowBeat == 4) {
-          finishPool.play(finish); // 4拍目の音
-        } else {
-          beatPool.play(beat); // 1拍の音`
-        }
-      }
-
-      this.alignment = this.alignment == Alignment.bottomRight
-          ? this.alignment = Alignment.bottomLeft
-          : this.alignment = Alignment.bottomRight;
-
-      notifyListeners();
-      await Future.delayed(Duration(milliseconds: tempoDuration));
-    }
-  }
-
-  // シークバーでテンポを変える
-  void changeTempo(double value) {
-    sliderTempo = value.toInt();
-    notifyListeners();
-  }
-
-  // ボタンをタップした時
-  void tapDown() {
-    isMainButtonTap = true;
-
-    if (run) {
-      // widgetKeyを付けたWidgetのグローバル座標を取得する
-      final RenderBox pendulumBox =
-          pendulumGlobalKey.currentContext!.findRenderObject() as RenderBox;
-      final pendulumWidget = pendulumBox.localToGlobal(Offset.zero);
-
-      print(pendulumWidget);
-      if (pendulumWidget.dx <= limitLeft.dx + safeWidth ||
-          pendulumWidget.dx >= limitRight.dx - safeWidth) {
-        isJustBeat = true;
-        print(isJustBeat);
-      } else {
-        isJustBeat = false;
-      }
-    }
-    notifyListeners();
-  }
-
-  /// ボタンを離した時
-  void tapUp() {
-    isMainButtonTap = false;
-    notifyListeners();
-  }
-
-  // 振り子の画面表示フラグを切り替える関数
-  void togglePendulum() {
-    isPendulum = !isPendulum;
-    notifyListeners();
-  }
-
-  // クリックの画面表示フラグを切り替える関数
-  void toggleClick() {
-    isClick = !isClick;
-    notifyListeners();
-  }
-
-  /// ボリュームのミュートフラグを切り替える関数
-  void toggleMute() {
-    isMute = !isMute;
-    notifyListeners();
-  }
-
   /// 設定ボタンフラグを切り替える関数
   void toggleSettings() {
     isSettings = !isSettings;
@@ -278,17 +100,17 @@ class HomeModel extends ChangeNotifier {
   }
 
   /// 画面をリセットする
-  void displayReset() {
+  void displayReset(BuildContext context) {
     isReset = !isReset;
-    run = false;
-    sliderTempo = defaultTempo;
-    nowBeat = 0;
-    alignment = Alignment.bottomRight;
-    isJustBeat = false;
-    isMainButtonTap = false;
-    isPendulum = false;
-    isClick = false;
-    isMute = false;
+    context.read<RhythmModel>().run = false;
+    context.read<RhythmModel>().sliderTempo = defaultTempo;
+    context.read<RhythmModel>().nowBeat = 0;
+    context.read<RhythmModel>().alignment = Alignment.bottomRight;
+    context.read<RhythmModel>().isJustBeat = false;
+    context.read<RhythmModel>().isMainButtonTap = false;
+    context.read<RhythmModel>().isPendulum = false;
+    context.read<RhythmModel>().isClick = false;
+    context.read<RhythmModel>().isMute = false;
     //selectedNoteIndex = 0;
     //selectedBeatType = 0;
     notifyListeners();

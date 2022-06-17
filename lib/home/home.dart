@@ -35,7 +35,7 @@ class Home extends StatelessWidget {
               SizedBox(height: SizeConfig.blockSizeVertical! * 2),
               Expanded(
                 flex: 3,
-                child: Rhythm(model: model),
+                child: Rhythm(),
               ),
               //! ---------------------------------------------------------------
               Expanded(

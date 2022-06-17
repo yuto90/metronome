@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:metronome/home/rhythm/rhythm_model.dart';
 
 import '../../size_config.dart';
 import '../home_model.dart';
@@ -6,7 +7,7 @@ import '../home_model.dart';
 class Beat extends StatelessWidget {
   const Beat({Key? key, required this.model}) : super(key: key);
 
-  final HomeModel model;
+  final RhythmModel model;
 
   @override
   Widget build(BuildContext context) {

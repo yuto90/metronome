@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:metronome/home/bpm/settings.dart';
 import 'package:metronome/home/home_model.dart';
+import 'package:metronome/home/rhythm/rhythm_model.dart';
+import 'package:provider/src/provider.dart';
 import '../size_config.dart';
 
 class BPM extends StatelessWidget {
@@ -66,7 +68,7 @@ class BPM extends StatelessWidget {
                     ),
                     Spacer(),
                     Text(
-                      model.sliderTempo.toString(),
+                      context.read<RhythmModel>().sliderTempo.toString(),
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: SizeConfig.blockSizeVertical! * 6,
@@ -98,13 +100,13 @@ class BPM extends StatelessWidget {
                 ),
                 Spacer(flex: 2),
                 Slider(
-                  value: model.sliderTempo.toDouble(),
+                  value: context.read<RhythmModel>().sliderTempo.toDouble(),
                   min: 40,
                   max: 200,
                   divisions: 200,
-                  label: model.sliderTempo.toString(),
+                  label: context.read<RhythmModel>().sliderTempo.toString(),
                   onChanged: (double value) {
-                    model.changeTempo(value);
+                    context.read<RhythmModel>().changeTempo(value);
                   },
                 ),
                 Spacer(flex: 1),

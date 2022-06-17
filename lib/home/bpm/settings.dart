@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:metronome/home/rhythm/rhythm_model.dart';
+import 'package:provider/src/provider.dart';
 import '../../size_config.dart';
 import '../home_model.dart';
 
@@ -53,7 +55,8 @@ class Settings extends StatelessWidget {
                   title: Text('バックグラウンドで再生する'),
                   controlAffinity: ListTileControlAffinity.leading,
                   value: true,
-                  onChanged: (value) => model.togglePendulum(),
+                  onChanged: (value) =>
+                      context.read<RhythmModel>().togglePendulum(),
                 ),
               ],
             ),
