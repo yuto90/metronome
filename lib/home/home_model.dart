@@ -3,32 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:metronome/property/home_property.dart';
 import 'package:provider/src/provider.dart';
+import 'bpm/bpm_model.dart';
 import 'rhythm/rhythm_model.dart';
 
 class HomeModel extends ChangeNotifier {
   RhythmModel rhythmModel = RhythmModel();
-
-  /// 音符のパスを格納
-  List note = [
-    'assets/images/1.png',
-    'assets/images/2.png',
-    'assets/images/3.png',
-    'assets/images/4.png',
-  ];
-
-  /// 拍子の種類を格納
-  List beatType = [
-    '1/4',
-    '2/4',
-    '3/4',
-    '4/4',
-  ];
-
-  /// 今どの音符がpickされているかを格納
-  int selectedNoteIndex = 0;
-
-  /// 今どの拍子がpickされているかを格納
-  int selectedBeatType = 0;
 
   late BannerAd myBanner;
 
@@ -75,27 +54,15 @@ class HomeModel extends ChangeNotifier {
     return testBannerUnitId;
   }
 
-  /// 設定ボタンフラグを切り替える関数
-  void toggleSettings() {
-    isSettings = !isSettings;
-    notifyListeners();
-  }
-
   /// リセットボタンを押した時
   void tapUpReset() {
     isReset = false;
     notifyListeners();
   }
 
-  /// 音符をタップした時
-  void pickNote(int index) {
-    selectedNoteIndex = index;
-    notifyListeners();
-  }
-
-  /// 音符をタップした時
-  void pickBeatType(int index) {
-    selectedBeatType = index;
+  /// 設定ボタンフラグを切り替える関数
+  void toggleSettings() {
+    isSettings = !isSettings;
     notifyListeners();
   }
 
@@ -103,7 +70,7 @@ class HomeModel extends ChangeNotifier {
   void displayReset(BuildContext context) {
     isReset = !isReset;
     context.read<RhythmModel>().run = false;
-    context.read<RhythmModel>().sliderTempo = defaultTempo;
+    context.read<BpmModel>().sliderTempo = defaultTempo;
     context.read<RhythmModel>().nowBeat = 0;
     context.read<RhythmModel>().alignment = Alignment.bottomRight;
     context.read<RhythmModel>().isJustBeat = false;

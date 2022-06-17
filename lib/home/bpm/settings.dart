@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:metronome/home/rhythm/rhythm_model.dart';
 import 'package:provider/src/provider.dart';
 import '../../size_config.dart';
 import '../home_model.dart';
+import 'bpm_model.dart';
 
 class Settings extends StatelessWidget {
   const Settings({Key? key, required this.model}) : super(key: key);
 
-  final HomeModel model;
+  final BpmModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class Settings extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: GestureDetector(
-                    onTap: () => model.toggleSettings(),
+                    onTap: () => context.read<HomeModel>().toggleSettings(),
                     onTapCancel: () => null,
                     child: SizedBox(
                       width: SizeConfig.blockSizeHorizontal! * 10,

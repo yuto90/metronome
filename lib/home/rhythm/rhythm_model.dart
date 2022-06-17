@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:metronome/home/bpm/bpm_model.dart';
 import 'package:metronome/property/home_property.dart';
+import 'package:provider/src/provider.dart';
 import 'package:soundpool/soundpool.dart';
 
 class RhythmModel extends ChangeNotifier {
@@ -35,8 +37,6 @@ class RhythmModel extends ChangeNotifier {
   double pendulumWidth = 20;
   // ジャストタイミングとして許容する幅
   double safeWidth = 30.0;
-  // 画面スライダーで設定したBPM
-  int sliderTempo = 60;
   // 振り子の初期位置
   Alignment alignment = Alignment.bottomRight;
   // 1拍にかかるの時間のマイクロ秒
@@ -89,7 +89,7 @@ class RhythmModel extends ChangeNotifier {
   }
 
   // メトロノームの起動処理
-  Future<void> toggleMetronome() async {
+  Future<void> toggleMetronome(BuildContext context) async {
     // メトロノームの起動チェック
     if (run) {
       run = false;
@@ -99,14 +99,14 @@ class RhythmModel extends ChangeNotifier {
       nowBeat = 0;
       // メトロノームの初期化
       initMetronome();
-      runMetronome();
+      runMetronome(context);
     }
   }
 
   // 無限ループするメトロノーム
-  Future<void> runMetronome() async {
+  Future<void> runMetronome(BuildContext context) async {
     // テンポの計算
-    tempoDuration = 60000 ~/ sliderTempo;
+    tempoDuration = 60000 ~/ context.read<BpmModel>().sliderTempo;
     while (run) {
       nowBeat++;
       if (nowBeat == 5) {
@@ -130,12 +130,6 @@ class RhythmModel extends ChangeNotifier {
       notifyListeners();
       await Future.delayed(Duration(milliseconds: tempoDuration));
     }
-  }
-
-  // シークバーでテンポを変える
-  void changeTempo(double value) {
-    sliderTempo = value.toInt();
-    notifyListeners();
   }
 
   // ボタンをタップした時

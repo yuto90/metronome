@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'home_model.dart';
 import 'footer.dart';
 import 'tap.dart';
-import 'bpm.dart';
+import 'bpm/bpm.dart';
 import 'adsense.dart';
 import '../size_config.dart';
 
@@ -47,7 +47,7 @@ class Home extends StatelessWidget {
                     SizeConfig.blockSizeHorizontal! * 6,
                     SizeConfig.blockSizeVertical! * 1,
                   ),
-                  child: BPM(model: model),
+                  child: BPM(),
                 ),
               ),
               //! ---------------------------------------------------------------

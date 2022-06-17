@@ -67,7 +67,7 @@ class Footer extends StatelessWidget {
         ),
         Spacer(),
         GestureDetector(
-          onTap: () => context.read<RhythmModel>().toggleMetronome(),
+          onTap: () => context.read<RhythmModel>().toggleMetronome(context),
           onTapCancel: () => null,
           //child:
           //model.homeProperty.smoothButton(model.isMute, Icons.play_arrow),
