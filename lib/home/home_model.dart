@@ -4,6 +4,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:metronome/property/home_property.dart';
 import 'package:provider/src/provider.dart';
 import 'bpm/bpm_model.dart';
+import 'footer/footer_model.dart';
 import 'rhythm/rhythm_model.dart';
 
 class HomeModel extends ChangeNotifier {
@@ -11,10 +12,6 @@ class HomeModel extends ChangeNotifier {
 
   late BannerAd myBanner;
 
-  int defaultTempo = 60; // デフォルトで設定するBPM
-
-  // リセットボタン押下フラグ
-  bool isReset = false;
   // 設定ボタン押下フラグ
   bool isSettings = false;
 
@@ -54,12 +51,6 @@ class HomeModel extends ChangeNotifier {
     return testBannerUnitId;
   }
 
-  /// リセットボタンを押した時
-  void tapUpReset() {
-    isReset = false;
-    notifyListeners();
-  }
-
   /// 設定ボタンフラグを切り替える関数
   void toggleSettings() {
     isSettings = !isSettings;
@@ -68,16 +59,17 @@ class HomeModel extends ChangeNotifier {
 
   /// 画面をリセットする
   void displayReset(BuildContext context) {
-    isReset = !isReset;
+    context.read<FooterModel>().isReset = false;
     context.read<RhythmModel>().run = false;
-    context.read<BpmModel>().sliderTempo = defaultTempo;
+    context.read<BpmModel>().sliderTempo = 60;
     context.read<RhythmModel>().nowBeat = 0;
     context.read<RhythmModel>().alignment = Alignment.bottomRight;
     context.read<RhythmModel>().isJustBeat = false;
     context.read<RhythmModel>().isMainButtonTap = false;
-    context.read<RhythmModel>().isPendulum = false;
-    context.read<RhythmModel>().isClick = false;
-    context.read<RhythmModel>().isMute = false;
+    context.read<FooterModel>().isPendulum = false;
+    context.read<FooterModel>().isClick = false;
+    context.read<FooterModel>().isMute = false;
+
     //selectedNoteIndex = 0;
     //selectedBeatType = 0;
     notifyListeners();

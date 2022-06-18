@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:metronome/home/bpm/bpm_model.dart';
+import 'package:metronome/home/footer/footer.dart';
+import 'package:metronome/home/footer/footer_model.dart';
 import 'package:metronome/property/home_property.dart';
 import 'package:provider/src/provider.dart';
 import 'package:soundpool/soundpool.dart';
@@ -49,12 +51,6 @@ class RhythmModel extends ChangeNotifier {
   late Offset limitRight;
   late Offset limitLeft;
 
-  // 振り子の表示フラグ
-  bool isPendulum = false;
-  // 拍子の表示フラグ
-  bool isClick = false;
-  // ボリュームのミュートフラグ
-  bool isMute = false;
   // タップの判定フラグ
   bool isJustBeat = false;
   // ボタンタップ判定フラグ
@@ -96,11 +92,12 @@ class RhythmModel extends ChangeNotifier {
       notifyListeners();
     } else {
       run = true; // メトロノームを起動
-      nowBeat = 0;
+      context.read<RhythmModel>().nowBeat = 0;
       // メトロノームの初期化
       initMetronome();
       runMetronome(context);
     }
+    context.read<FooterModel>().notify();
   }
 
   // 無限ループするメトロノーム
@@ -114,7 +111,7 @@ class RhythmModel extends ChangeNotifier {
       }
 
       // ミュートボタンが押されている場合は音を出さない
-      if (!isMute) {
+      if (!context.read<FooterModel>().isMute) {
         // 4拍目でfinishを鳴らす
         if (nowBeat == 4) {
           finishPool.play(finish); // 4拍目の音
@@ -160,21 +157,8 @@ class RhythmModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // 振り子の画面表示フラグを切り替える関数
-  void togglePendulum() {
-    isPendulum = !isPendulum;
-    notifyListeners();
-  }
-
-  // クリックの画面表示フラグを切り替える関数
-  void toggleClick() {
-    isClick = !isClick;
-    notifyListeners();
-  }
-
-  /// ボリュームのミュートフラグを切り替える関数
-  void toggleMute() {
-    isMute = !isMute;
+  // 画面更新用
+  void notify() {
     notifyListeners();
   }
 }

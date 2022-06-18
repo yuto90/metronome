@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:metronome/home/footer/footer_model.dart';
 import 'package:metronome/home/rhythm/rhythm_model.dart';
+import 'package:provider/src/provider.dart';
 import '../../size_config.dart';
 
 class Beat extends StatelessWidget {
@@ -17,7 +19,7 @@ class Beat extends StatelessWidget {
           height: SizeConfig.blockSizeVertical! * 4,
           // todo ↓ 三項内に三項ってどうなの？
           decoration: BoxDecoration(
-            color: model.isClick
+            color: context.read<FooterModel>().isClick
                 ? Colors.white
                 : model.nowBeat == 1
                     ? Colors.blue
@@ -31,7 +33,7 @@ class Beat extends StatelessWidget {
           height: SizeConfig.blockSizeVertical! * 4,
           // todo ↓ 三項内に三項ってどうなの？
           decoration: BoxDecoration(
-            color: model.isClick
+            color: context.read<FooterModel>().isClick
                 ? Colors.white
                 : model.nowBeat == 2
                     ? Colors.blue
@@ -45,7 +47,7 @@ class Beat extends StatelessWidget {
           height: SizeConfig.blockSizeVertical! * 4,
           // todo ↓ 三項内に三項ってどうなの？
           decoration: BoxDecoration(
-            color: model.isClick
+            color: context.read<FooterModel>().isClick
                 ? Colors.white
                 : model.nowBeat == 3
                     ? Colors.blue
@@ -59,7 +61,7 @@ class Beat extends StatelessWidget {
           height: SizeConfig.blockSizeVertical! * 4,
           // todo ↓ 三項内に三項ってどうなの？
           decoration: BoxDecoration(
-            color: model.isClick
+            color: context.read<FooterModel>().isClick
                 ? Colors.white
                 : model.nowBeat == 4
                     ? Colors.blue

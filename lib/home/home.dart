@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:metronome/home/rhythm/rhythm.dart';
 import 'package:provider/provider.dart';
 import 'home_model.dart';
-import 'footer.dart';
+import 'footer/footer.dart';
 import 'tap.dart';
 import 'bpm/bpm.dart';
 import 'adsense.dart';
@@ -69,15 +69,16 @@ class Home extends StatelessWidget {
               Expanded(
                 flex: 2,
                 child: Padding(
-                    padding: EdgeInsets.fromLTRB(
-                      SizeConfig.blockSizeHorizontal! * 2,
-                      SizeConfig.blockSizeVertical! * 1,
-                      SizeConfig.blockSizeHorizontal! * 2,
-                      SizeConfig.blockSizeVertical! * 1,
-                    ),
-                    child: Adsense(
-                      model: model,
-                    )),
+                  padding: EdgeInsets.fromLTRB(
+                    SizeConfig.blockSizeHorizontal! * 2,
+                    SizeConfig.blockSizeVertical! * 1,
+                    SizeConfig.blockSizeHorizontal! * 2,
+                    SizeConfig.blockSizeVertical! * 1,
+                  ),
+                  child: Adsense(
+                    model: model,
+                  ),
+                ),
               ),
               //! ---------------------------------------------------------------
               Expanded(
@@ -89,7 +90,7 @@ class Home extends StatelessWidget {
                     SizeConfig.blockSizeHorizontal! * 6,
                     SizeConfig.blockSizeVertical! * 1,
                   ),
-                  child: Footer(model: model),
+                  child: Footer(),
                 ),
               ),
             ],

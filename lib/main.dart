@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'home/bpm/bpm_model.dart';
+import 'home/footer/footer_model.dart';
 import 'home/home.dart';
 import 'home/home_model.dart';
 import 'home/rhythm/rhythm_model.dart';
@@ -25,6 +26,9 @@ void main() {
         ),
         ChangeNotifierProvider<BpmModel>(
           create: (context) => BpmModel(),
+        ),
+        ChangeNotifierProvider<FooterModel>(
+          create: (context) => FooterModel(context),
         ),
       ],
       child: MaterialApp(

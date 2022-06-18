@@ -46,4 +46,8 @@ class BpmModel extends ChangeNotifier {
     sliderTempo = value.toInt();
     notifyListeners();
   }
+
+  void notify() {
+    notifyListeners();
+  }
 }
