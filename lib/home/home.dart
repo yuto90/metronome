@@ -3,7 +3,7 @@ import 'package:metronome/home/rhythm/rhythm.dart';
 import 'package:provider/provider.dart';
 import 'home_model.dart';
 import 'footer/footer.dart';
-import 'tap.dart';
+import '../tap/tap.dart';
 import 'bpm/bpm.dart';
 import 'adsense.dart';
 import '../size_config.dart';
@@ -25,78 +25,80 @@ class Home extends StatelessWidget {
         //elevation: 6,
         //shadowColor: Colors.grey.shade500,
       ),
-      body: Consumer<HomeModel>(builder: (context, model, child) {
-        return Container(
-          color: Colors.grey[300],
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              //! ---------------------------------------------------------------
-              SizedBox(height: SizeConfig.blockSizeVertical! * 2),
-              Expanded(
-                flex: 3,
-                child: Rhythm(),
-              ),
-              //! ---------------------------------------------------------------
-              Expanded(
-                flex: model.isSettings ? 8 : 4,
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(
-                    SizeConfig.blockSizeHorizontal! * 6,
-                    SizeConfig.blockSizeVertical! * 1,
-                    SizeConfig.blockSizeHorizontal! * 6,
-                    SizeConfig.blockSizeVertical! * 1,
-                  ),
-                  child: BPM(),
+      body: Consumer<HomeModel>(
+        builder: (context, model, child) {
+          return Container(
+            color: Colors.grey[300],
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                //! ---------------------------------------------------------------
+                SizedBox(height: SizeConfig.blockSizeVertical! * 2),
+                Expanded(
+                  flex: 3,
+                  child: Rhythm(),
                 ),
-              ),
-              //! ---------------------------------------------------------------
-              model.isSettings
-                  ? Container()
-                  : Expanded(
-                      flex: 4,
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(
-                          SizeConfig.blockSizeHorizontal! * 2,
-                          SizeConfig.blockSizeVertical! * 1,
-                          SizeConfig.blockSizeHorizontal! * 2,
-                          SizeConfig.blockSizeVertical! * 1,
-                        ),
-                        child: Tap(model: model),
-                      ),
+                //! ---------------------------------------------------------------
+                Expanded(
+                  flex: model.isSettings ? 8 : 4,
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(
+                      SizeConfig.blockSizeHorizontal! * 6,
+                      SizeConfig.blockSizeVertical! * 1,
+                      SizeConfig.blockSizeHorizontal! * 6,
+                      SizeConfig.blockSizeVertical! * 1,
                     ),
-              //! ---------------------------------------------------------------
-              Expanded(
-                flex: 2,
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(
-                    SizeConfig.blockSizeHorizontal! * 2,
-                    SizeConfig.blockSizeVertical! * 1,
-                    SizeConfig.blockSizeHorizontal! * 2,
-                    SizeConfig.blockSizeVertical! * 1,
-                  ),
-                  child: Adsense(
-                    model: model,
+                    child: BPM(),
                   ),
                 ),
-              ),
-              //! ---------------------------------------------------------------
-              Expanded(
-                flex: 2,
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(
-                    SizeConfig.blockSizeHorizontal! * 6,
-                    SizeConfig.blockSizeVertical! * 1,
-                    SizeConfig.blockSizeHorizontal! * 6,
-                    SizeConfig.blockSizeVertical! * 1,
+                //! ---------------------------------------------------------------
+                model.isSettings
+                    ? Container()
+                    : Expanded(
+                        flex: 4,
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(
+                            SizeConfig.blockSizeHorizontal! * 2,
+                            SizeConfig.blockSizeVertical! * 1,
+                            SizeConfig.blockSizeHorizontal! * 2,
+                            SizeConfig.blockSizeVertical! * 1,
+                          ),
+                          child: Tap(),
+                        ),
+                      ),
+                //! ---------------------------------------------------------------
+                Expanded(
+                  flex: 2,
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(
+                      SizeConfig.blockSizeHorizontal! * 2,
+                      SizeConfig.blockSizeVertical! * 1,
+                      SizeConfig.blockSizeHorizontal! * 2,
+                      SizeConfig.blockSizeVertical! * 1,
+                    ),
+                    child: Adsense(
+                      model: model,
+                    ),
                   ),
-                  child: Footer(),
                 ),
-              ),
-            ],
-          ),
-        );
-      }),
+                //! ---------------------------------------------------------------
+                Expanded(
+                  flex: 2,
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(
+                      SizeConfig.blockSizeHorizontal! * 6,
+                      SizeConfig.blockSizeVertical! * 1,
+                      SizeConfig.blockSizeHorizontal! * 6,
+                      SizeConfig.blockSizeVertical! * 1,
+                    ),
+                    child: Footer(),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }

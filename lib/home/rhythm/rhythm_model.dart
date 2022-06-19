@@ -51,11 +51,6 @@ class RhythmModel extends ChangeNotifier {
   late Offset limitRight;
   late Offset limitLeft;
 
-  // タップの判定フラグ
-  bool isJustBeat = false;
-  // ボタンタップ判定フラグ
-  bool isMainButtonTap = false;
-
   Soundpool finishPool = Soundpool.fromOptions(
     options: SoundpoolOptions(streamType: StreamType.music),
   );
@@ -127,34 +122,6 @@ class RhythmModel extends ChangeNotifier {
       notifyListeners();
       await Future.delayed(Duration(milliseconds: tempoDuration));
     }
-  }
-
-  // ボタンをタップした時
-  void tapDown() {
-    isMainButtonTap = true;
-
-    if (run) {
-      // widgetKeyを付けたWidgetのグローバル座標を取得する
-      final RenderBox pendulumBox =
-          pendulumGlobalKey.currentContext!.findRenderObject() as RenderBox;
-      final pendulumWidget = pendulumBox.localToGlobal(Offset.zero);
-
-      print(pendulumWidget);
-      if (pendulumWidget.dx <= limitLeft.dx + safeWidth ||
-          pendulumWidget.dx >= limitRight.dx - safeWidth) {
-        isJustBeat = true;
-        print(isJustBeat);
-      } else {
-        isJustBeat = false;
-      }
-    }
-    notifyListeners();
-  }
-
-  /// ボタンを離した時
-  void tapUp() {
-    isMainButtonTap = false;
-    notifyListeners();
   }
 
   // 画面更新用

@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:metronome/property/home_property.dart';
+import 'package:metronome/tap/tap_model.dart';
 import 'package:provider/src/provider.dart';
 import 'bpm/bpm_model.dart';
 import 'footer/footer_model.dart';
@@ -64,8 +65,8 @@ class HomeModel extends ChangeNotifier {
     context.read<BpmModel>().sliderTempo = 60;
     context.read<RhythmModel>().nowBeat = 0;
     context.read<RhythmModel>().alignment = Alignment.bottomRight;
-    context.read<RhythmModel>().isJustBeat = false;
-    context.read<RhythmModel>().isMainButtonTap = false;
+    context.read<TapModel>().isJustBeat = false;
+    context.read<TapModel>().isMainButtonTap = false;
     context.read<FooterModel>().isPendulum = false;
     context.read<FooterModel>().isClick = false;
     context.read<FooterModel>().isMute = false;

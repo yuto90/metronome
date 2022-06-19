@@ -7,6 +7,7 @@ import 'home/footer/footer_model.dart';
 import 'home/home.dart';
 import 'home/home_model.dart';
 import 'home/rhythm/rhythm_model.dart';
+import 'tap/tap_model.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +27,9 @@ void main() {
         ),
         ChangeNotifierProvider<BpmModel>(
           create: (context) => BpmModel(),
+        ),
+        ChangeNotifierProvider<TapModel>(
+          create: (context) => TapModel(context),
         ),
         ChangeNotifierProvider<FooterModel>(
           create: (context) => FooterModel(context),
