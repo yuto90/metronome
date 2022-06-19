@@ -14,8 +14,6 @@ class FooterModel extends ChangeNotifier {
 
   late RhythmModel rhythmModel;
 
-  // リセットボタン押下フラグ
-  bool isReset = false;
   // ボリュームのミュートフラグ
   bool isMute = false;
   // 振り子の表示フラグ
@@ -25,12 +23,6 @@ class FooterModel extends ChangeNotifier {
 
   // デフォルトで設定するBPM
   int defaultTempo = 60;
-
-  /// リセットボタンを押した時
-  void tapUpReset() {
-    isReset = false;
-    notifyListeners();
-  }
 
   /// ボリュームのミュートフラグを切り替える関数
   void toggleMute() {

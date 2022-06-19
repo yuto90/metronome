@@ -57,22 +57,4 @@ class HomeModel extends ChangeNotifier {
     isSettings = !isSettings;
     notifyListeners();
   }
-
-  /// 画面をリセットする
-  void displayReset(BuildContext context) {
-    context.read<FooterModel>().isReset = false;
-    context.read<RhythmModel>().run = false;
-    context.read<BpmModel>().sliderTempo = 60;
-    context.read<RhythmModel>().nowBeat = 0;
-    context.read<RhythmModel>().alignment = Alignment.bottomRight;
-    context.read<TapModel>().isJustBeat = false;
-    context.read<TapModel>().isMainButtonTap = false;
-    context.read<FooterModel>().isPendulum = false;
-    context.read<FooterModel>().isClick = false;
-    context.read<FooterModel>().isMute = false;
-
-    //selectedNoteIndex = 0;
-    //selectedBeatType = 0;
-    notifyListeners();
-  }
 }
