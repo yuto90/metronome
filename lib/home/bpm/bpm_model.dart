@@ -34,6 +34,8 @@ class BpmModel extends ChangeNotifier {
   // 画面スライダーで設定したBPM
   int sliderTempo = 60;
 
+  bool isAccent = false;
+
   /// 音符を切り替えた時
   void pickNote(int index) {
     selectedNoteIndex = index;
@@ -49,6 +51,12 @@ class BpmModel extends ChangeNotifier {
   // シークバーでテンポを変える
   void changeTempo(double value) {
     sliderTempo = value.toInt();
+    notifyListeners();
+  }
+
+  // アクセントを付けるか
+  void checkAccent() {
+    isAccent = !isAccent;
     notifyListeners();
   }
 

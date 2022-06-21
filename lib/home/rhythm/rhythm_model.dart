@@ -110,7 +110,7 @@ class RhythmModel extends ChangeNotifier {
       // ミュートボタンが押されている場合は音を出さない
       if (!context.read<FooterModel>().isMute) {
         // 4拍目でfinishを鳴らす
-        if (nowBeat == bpmModel.selectedBeatType) {
+        if (nowBeat == bpmModel.selectedBeatType && bpmModel.isAccent) {
           finishPool.play(finish); // 4拍目の音
         } else {
           beatPool.play(beat); // 1拍の音`

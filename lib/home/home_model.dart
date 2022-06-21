@@ -2,10 +2,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:metronome/property/home_property.dart';
-import 'package:metronome/tap/tap_model.dart';
-import 'package:provider/src/provider.dart';
-import 'bpm/bpm_model.dart';
-import 'footer/footer_model.dart';
 import 'rhythm/rhythm_model.dart';
 
 class HomeModel extends ChangeNotifier {

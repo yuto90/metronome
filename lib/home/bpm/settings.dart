@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:metronome/home/footer/footer_model.dart';
 import 'package:provider/src/provider.dart';
 import '../../size_config.dart';
 import '../home_model.dart';
@@ -52,10 +51,10 @@ class Settings extends StatelessWidget {
               children: [
                 // todo 別ファイルに切り分け
                 CheckboxListTile(
-                  title: Text('バックグラウンドで再生する'),
+                  title: Text('最後の拍でアクセントをつける'),
                   controlAffinity: ListTileControlAffinity.leading,
-                  value: true,
-                  onChanged: (value) => null,
+                  value: model.isAccent,
+                  onChanged: (value) => model.checkAccent(),
                 ),
               ],
             ),
