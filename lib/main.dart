@@ -20,13 +20,13 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider<HomeModel>(
-          create: (context) => HomeModel(),
+          create: (context) => HomeModel(context),
         ),
         ChangeNotifierProvider<RhythmModel>(
-          create: (context) => RhythmModel(),
+          create: (context) => RhythmModel(context),
         ),
         ChangeNotifierProvider<BpmModel>(
-          create: (context) => BpmModel(),
+          create: (context) => BpmModel(context),
         ),
         ChangeNotifierProvider<TapModel>(
           create: (context) => TapModel(context),

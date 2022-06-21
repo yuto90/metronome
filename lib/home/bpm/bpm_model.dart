@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:metronome/home/rhythm/rhythm_model.dart';
 import 'package:metronome/property/home_property.dart';
 
 class BpmModel extends ChangeNotifier {
+  BpmModel(BuildContext context) {
+    rhythmModel = RhythmModel(context);
+  }
+  late RhythmModel rhythmModel;
   // スタイルのプロパティ
   HomeProperty homeProperty = HomeProperty();
 
@@ -38,6 +43,7 @@ class BpmModel extends ChangeNotifier {
   /// 拍を切り替えた時
   void pickBeatType(int index) {
     selectedBeatType = index;
+    print(selectedBeatType);
     notifyListeners();
   }
 

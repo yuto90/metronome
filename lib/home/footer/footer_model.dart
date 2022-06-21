@@ -7,11 +7,12 @@ import '../home_model.dart';
 class FooterModel extends ChangeNotifier {
   FooterModel(BuildContext context) {
     rhythmModel = context.read<RhythmModel>();
+    homeModel = context.read<HomeModel>();
   }
   // プロパティ用のclassをインスタンス化
   HomeProperty homeProperty = HomeProperty();
-  HomeModel homeModel = HomeModel();
 
+  late HomeModel homeModel;
   late RhythmModel rhythmModel;
 
   // ボリュームのミュートフラグ

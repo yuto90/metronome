@@ -52,7 +52,6 @@ class BPM extends StatelessWidget {
                           //color: Colors.red,
                           child: CupertinoPicker(
                             itemExtent: 50,
-                            //scrollController: FixedExtentScrollController(initialItem: 0),
                             onSelectedItemChanged: (index) =>
                                 model.pickNote(index),
                             children: model.note
@@ -84,6 +83,8 @@ class BPM extends StatelessWidget {
                           //color: Colors.red,
                           child: CupertinoPicker(
                             itemExtent: 50,
+                            scrollController:
+                                FixedExtentScrollController(initialItem: 4),
                             onSelectedItemChanged: (index) =>
                                 model.pickBeatType(index),
                             children: model.beatType

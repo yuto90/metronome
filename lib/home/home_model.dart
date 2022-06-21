@@ -9,7 +9,22 @@ import 'footer/footer_model.dart';
 import 'rhythm/rhythm_model.dart';
 
 class HomeModel extends ChangeNotifier {
-  RhythmModel rhythmModel = RhythmModel();
+  // 画面読み込み時のinit処理
+  HomeModel(BuildContext context) {
+    rhythmModel = RhythmModel(context);
+
+    // バナー広告をインスタンス化
+    myBanner = BannerAd(
+      adUnitId: getTestAdBannerUnitId(),
+      //adUnitId: 'ca-app-pub-8474156868822041/2299618878',
+      size: AdSize.banner,
+      request: const AdRequest(),
+      listener: const BannerAdListener(),
+    );
+    // バナー広告の読み込み
+    myBanner.load();
+  }
+  late RhythmModel rhythmModel;
 
   late BannerAd myBanner;
 
@@ -22,20 +37,6 @@ class HomeModel extends ChangeNotifier {
 
   // プロパティ用のclassをインスタンス化
   HomeProperty homeProperty = HomeProperty();
-
-  // 画面読み込み時のinit処理
-  HomeModel() {
-    // バナー広告をインスタンス化
-    myBanner = BannerAd(
-      adUnitId: getTestAdBannerUnitId(),
-      //adUnitId: 'ca-app-pub-8474156868822041/2299618878',
-      size: AdSize.banner,
-      request: const AdRequest(),
-      listener: const BannerAdListener(),
-    );
-    // バナー広告の読み込み
-    myBanner.load();
-  }
 
   // プラットフォーム（iOS / Android）に合わせてデモ用広告IDを返す
   String getTestAdBannerUnitId() {

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:metronome/home/bpm/bpm_model.dart';
-import 'package:metronome/home/footer/footer.dart';
 import 'package:metronome/home/footer/footer_model.dart';
 import 'package:metronome/property/home_property.dart';
 import 'package:provider/src/provider.dart';
 import 'package:soundpool/soundpool.dart';
 
 class RhythmModel extends ChangeNotifier {
-  RhythmModel() {
+  RhythmModel(BuildContext context) {
     Future(() async {
       beat = await rootBundle
           .load('assets/sound/hammer.wav')
@@ -46,7 +45,7 @@ class RhythmModel extends ChangeNotifier {
   //メトロノームの動作on/off
   bool run = false;
   // todo 4拍以外も作る
-  int nowBeat = 0;
+  int nowBeat = -1;
   // late:初期化を遅らせるだけ。使う前には初期化が必要
   late Offset limitRight;
   late Offset limitLeft;
@@ -87,7 +86,8 @@ class RhythmModel extends ChangeNotifier {
       notifyListeners();
     } else {
       run = true; // メトロノームを起動
-      context.read<RhythmModel>().nowBeat = 0;
+      // 一旦beat数を初期化
+      nowBeat = -1;
       // メトロノームの初期化
       initMetronome();
       runMetronome(context);
@@ -101,14 +101,14 @@ class RhythmModel extends ChangeNotifier {
     tempoDuration = 60000 ~/ context.read<BpmModel>().sliderTempo;
     while (run) {
       nowBeat++;
-      if (nowBeat == 5) {
-        nowBeat = 1;
+      if (nowBeat == 4) {
+        nowBeat = 0;
       }
 
       // ミュートボタンが押されている場合は音を出さない
       if (!context.read<FooterModel>().isMute) {
         // 4拍目でfinishを鳴らす
-        if (nowBeat == 4) {
+        if (nowBeat == 3) {
           finishPool.play(finish); // 4拍目の音
         } else {
           beatPool.play(beat); // 1拍の音`

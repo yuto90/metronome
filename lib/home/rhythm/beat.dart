@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:metronome/home/bpm/bpm_model.dart';
 import 'package:metronome/home/footer/footer_model.dart';
 import 'package:metronome/home/rhythm/rhythm_model.dart';
 import 'package:provider/src/provider.dart';
@@ -12,60 +13,26 @@ class Beat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Spacer(),
-        Container(
-          width: SizeConfig.blockSizeHorizontal! * 5,
-          height: SizeConfig.blockSizeVertical! * 3,
-          decoration: BoxDecoration(
-            color: context.read<FooterModel>().isClick
-                ? Colors.white
-                : model.nowBeat == 1
-                    ? Colors.blue
-                    : Colors.grey[300],
-            shape: BoxShape.circle,
+        for (int i = 0;
+            i <= context.watch<BpmModel>().selectedBeatType;
+            i++) ...[
+          Spacer(),
+          Container(
+            width: SizeConfig.blockSizeHorizontal! * 5,
+            height: SizeConfig.blockSizeVertical! * 3,
+            decoration: BoxDecoration(
+              color: context.read<FooterModel>().isClick
+                  ? Colors.white
+                  : model.nowBeat == i
+                      ? Colors.blue
+                      : Colors.grey[300],
+              shape: BoxShape.circle,
+            ),
           ),
-        ),
-        Spacer(),
-        Container(
-          width: SizeConfig.blockSizeHorizontal! * 5,
-          height: SizeConfig.blockSizeVertical! * 3,
-          decoration: BoxDecoration(
-            color: context.read<FooterModel>().isClick
-                ? Colors.white
-                : model.nowBeat == 2
-                    ? Colors.blue
-                    : Colors.grey[300],
-            shape: BoxShape.circle,
-          ),
-        ),
-        Spacer(),
-        Container(
-          width: SizeConfig.blockSizeHorizontal! * 5,
-          height: SizeConfig.blockSizeVertical! * 3,
-          decoration: BoxDecoration(
-            color: context.read<FooterModel>().isClick
-                ? Colors.white
-                : model.nowBeat == 3
-                    ? Colors.blue
-                    : Colors.grey[300],
-            shape: BoxShape.circle,
-          ),
-        ),
-        Spacer(),
-        Container(
-          width: SizeConfig.blockSizeHorizontal! * 5,
-          height: SizeConfig.blockSizeVertical! * 3,
-          decoration: BoxDecoration(
-            color: context.read<FooterModel>().isClick
-                ? Colors.white
-                : model.nowBeat == 4
-                    ? Colors.blue
-                    : Colors.grey[300],
-            shape: BoxShape.circle,
-          ),
-        ),
-        Spacer(),
+          Spacer()
+        ],
       ],
     );
   }
