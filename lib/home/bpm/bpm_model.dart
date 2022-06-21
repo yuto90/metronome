@@ -43,7 +43,6 @@ class BpmModel extends ChangeNotifier {
   /// 拍を切り替えた時
   void pickBeatType(int index) {
     selectedBeatType = index;
-    print(selectedBeatType);
     notifyListeners();
   }
 
