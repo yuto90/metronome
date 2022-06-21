@@ -15,9 +15,8 @@ class Beat extends StatelessWidget {
       children: [
         Spacer(),
         Container(
-          width: SizeConfig.blockSizeHorizontal! * 10,
-          height: SizeConfig.blockSizeVertical! * 4,
-          // todo ↓ 三項内に三項ってどうなの？
+          width: SizeConfig.blockSizeHorizontal! * 5,
+          height: SizeConfig.blockSizeVertical! * 3,
           decoration: BoxDecoration(
             color: context.read<FooterModel>().isClick
                 ? Colors.white
@@ -29,9 +28,8 @@ class Beat extends StatelessWidget {
         ),
         Spacer(),
         Container(
-          width: SizeConfig.blockSizeHorizontal! * 10,
-          height: SizeConfig.blockSizeVertical! * 4,
-          // todo ↓ 三項内に三項ってどうなの？
+          width: SizeConfig.blockSizeHorizontal! * 5,
+          height: SizeConfig.blockSizeVertical! * 3,
           decoration: BoxDecoration(
             color: context.read<FooterModel>().isClick
                 ? Colors.white
@@ -43,9 +41,8 @@ class Beat extends StatelessWidget {
         ),
         Spacer(),
         Container(
-          width: SizeConfig.blockSizeHorizontal! * 10,
-          height: SizeConfig.blockSizeVertical! * 4,
-          // todo ↓ 三項内に三項ってどうなの？
+          width: SizeConfig.blockSizeHorizontal! * 5,
+          height: SizeConfig.blockSizeVertical! * 3,
           decoration: BoxDecoration(
             color: context.read<FooterModel>().isClick
                 ? Colors.white
@@ -57,9 +54,8 @@ class Beat extends StatelessWidget {
         ),
         Spacer(),
         Container(
-          width: SizeConfig.blockSizeHorizontal! * 10,
-          height: SizeConfig.blockSizeVertical! * 4,
-          // todo ↓ 三項内に三項ってどうなの？
+          width: SizeConfig.blockSizeHorizontal! * 5,
+          height: SizeConfig.blockSizeVertical! * 3,
           decoration: BoxDecoration(
             color: context.read<FooterModel>().isClick
                 ? Colors.white

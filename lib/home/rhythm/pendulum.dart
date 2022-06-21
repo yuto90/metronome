@@ -20,33 +20,34 @@ class Pendulum extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               // 左側のジャストタイミングとして許容する範囲
-              Align(
-                alignment: Alignment.bottomLeft,
-                child: Container(
-                  width: SizeConfig.blockSizeHorizontal! * model.pendulumWidth +
-                      model.safeWidth,
-                  height: SizeConfig.blockSizeVertical! * 1,
-                  // ! ジャストのエリア可視化
-                  color: Colors.white,
-                  key: model.leftGlobalKey, // 座標を取得したいWidgetにkeyを付けると、後から参照できる
-                ),
+              Container(
+                width: SizeConfig.blockSizeHorizontal! * model.pendulumWidth +
+                    model.safeWidth,
+                height: SizeConfig.blockSizeVertical! * 1,
+                // ! ジャストのエリア可視化
+                color: Colors.white,
+                key: model.leftGlobalKey, // 座標を取得したいWidgetにkeyを付けると、後から参照できる
+              ),
+              Container(
+                width: SizeConfig.blockSizeHorizontal! * model.pendulumWidth,
+                height: SizeConfig.blockSizeVertical! * 1,
+                color: context.read<FooterModel>().isPendulum
+                    ? Colors.white
+                    : Colors.grey[300],
               ),
               // 右側のジャストタイミングとして許容する範囲
-              Align(
-                alignment: Alignment.bottomRight,
-                child: Container(
-                  width: SizeConfig.blockSizeHorizontal! * model.pendulumWidth +
-                      model.safeWidth,
-                  height: SizeConfig.blockSizeVertical! * 1,
-                  // ! ジャストのエリア可視化
-                  color: Colors.white,
-                  key: model.rightGlobalKey, // 座標を取得したいWidgetにkeyを付けると、後から参照できる
-                ),
+              Container(
+                width: SizeConfig.blockSizeHorizontal! * model.pendulumWidth +
+                    model.safeWidth,
+                height: SizeConfig.blockSizeVertical! * 1,
+                // ! ジャストのエリア可視化
+                color: Colors.white,
+                key: model.rightGlobalKey, // 座標を取得したいWidgetにkeyを付けると、後から参照できる
               ),
             ],
           ),
         ),
-        // 振り子本体
+        // 振り子
         Container(
           width: SizeConfig.blockSizeHorizontal! * 90,
           height: SizeConfig.blockSizeVertical! * 3,
@@ -57,6 +58,7 @@ class Pendulum extends StatelessWidget {
             alignment: model.alignment,
             duration: Duration(milliseconds: model.tempoDuration),
             child: Container(
+              // 振り子本体
               width: SizeConfig.blockSizeHorizontal! * model.pendulumWidth,
               height: SizeConfig.blockSizeVertical! * 4,
               color: context.read<FooterModel>().isPendulum
@@ -65,6 +67,23 @@ class Pendulum extends StatelessWidget {
               key: model.pendulumGlobalKey, // 座標を取得したいWidgetにkeyを付けると、後から参照できる
             ),
             curve: Curves.linear,
+          ),
+        ),
+
+        Container(
+          width: SizeConfig.blockSizeHorizontal! * 90,
+          height: SizeConfig.blockSizeVertical! * 1,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: SizeConfig.blockSizeHorizontal! * model.pendulumWidth,
+                height: SizeConfig.blockSizeVertical! * 1,
+                color: context.read<FooterModel>().isPendulum
+                    ? Colors.white
+                    : Colors.grey[300],
+              ),
+            ],
           ),
         ),
       ],

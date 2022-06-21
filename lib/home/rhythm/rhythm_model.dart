@@ -36,7 +36,7 @@ class RhythmModel extends ChangeNotifier {
   // スタイルのプロパティ
   HomeProperty homeProperty = HomeProperty();
 
-  double pendulumWidth = 20;
+  double pendulumWidth = 1;
   // ジャストタイミングとして許容する幅
   double safeWidth = 30.0;
   // 振り子の初期位置
