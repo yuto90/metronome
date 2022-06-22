@@ -15,6 +15,7 @@ class Beat extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        // todo context.watch...はmodelで変数化する
         for (int i = 0;
             i <= context.watch<BpmModel>().selectedBeatType;
             i++) ...[
@@ -31,7 +32,26 @@ class Beat extends StatelessWidget {
               shape: BoxShape.circle,
             ),
           ),
-          Spacer()
+          Spacer(),
+          // todo 選択音符によって画面に表示するclickを可変
+          for (int i = 0;
+              i < context.watch<BpmModel>().selectedNoteIndex;
+              i++) ...[
+            Spacer(),
+            Container(
+              width: SizeConfig.blockSizeHorizontal! * 5,
+              height: SizeConfig.blockSizeVertical! * 1,
+              decoration: BoxDecoration(
+                color: context.read<FooterModel>().isClick
+                    ? Colors.white
+                    : model.nowBeat == i
+                        ? Colors.blue
+                        : Colors.grey[300],
+                shape: BoxShape.circle,
+              ),
+            ),
+          ],
+          Spacer(),
         ],
       ],
     );
