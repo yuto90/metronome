@@ -30,7 +30,7 @@ class BpmModel extends ChangeNotifier {
   int selectedNoteIndex = 0;
 
   /// 今どの拍子がpickされているかを格納
-  int selectedBeatType = 0;
+  int selectedBeatType = 4;
   // 画面スライダーで設定したBPM
   int sliderTempo = 60;
 

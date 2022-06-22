@@ -109,11 +109,11 @@ class RhythmModel extends ChangeNotifier {
 
       // ミュートボタンが押されている場合は音を出さない
       if (!context.read<FooterModel>().isMute) {
-        // 4拍目でfinishを鳴らす
+        // 最後の拍 かつ アクセントフラグがtrue
         if (nowBeat == bpmModel.selectedBeatType && bpmModel.isAccent) {
-          finishPool.play(finish); // 4拍目の音
+          finishPool.play(finish);
         } else {
-          beatPool.play(beat); // 1拍の音`
+          beatPool.play(beat);
         }
       }
 
