@@ -40,12 +40,17 @@ class RhythmModel extends ChangeNotifier {
   double safeWidth = 30.0;
   // 振り子の初期位置
   Alignment alignment = Alignment.bottomRight;
-  // 1拍にかかるの時間のマイクロ秒
+  // 振り子のテンポ
+  int pendulumTempoDuration = 0;
+  // メトロノームの内部ループのテンポ
   int tempoDuration = 0;
   //メトロノームの動作on/off
   bool run = false;
+  // 現在の拍
   // todo 4拍以外も作る
   int nowBeat = -1;
+  // 現在のクリック
+  int nowClick = -1;
   // late:初期化を遅らせるだけ。使う前には初期化が必要
   late Offset limitRight;
   late Offset limitLeft;
@@ -88,6 +93,7 @@ class RhythmModel extends ChangeNotifier {
       run = true; // メトロノームを起動
       // 一旦beat数を初期化
       nowBeat = -1;
+      nowClick = -1;
       // メトロノームの初期化
       initMetronome();
       runMetronome(context);
@@ -97,29 +103,56 @@ class RhythmModel extends ChangeNotifier {
 
   // 無限ループするメトロノーム
   Future<void> runMetronome(BuildContext context) async {
-    BpmModel bpmModel;
+    BpmModel bpmModel = context.read<BpmModel>();
+    FooterModel footerModel = context.read<FooterModel>();
     // テンポの計算
-    tempoDuration = 60000 ~/ context.read<BpmModel>().sliderTempo;
+    pendulumTempoDuration = 60000 ~/ context.read<BpmModel>().sliderTempo;
+
+    // todo もっと効率よく書けそう
+    if (bpmModel.selectedNoteIndex == 0) {
+      // 4分
+      tempoDuration = pendulumTempoDuration;
+    } else if (bpmModel.selectedNoteIndex == 1) {
+      // 8分2連
+      //? 「~/:除算、整数の結果を返す」
+      tempoDuration = pendulumTempoDuration ~/ 2;
+    } else if (bpmModel.selectedNoteIndex == 2) {
+      // 8分3連
+      tempoDuration = pendulumTempoDuration ~/ 3;
+    } else if (bpmModel.selectedNoteIndex == 3) {
+      // 16分4連
+      tempoDuration = pendulumTempoDuration ~/ 4;
+    }
+
     while (run) {
-      nowBeat++;
-      bpmModel = context.read<BpmModel>();
+      nowClick++;
+
+      if (nowClick % (bpmModel.selectedNoteIndex + 1) == 0) {
+        nowBeat++;
+        nowClick = 0;
+
+        this.alignment = this.alignment == Alignment.bottomRight
+            ? this.alignment = Alignment.bottomLeft
+            : this.alignment = Alignment.bottomRight;
+      }
+
       if (nowBeat == bpmModel.selectedBeatType + 1) {
         nowBeat = 0;
+        //nowClick = 0;
       }
 
       // ミュートボタンが押されている場合は音を出さない
-      if (!context.read<FooterModel>().isMute) {
+      if (!footerModel.isMute) {
         // 最後の拍 かつ アクセントフラグがtrue
         if (nowBeat == bpmModel.selectedBeatType && bpmModel.isAccent) {
           finishPool.play(finish);
+          //print(nowBeat);
+          //print(nowClick);
         } else {
           beatPool.play(beat);
         }
       }
-
-      this.alignment = this.alignment == Alignment.bottomRight
-          ? this.alignment = Alignment.bottomLeft
-          : this.alignment = Alignment.bottomRight;
+      //print('-------------\n$nowBeat\n$nowClick');
 
       notifyListeners();
       await Future.delayed(Duration(milliseconds: tempoDuration));

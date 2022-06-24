@@ -56,7 +56,7 @@ class Pendulum extends StatelessWidget {
               : Colors.grey[300],
           child: AnimatedAlign(
             alignment: model.alignment,
-            duration: Duration(milliseconds: model.tempoDuration),
+            duration: Duration(milliseconds: model.pendulumTempoDuration),
             child: Container(
               // 振り子本体
               width: SizeConfig.blockSizeHorizontal! * model.pendulumWidth,
