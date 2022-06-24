@@ -144,7 +144,9 @@ class RhythmModel extends ChangeNotifier {
       // ミュートボタンが押されている場合は音を出さない
       if (!footerModel.isMute) {
         // 最後の拍 かつ アクセントフラグがtrue かつ clickが0
-        if (nowBeat == bpmModel.selectedBeatType &&
+        if (nowClick != 0) {
+          clickPool.play(click);
+        } else if (nowBeat == bpmModel.selectedBeatType &&
             bpmModel.isAccent &&
             nowClick == 0) {
           finishPool.play(finish);
