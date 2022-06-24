@@ -99,6 +99,7 @@ class RhythmModel extends ChangeNotifier {
       runMetronome(context);
     }
     context.read<FooterModel>().notify();
+    context.read<BpmModel>().notify();
   }
 
   // 無限ループするメトロノーム

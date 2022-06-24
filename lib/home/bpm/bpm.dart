@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:metronome/home/bpm/settings.dart';
+import 'package:metronome/home/rhythm/rhythm_model.dart';
 import 'package:provider/provider.dart';
 import '../../size_config.dart';
 import '../home_model.dart';
@@ -50,21 +51,26 @@ class BPM extends StatelessWidget {
                           width: SizeConfig.blockSizeHorizontal! * 20,
                           height: SizeConfig.blockSizeVertical! * 10,
                           //color: Colors.red,
-                          child: CupertinoPicker(
-                            itemExtent: 50,
-                            onSelectedItemChanged: (index) =>
-                                model.pickNote(index),
-                            children: model.note
-                                .map((e) => Center(
-                                      child: SizedBox(
-                                        width: SizeConfig.blockSizeHorizontal! *
-                                            15,
-                                        height:
-                                            SizeConfig.blockSizeVertical! * 4,
-                                        child: Image.asset(e),
-                                      ),
-                                    ))
-                                .toList(),
+                          // AbsorbPointer:任意のウィジェットのタッチイベントを有効/無効にできる
+                          child: AbsorbPointer(
+                            absorbing: context.read<RhythmModel>().run,
+                            child: CupertinoPicker(
+                              itemExtent: 50,
+                              onSelectedItemChanged: (index) =>
+                                  model.pickNote(index),
+                              children: model.note
+                                  .map((e) => Center(
+                                        child: SizedBox(
+                                          width:
+                                              SizeConfig.blockSizeHorizontal! *
+                                                  15,
+                                          height:
+                                              SizeConfig.blockSizeVertical! * 4,
+                                          child: Image.asset(e),
+                                        ),
+                                      ))
+                                  .toList(),
+                            ),
                           ),
                         ),
                         Spacer(),
@@ -81,38 +87,45 @@ class BPM extends StatelessWidget {
                           width: SizeConfig.blockSizeHorizontal! * 20,
                           height: SizeConfig.blockSizeVertical! * 10,
                           //color: Colors.red,
-                          child: CupertinoPicker(
-                            itemExtent: 50,
-                            scrollController: FixedExtentScrollController(
-                                initialItem: model.selectedBeatType),
-                            onSelectedItemChanged: (index) =>
-                                model.pickBeatType(index),
-                            children: model.beatType
-                                .map((e) => Center(
-                                      child: SizedBox(
-                                        width: SizeConfig.blockSizeHorizontal! *
-                                            15,
-                                        height:
-                                            SizeConfig.blockSizeVertical! * 4,
-                                        child: Center(child: Text(e)),
-                                      ),
-                                    ))
-                                .toList(),
+                          child: AbsorbPointer(
+                            absorbing: context.read<RhythmModel>().run,
+                            child: CupertinoPicker(
+                              itemExtent: 50,
+                              scrollController: FixedExtentScrollController(
+                                  initialItem: model.selectedBeatType),
+                              onSelectedItemChanged: (index) =>
+                                  model.pickBeatType(index),
+                              children: model.beatType
+                                  .map((e) => Center(
+                                        child: SizedBox(
+                                          width:
+                                              SizeConfig.blockSizeHorizontal! *
+                                                  15,
+                                          height:
+                                              SizeConfig.blockSizeVertical! * 4,
+                                          child: Center(child: Text(e)),
+                                        ),
+                                      ))
+                                  .toList(),
+                            ),
                           ),
                         ),
                         Spacer(),
                       ],
                     ),
                     Spacer(flex: 2),
-                    Slider(
-                      value: context.read<BpmModel>().sliderTempo.toDouble(),
-                      min: 40,
-                      max: 200,
-                      divisions: 200,
-                      label: context.read<BpmModel>().sliderTempo.toString(),
-                      onChanged: (double value) {
-                        context.read<BpmModel>().changeTempo(value);
-                      },
+                    AbsorbPointer(
+                      absorbing: context.read<RhythmModel>().run,
+                      child: Slider(
+                        value: context.read<BpmModel>().sliderTempo.toDouble(),
+                        min: 40,
+                        max: 200,
+                        divisions: 200,
+                        label: context.read<BpmModel>().sliderTempo.toString(),
+                        onChanged: (double value) {
+                          context.read<BpmModel>().changeTempo(value);
+                        },
+                      ),
                     ),
                     Spacer(flex: 1),
                   ],
