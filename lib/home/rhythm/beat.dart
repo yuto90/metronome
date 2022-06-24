@@ -20,7 +20,7 @@ class Beat extends StatelessWidget {
         0,
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           // todo context.watch...はmodelで変数化する
           for (int beatIndex = 0;
