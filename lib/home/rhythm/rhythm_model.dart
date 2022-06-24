@@ -143,8 +143,10 @@ class RhythmModel extends ChangeNotifier {
 
       // ミュートボタンが押されている場合は音を出さない
       if (!footerModel.isMute) {
-        // 最後の拍 かつ アクセントフラグがtrue
-        if (nowBeat == bpmModel.selectedBeatType && bpmModel.isAccent) {
+        // 最後の拍 かつ アクセントフラグがtrue かつ clickが0
+        if (nowBeat == bpmModel.selectedBeatType &&
+            bpmModel.isAccent &&
+            nowClick == 0) {
           finishPool.play(finish);
           //print(nowBeat);
           //print(nowClick);

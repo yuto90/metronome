@@ -33,7 +33,7 @@ class Beat extends StatelessWidget {
             ),
           ),
           Spacer(),
-          // todo 選択音符によって画面に表示するclickを可変
+          // 選択音符によって画面に表示するclickを可変
           for (int noteIndex = 1;
               noteIndex <= context.watch<BpmModel>().selectedNoteIndex;
               noteIndex++) ...[
