@@ -39,6 +39,12 @@ class BpmModel extends ChangeNotifier {
   bool isAccent = false;
   // ジャスト反映の可視化フラグ
   bool isJustZone = false;
+  // ボリュームのミュートフラグ
+  bool isMute = false;
+  // 振り子の表示フラグ
+  bool isPendulum = false;
+  // 拍子の表示フラグ
+  bool isClick = false;
 
   /// 音符を切り替えた時
   void pickNote(int index) {
@@ -49,6 +55,26 @@ class BpmModel extends ChangeNotifier {
   /// 拍を切り替えた時
   void pickBeatType(int index) {
     selectedBeatType = index;
+    notifyListeners();
+  }
+
+  /// ボリュームのミュートフラグを切り替える関数
+  void toggleMute() {
+    isMute = !isMute;
+    notifyListeners();
+  }
+
+  /// 振り子の画面表示フラグを切り替える関数
+  void togglePendulum(BuildContext context) {
+    isPendulum = !isPendulum;
+    context.read<RhythmModel>().notify();
+    notifyListeners();
+  }
+
+  /// クリックの画面表示フラグを切り替える関数
+  void toggleClick(BuildContext context) {
+    isClick = !isClick;
+    context.read<RhythmModel>().notify();
     notifyListeners();
   }
 

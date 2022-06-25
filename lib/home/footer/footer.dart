@@ -12,24 +12,6 @@ class Footer extends StatelessWidget {
         return Row(
           children: [
             Spacer(),
-            // 音量ミュートボタン
-            GestureDetector(
-              onTap: () => context.read<FooterModel>().toggleMute(),
-              onTapCancel: () => null,
-              child: model.homeProperty.smoothButton(
-                context.read<FooterModel>().isMute,
-                Icons.volume_off,
-              ),
-            ),
-            Spacer(),
-            //todo 何かボタンを追加する
-            Container(
-              child: model.homeProperty.smoothButton(
-                context.read<FooterModel>().isMute,
-                Icons.question_answer,
-              ),
-            ),
-            Spacer(),
             GestureDetector(
               onTap: () => context.read<RhythmModel>().toggleMetronome(context),
               onTapCancel: () => null,
@@ -73,24 +55,24 @@ class Footer extends StatelessWidget {
                 ),
               ),
             ),
-            Spacer(),
-            GestureDetector(
-              onTap: () => model.togglePendulum(context),
-              onTapCancel: () => null,
-              child: model.homeProperty.smoothButton(
-                model.isPendulum,
-                Icons.settings_ethernet_rounded,
-              ),
-              //child: Icon(Icons.sync_alt),
-            ),
-            Spacer(),
-            GestureDetector(
-              onTap: () => model.toggleClick(context),
-              onTapCancel: () => null,
-              child: model.homeProperty
-                  .smoothButton(model.isClick, Icons.hdr_strong),
-              //child: Icon(Icons.keyboard_control_outlined),
-            ),
+            //Spacer(),
+            //GestureDetector(
+            //onTap: () => model.togglePendulum(context),
+            //onTapCancel: () => null,
+            //child: model.homeProperty.smoothButton(
+            //model.isPendulum,
+            //Icons.settings_ethernet_rounded,
+            //),
+            ////child: Icon(Icons.sync_alt),
+            //),
+            //Spacer(),
+            //GestureDetector(
+            //onTap: () => model.toggleClick(context),
+            //onTapCancel: () => null,
+            //child: model.homeProperty
+            //.smoothButton(model.isClick, Icons.hdr_strong),
+            ////child: Icon(Icons.keyboard_control_outlined),
+            //),
             Spacer(),
           ],
         );

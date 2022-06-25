@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:metronome/home/bpm/bpm_model.dart';
-import 'package:metronome/home/footer/footer_model.dart';
 import 'package:metronome/home/rhythm/rhythm_model.dart';
 import 'package:provider/src/provider.dart';
 import '../../size_config.dart';
@@ -30,7 +29,7 @@ class Beat extends StatelessWidget {
               width: SizeConfig.blockSizeHorizontal! * 5,
               height: SizeConfig.blockSizeVertical! * 3,
               decoration: BoxDecoration(
-                color: context.read<FooterModel>().isClick
+                color: context.read<BpmModel>().isClick
                     ? Colors.white
                     : model.nowBeat == beatIndex && model.nowClick == 0
                         ? Colors.blue
@@ -46,7 +45,7 @@ class Beat extends StatelessWidget {
                 width: SizeConfig.blockSizeHorizontal! * 5,
                 height: SizeConfig.blockSizeVertical! * 1,
                 decoration: BoxDecoration(
-                  color: context.read<FooterModel>().isClick
+                  color: context.read<BpmModel>().isClick
                       ? Colors.white
                       : model.nowBeat == beatIndex &&
                               model.nowClick == noteIndex

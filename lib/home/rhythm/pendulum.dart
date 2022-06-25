@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:metronome/home/bpm/bpm_model.dart';
-import 'package:metronome/home/footer/footer_model.dart';
 import 'package:provider/src/provider.dart';
 import '../../size_config.dart';
 import 'rhythm_model.dart';
@@ -27,7 +26,7 @@ class Pendulum extends StatelessWidget {
                 height: SizeConfig.blockSizeVertical! * 1,
                 // ! ジャストのエリア可視化
                 color: context.read<BpmModel>().isJustZone &&
-                        !context.read<FooterModel>().isPendulum
+                        !context.read<BpmModel>().isPendulum
                     ? Colors.green
                     : Colors.white,
                 key: model.leftGlobalKey, // 座標を取得したいWidgetにkeyを付けると、後から参照できる
@@ -35,7 +34,7 @@ class Pendulum extends StatelessWidget {
               Container(
                 width: SizeConfig.blockSizeHorizontal! * model.pendulumWidth,
                 height: SizeConfig.blockSizeVertical! * 1,
-                color: context.read<FooterModel>().isPendulum
+                color: context.read<BpmModel>().isPendulum
                     ? Colors.white
                     : Colors.grey[300],
               ),
@@ -46,7 +45,7 @@ class Pendulum extends StatelessWidget {
                 height: SizeConfig.blockSizeVertical! * 1,
                 // ! ジャストのエリア可視化
                 color: context.read<BpmModel>().isJustZone &&
-                        !context.read<FooterModel>().isPendulum
+                        !context.read<BpmModel>().isPendulum
                     ? Colors.green
                     : Colors.white,
                 key: model.rightGlobalKey, // 座標を取得したいWidgetにkeyを付けると、後から参照できる
@@ -58,7 +57,7 @@ class Pendulum extends StatelessWidget {
         Container(
           width: SizeConfig.blockSizeHorizontal! * 90,
           height: SizeConfig.blockSizeVertical! * 3,
-          color: context.read<FooterModel>().isPendulum
+          color: context.read<BpmModel>().isPendulum
               ? Colors.white
               : Colors.grey[300],
           child: AnimatedAlign(
@@ -68,7 +67,7 @@ class Pendulum extends StatelessWidget {
               // 振り子本体
               width: SizeConfig.blockSizeHorizontal! * model.pendulumWidth,
               height: SizeConfig.blockSizeVertical! * 4,
-              color: context.read<FooterModel>().isPendulum
+              color: context.read<BpmModel>().isPendulum
                   ? Colors.white
                   : Colors.blue,
               key: model.pendulumGlobalKey, // 座標を取得したいWidgetにkeyを付けると、後から参照できる
@@ -86,7 +85,7 @@ class Pendulum extends StatelessWidget {
               Container(
                 width: SizeConfig.blockSizeHorizontal! * model.pendulumWidth,
                 height: SizeConfig.blockSizeVertical! * 1,
-                color: context.read<FooterModel>().isPendulum
+                color: context.read<BpmModel>().isPendulum
                     ? Colors.white
                     : Colors.grey[300],
               ),

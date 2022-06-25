@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:metronome/home/rhythm/rhythm_model.dart';
 import 'package:provider/src/provider.dart';
 import '../../size_config.dart';
 import '../home_model.dart';
@@ -28,7 +27,7 @@ class Settings extends StatelessWidget {
                     height: SizeConfig.blockSizeVertical! * 3,
                   ),
                 ),
-                Text('Settings'),
+                Text('Option'),
                 // 設定ボタン
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -47,10 +46,22 @@ class Settings extends StatelessWidget {
           ),
           SizedBox(
             width: double.infinity,
-            height: SizeConfig.blockSizeVertical! * 38,
+            height: SizeConfig.blockSizeVertical! * 35,
             child: ListView(
               children: [
                 // todo 別ファイルに切り分け
+                CheckboxListTile(
+                  title: Text('拍数を非表示にする'),
+                  controlAffinity: ListTileControlAffinity.leading,
+                  value: model.isPendulum,
+                  onChanged: (value) => model.togglePendulum(context),
+                ),
+                CheckboxListTile(
+                  title: Text('振り子を非表示にする'),
+                  controlAffinity: ListTileControlAffinity.leading,
+                  value: model.isClick,
+                  onChanged: (value) => model.toggleClick(context),
+                ),
                 CheckboxListTile(
                   title: Text('最後の拍でアクセントをつける'),
                   controlAffinity: ListTileControlAffinity.leading,
@@ -58,7 +69,7 @@ class Settings extends StatelessWidget {
                   onChanged: (value) => model.checkAccent(),
                 ),
                 CheckboxListTile(
-                  title: Text('ジャストの範囲を可視化する'),
+                  title: Text('ジャストタイミングの範囲を可視化する'),
                   controlAffinity: ListTileControlAffinity.leading,
                   value: model.isJustZone,
                   onChanged: (value) => model.checkJustZone(context),
@@ -66,6 +77,7 @@ class Settings extends StatelessWidget {
               ],
             ),
           ),
+          Text('Version 1.0'),
         ],
       ),
     );

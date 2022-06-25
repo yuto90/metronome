@@ -23,9 +23,18 @@ class BPM extends StatelessWidget {
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: SizedBox(
-                            width: SizeConfig.blockSizeHorizontal! * 10,
-                            height: SizeConfig.blockSizeVertical! * 3,
+                          child: GestureDetector(
+                            onTap: () => context.read<BpmModel>().toggleMute(),
+                            child: SizedBox(
+                              width: SizeConfig.blockSizeHorizontal! * 10,
+                              height: SizeConfig.blockSizeVertical! * 3,
+                              child: model.isMute
+                                  ? Icon(
+                                      Icons.volume_up,
+                                      color: Colors.blue,
+                                    )
+                                  : Icon(Icons.volume_off),
+                            ),
                           ),
                         ),
                         Text('now BPM'),
@@ -56,6 +65,8 @@ class BPM extends StatelessWidget {
                             absorbing: context.read<RhythmModel>().run,
                             child: CupertinoPicker(
                               itemExtent: 50,
+                              scrollController: FixedExtentScrollController(
+                                  initialItem: model.selectedNoteIndex),
                               onSelectedItemChanged: (index) =>
                                   model.pickNote(index),
                               children: model.note
