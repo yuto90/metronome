@@ -32,7 +32,7 @@ void main() {
           create: (context) => TapModel(context),
         ),
         ChangeNotifierProvider<FooterModel>(
-          create: (context) => FooterModel(context),
+          create: (context) => FooterModel(),
         ),
       ],
       child: MaterialApp(

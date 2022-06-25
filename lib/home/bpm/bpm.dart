@@ -19,47 +19,21 @@ class BPM extends StatelessWidget {
               : Column(
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: GestureDetector(
-                            onTap: () => context.read<BpmModel>().toggleMute(),
-                            child: SizedBox(
-                              width: SizeConfig.blockSizeHorizontal! * 10,
-                              height: SizeConfig.blockSizeVertical! * 3,
-                              child: model.isMute
-                                  ? Icon(
-                                      Icons.volume_up,
-                                      color: Colors.blue,
-                                    )
-                                  : Icon(Icons.volume_off),
-                            ),
-                          ),
-                        ),
-                        Text('now BPM'),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: GestureDetector(
-                            onTap: () =>
-                                context.read<HomeModel>().toggleSettings(),
-                            onTapCancel: () => null,
-                            child: SizedBox(
-                              width: SizeConfig.blockSizeHorizontal! * 10,
-                              height: SizeConfig.blockSizeVertical! * 3,
-                              child: Icon(Icons.settings),
-                            ),
-                          ),
+                          padding: EdgeInsets.all(
+                              SizeConfig.blockSizeHorizontal! * 2),
+                          child: Text('now BPM'),
                         ),
                       ],
                     ),
                     Row(
                       children: [
                         Spacer(),
-                        Container(
+                        SizedBox(
                           width: SizeConfig.blockSizeHorizontal! * 20,
                           height: SizeConfig.blockSizeVertical! * 10,
-                          //color: Colors.red,
                           // AbsorbPointer:任意のウィジェットのタッチイベントを有効/無効にできる
                           child: AbsorbPointer(
                             absorbing: context.read<RhythmModel>().run,
@@ -94,10 +68,9 @@ class BPM extends StatelessWidget {
                           ),
                         ),
                         Spacer(),
-                        Container(
+                        SizedBox(
                           width: SizeConfig.blockSizeHorizontal! * 20,
                           height: SizeConfig.blockSizeVertical! * 10,
-                          //color: Colors.red,
                           child: AbsorbPointer(
                             absorbing: context.read<RhythmModel>().run,
                             child: CupertinoPicker(

@@ -105,6 +105,7 @@ class RhythmModel extends ChangeNotifier {
   // 無限ループするメトロノーム
   Future<void> runMetronome(BuildContext context) async {
     BpmModel bpmModel = context.read<BpmModel>();
+    FooterModel footerModel = context.read<FooterModel>();
     // テンポの計算
     pendulumTempoDuration = 60000 ~/ context.read<BpmModel>().sliderTempo;
 
@@ -141,7 +142,7 @@ class RhythmModel extends ChangeNotifier {
       }
 
       // ミュートボタンが押されている場合は音を出さない
-      if (!bpmModel.isMute) {
+      if (!footerModel.isMute) {
         //
         if (nowClick != 0) {
           clickPool.play(click);

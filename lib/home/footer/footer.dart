@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:metronome/home/rhythm/rhythm_model.dart';
 import 'package:provider/provider.dart';
 import '../../size_config.dart';
+import '../home_model.dart';
 import 'footer_model.dart';
 
 class Footer extends StatelessWidget {
@@ -13,10 +14,17 @@ class Footer extends StatelessWidget {
           children: [
             Spacer(),
             GestureDetector(
+              onTap: () => model.toggleMute(),
+              onTapCancel: () => null,
+              child: model.homeProperty.smoothButton(
+                model.isMute,
+                Icons.volume_off,
+              ),
+            ),
+            Spacer(),
+            GestureDetector(
               onTap: () => context.read<RhythmModel>().toggleMetronome(context),
               onTapCancel: () => null,
-              //child:
-              //model.homeProperty.smoothButton(model.isMute, Icons.play_arrow),
               child: AnimatedContainer(
                 duration: Duration(milliseconds: 100),
                 width: SizeConfig.blockSizeHorizontal! * 20,
@@ -55,24 +63,15 @@ class Footer extends StatelessWidget {
                 ),
               ),
             ),
-            //Spacer(),
-            //GestureDetector(
-            //onTap: () => model.togglePendulum(context),
-            //onTapCancel: () => null,
-            //child: model.homeProperty.smoothButton(
-            //model.isPendulum,
-            //Icons.settings_ethernet_rounded,
-            //),
-            ////child: Icon(Icons.sync_alt),
-            //),
-            //Spacer(),
-            //GestureDetector(
-            //onTap: () => model.toggleClick(context),
-            //onTapCancel: () => null,
-            //child: model.homeProperty
-            //.smoothButton(model.isClick, Icons.hdr_strong),
-            ////child: Icon(Icons.keyboard_control_outlined),
-            //),
+            Spacer(),
+            GestureDetector(
+              onTap: () => context.read<HomeModel>().toggleSettings(),
+              onTapCancel: () => null,
+              child: model.homeProperty.smoothButton(
+                context.read<HomeModel>().isSettings,
+                Icons.settings,
+              ),
+            ),
             Spacer(),
           ],
         );

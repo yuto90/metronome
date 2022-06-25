@@ -18,28 +18,11 @@ class Settings extends StatelessWidget {
         children: [
           Container(
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    width: SizeConfig.blockSizeHorizontal! * 10,
-                    height: SizeConfig.blockSizeVertical! * 3,
-                  ),
-                ),
-                Text('Option'),
-                // 設定ボタン
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
-                    onTap: () => context.read<HomeModel>().toggleSettings(),
-                    onTapCancel: () => null,
-                    child: SizedBox(
-                      width: SizeConfig.blockSizeHorizontal! * 10,
-                      height: SizeConfig.blockSizeVertical! * 3,
-                      child: Icon(Icons.keyboard_return),
-                    ),
-                  ),
+                  padding: EdgeInsets.all(SizeConfig.blockSizeHorizontal! * 2),
+                  child: Text('Option'),
                 ),
               ],
             ),
