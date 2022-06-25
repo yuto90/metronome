@@ -71,6 +71,19 @@ class Home extends StatelessWidget {
                   flex: 2,
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(
+                      SizeConfig.blockSizeHorizontal! * 6,
+                      SizeConfig.blockSizeVertical! * 1,
+                      SizeConfig.blockSizeHorizontal! * 6,
+                      SizeConfig.blockSizeVertical! * 1,
+                    ),
+                    child: Footer(),
+                  ),
+                ),
+                //! ---------------------------------------------------------------
+                Expanded(
+                  flex: 2,
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(
                       SizeConfig.blockSizeHorizontal! * 2,
                       SizeConfig.blockSizeVertical! * 1,
                       SizeConfig.blockSizeHorizontal! * 2,
@@ -79,19 +92,6 @@ class Home extends StatelessWidget {
                     child: Adsense(
                       model: model,
                     ),
-                  ),
-                ),
-                //! ---------------------------------------------------------------
-                Expanded(
-                  flex: 2,
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(
-                      SizeConfig.blockSizeHorizontal! * 6,
-                      SizeConfig.blockSizeVertical! * 1,
-                      SizeConfig.blockSizeHorizontal! * 6,
-                      SizeConfig.blockSizeVertical! * 1,
-                    ),
-                    child: Footer(),
                   ),
                 ),
               ],
