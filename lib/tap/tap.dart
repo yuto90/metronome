@@ -25,7 +25,7 @@ class Tap extends StatelessWidget {
                 height: SizeConfig.blockSizeVertical! * 20,
                 child: Icon(
                   Icons.touch_app,
-                  color: model.isJustBeat ? Colors.red : Colors.blue,
+                  color: model.isJustBeat ? Colors.green : Colors.blue,
                   size: SizeConfig.blockSizeVertical! * 10,
                 ),
                 decoration: BoxDecoration(
@@ -43,14 +43,15 @@ class Tap extends StatelessWidget {
                       : [
                           BoxShadow(
                             color: model.isJustBeat
-                                ? Colors.red
+                                ? Colors.green
                                 : Colors.grey.shade500,
                             offset: Offset(6, 6),
                             blurRadius: 15,
                             spreadRadius: 1,
                           ),
                           BoxShadow(
-                            color: model.isJustBeat ? Colors.red : Colors.white,
+                            color:
+                                model.isJustBeat ? Colors.green : Colors.white,
                             offset: Offset(-6, -6),
                             blurRadius: 15,
                             spreadRadius: 1,
