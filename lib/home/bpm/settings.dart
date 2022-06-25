@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:metronome/home/rhythm/rhythm_model.dart';
 import 'package:provider/src/provider.dart';
 import '../../size_config.dart';
 import '../home_model.dart';
@@ -55,6 +56,12 @@ class Settings extends StatelessWidget {
                   controlAffinity: ListTileControlAffinity.leading,
                   value: model.isAccent,
                   onChanged: (value) => model.checkAccent(),
+                ),
+                CheckboxListTile(
+                  title: Text('ジャストの範囲を可視化する'),
+                  controlAffinity: ListTileControlAffinity.leading,
+                  value: model.isJustZone,
+                  onChanged: (value) => model.checkJustZone(context),
                 ),
               ],
             ),

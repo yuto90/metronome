@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:metronome/home/bpm/bpm_model.dart';
 import 'package:metronome/home/footer/footer_model.dart';
 import 'package:provider/src/provider.dart';
 import '../../size_config.dart';
@@ -25,7 +26,10 @@ class Pendulum extends StatelessWidget {
                     model.safeWidth,
                 height: SizeConfig.blockSizeVertical! * 1,
                 // ! ジャストのエリア可視化
-                color: Colors.white,
+                color: context.read<BpmModel>().isJustZone &&
+                        !context.read<FooterModel>().isPendulum
+                    ? Colors.green
+                    : Colors.white,
                 key: model.leftGlobalKey, // 座標を取得したいWidgetにkeyを付けると、後から参照できる
               ),
               Container(
@@ -41,7 +45,10 @@ class Pendulum extends StatelessWidget {
                     model.safeWidth,
                 height: SizeConfig.blockSizeVertical! * 1,
                 // ! ジャストのエリア可視化
-                color: Colors.white,
+                color: context.read<BpmModel>().isJustZone &&
+                        !context.read<FooterModel>().isPendulum
+                    ? Colors.green
+                    : Colors.white,
                 key: model.rightGlobalKey, // 座標を取得したいWidgetにkeyを付けると、後から参照できる
               ),
             ],

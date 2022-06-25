@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:metronome/home/rhythm/rhythm_model.dart';
 import 'package:metronome/property/home_property.dart';
+import 'package:provider/src/provider.dart';
 
 class BpmModel extends ChangeNotifier {
   BpmModel(BuildContext context) {
@@ -34,7 +35,10 @@ class BpmModel extends ChangeNotifier {
   // 画面スライダーで設定したBPM
   int sliderTempo = 60;
 
+  // アクセント可否フラグ
   bool isAccent = false;
+  // ジャスト反映の可視化フラグ
+  bool isJustZone = false;
 
   /// 音符を切り替えた時
   void pickNote(int index) {
@@ -60,6 +64,14 @@ class BpmModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  // アクセントを付けるか
+  void checkJustZone(BuildContext context) {
+    isJustZone = !isJustZone;
+    context.read<RhythmModel>().notify();
+    notifyListeners();
+  }
+
+  // 画面を更新
   void notify() {
     notifyListeners();
   }
