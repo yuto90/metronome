@@ -57,6 +57,12 @@ class Settings extends StatelessWidget {
                   value: model.isJustZone,
                   onChanged: (value) => model.checkJustZone(context),
                 ),
+                CheckboxListTile(
+                  title: Text('ジャストタイミングでタップした時にバイブを鳴らす'),
+                  controlAffinity: ListTileControlAffinity.leading,
+                  value: model.isVibration,
+                  onChanged: (value) => model.checkVibration(),
+                ),
               ],
             ),
           ),

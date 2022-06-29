@@ -43,6 +43,8 @@ class BpmModel extends ChangeNotifier {
   bool isPendulum = false;
   // 拍子の表示フラグ
   bool isClick = false;
+  // バイブレーション
+  bool isVibration = false;
 
   /// 音符を切り替えた時
   void pickNote(int index) {
@@ -86,6 +88,12 @@ class BpmModel extends ChangeNotifier {
   void checkJustZone(BuildContext context) {
     isJustZone = !isJustZone;
     context.read<RhythmModel>().notify();
+    notifyListeners();
+  }
+
+  // バイブレーションを鳴らすか
+  void checkVibration() {
+    isVibration = !isVibration;
     notifyListeners();
   }
 
