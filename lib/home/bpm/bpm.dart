@@ -59,12 +59,18 @@ class BPM extends StatelessWidget {
                           ),
                         ),
                         Spacer(),
-                        Text(
-                          context.read<BpmModel>().sliderTempo.toString(),
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: SizeConfig.blockSizeVertical! * 6,
-                            color: Colors.black,
+                        SizedBox(
+                          width: SizeConfig.blockSizeHorizontal! * 25,
+                          height: SizeConfig.blockSizeVertical! * 10,
+                          child: Center(
+                            child: Text(
+                              context.read<BpmModel>().sliderTempo.toString(),
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: SizeConfig.blockSizeVertical! * 6,
+                                color: Colors.black,
+                              ),
+                            ),
                           ),
                         ),
                         Spacer(),
