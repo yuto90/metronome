@@ -71,6 +71,8 @@ class BPM extends StatelessWidget {
                             child: TextFormField(
                               textAlign: TextAlign.center,
                               controller: model.controller,
+                              // メトロノーム起動祐はBPM設定不可
+                              enabled: !context.read<RhythmModel>().run,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: SizeConfig.blockSizeVertical! * 5,
