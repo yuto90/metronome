@@ -26,7 +26,7 @@ void main() {
           create: (context) => RhythmModel(context),
         ),
         ChangeNotifierProvider<BpmModel>(
-          create: (context) => BpmModel(context),
+          create: (context) => BpmModel(),
         ),
         ChangeNotifierProvider<TapModel>(
           create: (context) => TapModel(context),

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:metronome/home/bpm/settings.dart';
 import 'package:metronome/home/rhythm/rhythm_model.dart';
 import 'package:provider/provider.dart';
@@ -60,16 +61,27 @@ class BPM extends StatelessWidget {
                         ),
                         Spacer(),
                         SizedBox(
-                          width: SizeConfig.blockSizeHorizontal! * 25,
-                          height: SizeConfig.blockSizeVertical! * 10,
-                          child: Center(
-                            child: Text(
-                              context.read<BpmModel>().sliderTempo.toString(),
+                          width: SizeConfig.blockSizeHorizontal! * 20,
+                          height: SizeConfig.blockSizeVertical! * 5,
+                          child: Focus(
+                            // テキストフィールドからフォーカスが外れた時の処理
+                            onFocusChange: (hasFocus) {
+                              model.changeTempoKeyboard(hasFocus);
+                            },
+                            child: TextFormField(
+                              textAlign: TextAlign.center,
+                              controller: model.controller,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: SizeConfig.blockSizeVertical! * 6,
-                                color: Colors.black,
+                                fontSize: SizeConfig.blockSizeVertical! * 5,
                               ),
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                // コピペ等でも数字以外を受け付けない様にする
+                                FilteringTextInputFormatter.digitsOnly,
+                                // カウンターを出さずに文字数を制限
+                                LengthLimitingTextInputFormatter(3),
+                              ],
                             ),
                           ),
                         ),
@@ -107,13 +119,13 @@ class BPM extends StatelessWidget {
                     AbsorbPointer(
                       absorbing: context.read<RhythmModel>().run,
                       child: Slider(
-                        value: context.read<BpmModel>().sliderTempo.toDouble(),
+                        value: double.parse(model.controller.text),
                         min: 40,
                         max: 200,
                         divisions: 200,
-                        label: context.read<BpmModel>().sliderTempo.toString(),
+                        label: model.controller.text,
                         onChanged: (double value) {
-                          context.read<BpmModel>().changeTempo(value);
+                          model.changeTempoSlider(value);
                         },
                       ),
                     ),

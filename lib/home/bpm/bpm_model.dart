@@ -4,10 +4,10 @@ import 'package:metronome/property/home_property.dart';
 import 'package:provider/src/provider.dart';
 
 class BpmModel extends ChangeNotifier {
-  BpmModel(BuildContext context) {
-    rhythmModel = RhythmModel(context);
+  BpmModel() {
+    // デフォルトのBPM
+    controller.text = '60';
   }
-  late RhythmModel rhythmModel;
   // スタイルのプロパティ
   HomeProperty homeProperty = HomeProperty();
 
@@ -27,13 +27,14 @@ class BpmModel extends ChangeNotifier {
     '4/4',
   ];
 
+  // テキストフィールドのコントローラー
+  TextEditingController controller = TextEditingController();
+
   /// 今どの音符がpickされているかを格納
   int selectedNoteIndex = 0;
 
   /// 今どの拍子がpickされているかを格納
   int selectedBeatType = 4;
-  // 画面スライダーで設定したBPM
-  int sliderTempo = 60;
 
   // アクセント可否フラグ
   bool isAccent = false;
@@ -73,8 +74,25 @@ class BpmModel extends ChangeNotifier {
   }
 
   // シークバーでテンポを変える
-  void changeTempo(double value) {
-    sliderTempo = value.toInt();
+  void changeTempoKeyboard(bool hasFocus) {
+    // フォーカスが外れていれば
+    if (!hasFocus) {
+      // 想定範囲愛の値を入力された時のハンドリング
+      if (controller.text == '') {
+        controller.text = '40';
+      } else if (int.parse(controller.text) >= 200) {
+        controller.text = '200';
+      } else if (int.parse(controller.text) <= 40) {
+        controller.text = '40';
+      }
+    }
+
+    notifyListeners();
+  }
+
+  // シークバーでテンポを変える
+  void changeTempoSlider(double value) {
+    controller.text = value.toInt().toString();
     notifyListeners();
   }
 

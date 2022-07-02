@@ -107,7 +107,8 @@ class RhythmModel extends ChangeNotifier {
     BpmModel bpmModel = context.read<BpmModel>();
     FooterModel footerModel = context.read<FooterModel>();
     // テンポの計算
-    pendulumTempoDuration = 60000 ~/ context.read<BpmModel>().sliderTempo;
+    pendulumTempoDuration =
+        60000 ~/ int.parse(context.read<BpmModel>().controller.text);
 
     // todo もっと効率よく書けそう
     if (bpmModel.selectedNoteIndex == 0) {
