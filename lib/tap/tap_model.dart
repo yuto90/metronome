@@ -28,7 +28,7 @@ class TapModel extends ChangeNotifier {
               as RenderBox;
       final pendulumWidget = pendulumBox.localToGlobal(Offset.zero);
 
-      print(pendulumWidget);
+      // todo もっと効率よく書きたい
       if (pendulumWidget.dx <=
               rhythmModel.limitLeft.dx + rhythmModel.safeWidth ||
           pendulumWidget.dx >=

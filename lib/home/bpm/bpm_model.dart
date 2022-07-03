@@ -73,7 +73,7 @@ class BpmModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // シークバーでテンポを変える
+  // テキストフィールドでテンポを変える
   void changeTempoKeyboard(bool hasFocus) {
     // フォーカスが外れていれば
     if (!hasFocus) {
@@ -102,7 +102,7 @@ class BpmModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // アクセントを付けるか
+  // ジャスト判定か
   void checkJustZone(BuildContext context) {
     isJustZone = !isJustZone;
     context.read<RhythmModel>().notify();

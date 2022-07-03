@@ -156,7 +156,6 @@ class RhythmModel extends ChangeNotifier {
           beatPool.play(beat);
         }
       }
-      //print('-------------\n$nowBeat\n$nowClick');
 
       notifyListeners();
       await Future.delayed(Duration(milliseconds: tempoDuration));

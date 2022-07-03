@@ -36,7 +36,7 @@ void main() {
         ),
       ],
       child: MaterialApp(
-        title: 'metronome',
+        title: 'JustBeat',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,

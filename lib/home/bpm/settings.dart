@@ -46,7 +46,7 @@ class Settings extends StatelessWidget {
                   onChanged: (value) => model.toggleClick(context),
                 ),
                 CheckboxListTile(
-                  title: Text('最後の拍でアクセントをつける'),
+                  title: Text('最後の拍で音を変える'),
                   controlAffinity: ListTileControlAffinity.leading,
                   value: model.isAccent,
                   onChanged: (value) => model.checkAccent(),
