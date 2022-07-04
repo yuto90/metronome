@@ -1,0 +1,8 @@
+{
+  "@@locale": "ja",
+  "hello": "ようこそ {name}",
+  "option_beat": "拍子を非表示にする",
+  "option_pendulum": "振り子を非表示にする",
+  "option_change_beat": "最後の拍子で音を変える",
+  "option_just_vibration": "ジャストタイミングでタップした時にバイブを鳴らす"
+}

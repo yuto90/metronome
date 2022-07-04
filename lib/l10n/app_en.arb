@@ -1,0 +1,17 @@
+{
+  "@@locale":"en",
+  "hello": "Hello {name}",
+  "@hello": {
+      "description": "welcome message",
+      "placeholders":{
+      "name":{
+        "description" : "username",
+        "example" : "yuto"
+      }
+    }
+  },
+  "option_beat": "Hide the beat",
+  "option_pendulum": "Hide the pendulum",
+  "option_change_beat": "Change the sound with the last beat",
+  "option_just_vibration": "Sounds a vibe when just tapped"
+}

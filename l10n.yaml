@@ -1,0 +1,4 @@
+# 多言語対応設定ファイル
+arb-dir: lib/l10n # arbファイルが置かれるディレクトリ
+template-arb-file: app_en.arb # メッセージ対応のテンプレート定義
+output-localization-file: app_localizations.dart # インポートするDartクラスファイルの定義

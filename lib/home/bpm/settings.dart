@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/src/provider.dart';
 import '../../size_config.dart';
-import '../home_model.dart';
 import 'bpm_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Settings extends StatelessWidget {
   const Settings({Key? key, required this.model}) : super(key: key);
@@ -34,25 +33,26 @@ class Settings extends StatelessWidget {
               children: [
                 // todo 別ファイルに切り分け
                 CheckboxListTile(
-                  title: Text('拍数を非表示にする'),
+                  title: Text(AppLocalizations.of(context)!.option_beat),
                   controlAffinity: ListTileControlAffinity.leading,
                   value: model.isPendulum,
                   onChanged: (value) => model.togglePendulum(context),
                 ),
                 CheckboxListTile(
-                  title: Text('振り子を非表示にする'),
+                  title: Text(AppLocalizations.of(context)!.option_pendulum),
                   controlAffinity: ListTileControlAffinity.leading,
                   value: model.isClick,
                   onChanged: (value) => model.toggleClick(context),
                 ),
                 CheckboxListTile(
-                  title: Text('最後の拍で音を変える'),
+                  title: Text(AppLocalizations.of(context)!.option_change_beat),
                   controlAffinity: ListTileControlAffinity.leading,
                   value: model.isAccent,
                   onChanged: (value) => model.checkAccent(),
                 ),
                 CheckboxListTile(
-                  title: Text('ジャストタイミングでタップした時にバイブを鳴らす'),
+                  title:
+                      Text(AppLocalizations.of(context)!.option_just_vibration),
                   controlAffinity: ListTileControlAffinity.leading,
                   value: model.isVibration,
                   onChanged: (value) => model.checkVibration(),
@@ -64,6 +64,16 @@ class Settings extends StatelessWidget {
                 //value: model.isJustZone,
                 //onChanged: (value) => model.checkJustZone(context),
                 //),
+
+//                Text(
+//                  AppLocalizations.of(context)!.hello("kazutxt"),
+//                ),
+//                Text(
+//                  AppLocalizations.of(context)!.allow,
+//                ),
+//                Text(
+//                  AppLocalizations.of(context)!.deny,
+//                ),
               ],
             ),
           ),
