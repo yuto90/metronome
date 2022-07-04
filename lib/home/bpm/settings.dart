@@ -64,16 +64,6 @@ class Settings extends StatelessWidget {
                 //value: model.isJustZone,
                 //onChanged: (value) => model.checkJustZone(context),
                 //),
-
-//                Text(
-//                  AppLocalizations.of(context)!.hello("kazutxt"),
-//                ),
-//                Text(
-//                  AppLocalizations.of(context)!.allow,
-//                ),
-//                Text(
-//                  AppLocalizations.of(context)!.deny,
-//                ),
               ],
             ),
           ),

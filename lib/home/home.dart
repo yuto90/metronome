@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:metronome/home/rhythm/rhythm.dart';
 import 'package:provider/provider.dart';
 import 'home_model.dart';
@@ -13,6 +14,15 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     // SizeConfigを初期化
     SizeConfig().init(context);
+
+    // Androidキーボードの閉じるボタンを押した時にフォーカスが外れた判定にする
+    var keyboard = KeyboardVisibilityController();
+    keyboard.onChange.listen((visible) {
+      if (!visible) {
+        FocusScope.of(context).unfocus();
+      }
+    });
+
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       behavior: HitTestBehavior.opaque,
