@@ -22,6 +22,7 @@ class Rhythm extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                // todo オプションで表示オフの時は画面を再描画しない
                 Spacer(),
                 Pendulum(model: model),
                 Spacer(),

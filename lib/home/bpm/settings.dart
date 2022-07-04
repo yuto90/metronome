@@ -52,17 +52,18 @@ class Settings extends StatelessWidget {
                   onChanged: (value) => model.checkAccent(),
                 ),
                 CheckboxListTile(
-                  title: Text('ジャストタイミングの範囲を可視化する'),
-                  controlAffinity: ListTileControlAffinity.leading,
-                  value: model.isJustZone,
-                  onChanged: (value) => model.checkJustZone(context),
-                ),
-                CheckboxListTile(
                   title: Text('ジャストタイミングでタップした時にバイブを鳴らす'),
                   controlAffinity: ListTileControlAffinity.leading,
                   value: model.isVibration,
                   onChanged: (value) => model.checkVibration(),
                 ),
+                ////* ジャスト判定可視化(デバッグオプション)
+                //CheckboxListTile(
+                //title: Text('ジャストタイミングの範囲を可視化する'),
+                //controlAffinity: ListTileControlAffinity.leading,
+                //value: model.isJustZone,
+                //onChanged: (value) => model.checkJustZone(context),
+                //),
               ],
             ),
           ),
