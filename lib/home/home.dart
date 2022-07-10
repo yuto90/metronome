@@ -30,7 +30,7 @@ class Home extends StatelessWidget {
         resizeToAvoidBottomInset: false, // キーボードを同じレイヤーではなく上端のレイヤーに乗せる設定
         appBar: AppBar(
           title: Text(
-            'Just Beat',
+            'JustBeat',
             style: TextStyle(color: Colors.black),
           ),
           backgroundColor: Colors.grey[300],

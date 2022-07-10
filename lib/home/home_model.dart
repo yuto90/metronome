@@ -11,8 +11,9 @@ class HomeModel extends ChangeNotifier {
 
     // バナー広告をインスタンス化
     myBanner = BannerAd(
-      adUnitId: getTestAdBannerUnitId(),
-      //adUnitId: 'ca-app-pub-8474156868822041/2299618878',
+      //adUnitId: getTestAdBannerUnitId(),
+      adUnitId: 'ca-app-pub-8474156868822041/4228332466',
+
       size: AdSize.banner,
       request: const AdRequest(),
       listener: const BannerAdListener(),
