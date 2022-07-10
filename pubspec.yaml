@@ -41,7 +41,7 @@ dependencies:
   cupertino_icons: ^1.0.2
 
 flutter_native_splash:
-  image: "assets/icon/just_beat_icon.png"
+  image: "assets/icon/icon.png"
   color: "#e0e0e0" # grey[300]
 
 dev_dependencies:
@@ -51,7 +51,7 @@ dev_dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/icon/just_beat_icon.png"
+  image_path: "assets/icon/icon.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
