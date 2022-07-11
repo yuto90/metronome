@@ -31,8 +31,9 @@ class Pendulum extends StatelessWidget {
                     : Colors.white,
                 key: model.leftGlobalKey, // 座標を取得したいWidgetにkeyを付けると、後から参照できる
               ),
+              // 中間線
               Container(
-                width: SizeConfig.blockSizeHorizontal! * model.pendulumWidth,
+                width: SizeConfig.blockSizeHorizontal! * 1,
                 height: SizeConfig.blockSizeVertical! * 1,
                 color: context.read<BpmModel>().isPendulum
                     ? Colors.white
@@ -76,21 +77,18 @@ class Pendulum extends StatelessWidget {
           ),
         ),
 
-        Container(
-          width: SizeConfig.blockSizeHorizontal! * 90,
-          height: SizeConfig.blockSizeVertical! * 1,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                width: SizeConfig.blockSizeHorizontal! * model.pendulumWidth,
-                height: SizeConfig.blockSizeVertical! * 1,
-                color: context.read<BpmModel>().isPendulum
-                    ? Colors.white
-                    : Colors.grey[300],
-              ),
-            ],
-          ),
+        // 中間線
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: SizeConfig.blockSizeHorizontal! * 1,
+              height: SizeConfig.blockSizeVertical! * 1,
+              color: context.read<BpmModel>().isPendulum
+                  ? Colors.white
+                  : Colors.grey[300],
+            ),
+          ],
         ),
       ],
     );

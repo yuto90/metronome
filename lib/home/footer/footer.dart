@@ -41,8 +41,8 @@ class Footer extends StatelessWidget {
                   shape: BoxShape.circle,
                   border: Border.all(
                     color: context.read<RhythmModel>().run
-                        ? Colors.grey.shade200
-                        : Colors.grey.shade300,
+                        ? Colors.grey.shade300
+                        : Colors.grey.shade200,
                   ),
                   boxShadow: context.read<RhythmModel>().run
                       ? []

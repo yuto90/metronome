@@ -33,8 +33,8 @@ class Tap extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
                     color: model.isMainButtonTap
-                        ? Colors.grey.shade200
-                        : Colors.grey.shade300,
+                        ? Colors.grey.shade300
+                        : Colors.grey.shade200,
                   ),
                   boxShadow: model.isMainButtonTap
                       ? [

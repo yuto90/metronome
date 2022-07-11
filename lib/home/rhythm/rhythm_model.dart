@@ -35,7 +35,7 @@ class RhythmModel extends ChangeNotifier {
   // スタイルのプロパティ
   HomeProperty homeProperty = HomeProperty();
 
-  double pendulumWidth = 1;
+  double pendulumWidth = 10;
   // ジャストタイミングとして許容する幅
   double safeWidth = 10.0;
   // 振り子の初期位置
@@ -88,7 +88,6 @@ class RhythmModel extends ChangeNotifier {
     // メトロノームの起動チェック
     if (run) {
       run = false;
-      notifyListeners();
     } else {
       run = true; // メトロノームを起動
       // 一旦beat数を初期化

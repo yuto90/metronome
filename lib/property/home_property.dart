@@ -47,7 +47,7 @@ class HomeProperty {
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: isButtonTap ? Colors.grey.shade200 : Colors.grey.shade300,
+          color: isButtonTap ? Colors.grey.shade300 : Colors.grey.shade200,
         ),
         boxShadow: isButtonTap
             ? []
