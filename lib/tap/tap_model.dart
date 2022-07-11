@@ -17,40 +17,38 @@ class TapModel extends ChangeNotifier {
   // ボタンタップ判定フラグ
   bool isMainButtonTap = false;
 
+  late RenderBox pendulumBox;
+  late Offset pendulumWidget;
+
   /// ボタンをタップした時
   Future<void> tapDown(BuildContext context) async {
     isMainButtonTap = true;
 
-    if (rhythmModel.run) {
-      // widgetKeyを付けたWidgetのグローバル座標を取得する
-      final RenderBox pendulumBox =
-          rhythmModel.pendulumGlobalKey.currentContext!.findRenderObject()
-              as RenderBox;
-      final pendulumWidget = pendulumBox.localToGlobal(Offset.zero);
+    // widgetKeyを付けたWidgetのグローバル座標を取得する
+    pendulumBox = rhythmModel.pendulumGlobalKey.currentContext!
+        .findRenderObject() as RenderBox;
+    pendulumWidget = pendulumBox.localToGlobal(Offset.zero);
 
-      // todo もっと効率よく書きたい
-      if (pendulumWidget.dx <=
-              rhythmModel.limitLeft.dx + rhythmModel.safeWidth ||
-          pendulumWidget.dx >=
-              rhythmModel.limitRight.dx - rhythmModel.safeWidth) {
-        isJustBeat = true;
-
-        // 端末に振動機能がついているかチェック
-        if (await Vibration.hasVibrator() != null && bpmModel.isVibration) {
-          Vibration.vibrate(duration: 100);
-        }
-      } else {
-        isJustBeat = false;
+    // メトロノームが起動中 かつ ジャスト判定内
+    if (rhythmModel.run &&
+        (pendulumWidget.dx <=
+                rhythmModel.limitLeft.dx + rhythmModel.safeWidth ||
+            pendulumWidget.dx >=
+                rhythmModel.limitRight.dx - rhythmModel.safeWidth)) {
+      isJustBeat = true;
+      // 端末に振動機能がついているかチェック
+      if (await Vibration.hasVibrator() != null && bpmModel.isVibration) {
+        Vibration.vibrate(duration: 100);
       }
+    } else {
+      isJustBeat = false;
     }
-    rhythmModel.notify();
     notifyListeners();
   }
 
   /// ボタンを離した時
   void tapUp(BuildContext context) {
     isMainButtonTap = false;
-    rhythmModel.notify();
     notifyListeners();
   }
 }
