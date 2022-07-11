@@ -36,7 +36,7 @@ class HomeProperty {
   /// @return AnimatedContainer
   AnimatedContainer smoothButton(bool isButtonTap, IconData icon) {
     return AnimatedContainer(
-      duration: Duration(milliseconds: 100),
+      duration: Duration(milliseconds: 300),
       width: SizeConfig.blockSizeHorizontal! * 15,
       height: SizeConfig.blockSizeVertical! * 6,
       child: Icon(
@@ -50,7 +50,22 @@ class HomeProperty {
           color: isButtonTap ? Colors.grey.shade300 : Colors.grey.shade200,
         ),
         boxShadow: isButtonTap
-            ? []
+            // ボタンが押されている時
+            ? [
+                BoxShadow(
+                  color: Colors.grey.shade500,
+                  offset: Offset(-6, -6),
+                  blurRadius: 15,
+                  spreadRadius: 1,
+                ),
+                BoxShadow(
+                  color: Colors.white,
+                  offset: Offset(6, 6),
+                  blurRadius: 15,
+                  spreadRadius: 1,
+                )
+              ]
+            // ボタンが押されていない時
             : [
                 BoxShadow(
                   color: Colors.grey.shade500,

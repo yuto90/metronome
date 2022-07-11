@@ -26,7 +26,7 @@ class Footer extends StatelessWidget {
               onTap: () => context.read<RhythmModel>().toggleMetronome(context),
               onTapCancel: () => null,
               child: AnimatedContainer(
-                duration: Duration(milliseconds: 100),
+                duration: Duration(milliseconds: 300),
                 width: SizeConfig.blockSizeHorizontal! * 20,
                 height: SizeConfig.blockSizeVertical! * 7,
                 child: Icon(
@@ -45,7 +45,20 @@ class Footer extends StatelessWidget {
                         : Colors.grey.shade200,
                   ),
                   boxShadow: context.read<RhythmModel>().run
-                      ? []
+                      ? [
+                          BoxShadow(
+                            color: Colors.grey.shade500,
+                            offset: Offset(-6, -6),
+                            blurRadius: 15,
+                            spreadRadius: 1,
+                          ),
+                          BoxShadow(
+                            color: Colors.white,
+                            offset: Offset(6, 6),
+                            blurRadius: 15,
+                            spreadRadius: 1,
+                          )
+                        ]
                       : [
                           BoxShadow(
                             color: Colors.grey.shade500,
