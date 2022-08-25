@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:metronome/home/bpm/bpm_model.dart';
+import 'package:metronome/property/hex.dart';
 import 'package:provider/src/provider.dart';
 import '../../size_config.dart';
 import 'rhythm_model.dart';
@@ -28,7 +29,7 @@ class Pendulum extends StatelessWidget {
                 color: context.read<BpmModel>().isJustZone &&
                         !context.read<BpmModel>().isPendulum
                     ? Colors.green
-                    : Colors.white,
+                    : HexColor('#f0f0f0'),
                 key: model.leftGlobalKey, // 座標を取得したいWidgetにkeyを付けると、後から参照できる
               ),
               // 中間線
@@ -48,7 +49,7 @@ class Pendulum extends StatelessWidget {
                 color: context.read<BpmModel>().isJustZone &&
                         !context.read<BpmModel>().isPendulum
                     ? Colors.green
-                    : Colors.white,
+                    : HexColor('#f0f0f0'),
                 key: model.rightGlobalKey, // 座標を取得したいWidgetにkeyを付けると、後から参照できる
               ),
             ],

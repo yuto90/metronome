@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:metronome/home/home_model.dart';
 
 import '../size_config.dart';
+import 'hex.dart';
 
 class HomeProperty {
   /// 白ベースのWidgetに影をつける\
@@ -10,19 +11,19 @@ class HomeProperty {
   /// @return BoxDecorationプロパティ
   BoxDecoration smooth() {
     return BoxDecoration(
-      color: Colors.white,
+      color: HexColor('#f0f0f0'),
       borderRadius: BorderRadius.circular(12),
       boxShadow: [
         BoxShadow(
-          color: Colors.grey.shade500,
+          color: HexColor('#b6b6b6'),
           offset: Offset(6, 6),
-          blurRadius: 15,
+          blurRadius: 10,
           spreadRadius: 1,
         ),
         BoxShadow(
-          color: Colors.white,
+          color: HexColor('#ffffff'),
           offset: Offset(-6, -6),
-          blurRadius: 15,
+          blurRadius: 10,
           spreadRadius: 1,
         )
       ],
@@ -44,39 +45,36 @@ class HomeProperty {
         color: isButtonTap ? Colors.black : Colors.blue,
       ),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: HexColor('#f0f0f0'),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: isButtonTap ? Colors.grey.shade300 : Colors.grey.shade200,
-        ),
         boxShadow: isButtonTap
             // ボタンが押されている時
             ? [
                 BoxShadow(
-                  color: Colors.grey.shade500,
+                  color: HexColor('#ffffff'),
                   offset: Offset(-6, -6),
-                  blurRadius: 15,
+                  blurRadius: 10,
                   spreadRadius: 1,
                 ),
                 BoxShadow(
-                  color: Colors.white,
+                  color: HexColor('#b6b6b6'),
                   offset: Offset(6, 6),
-                  blurRadius: 15,
+                  blurRadius: 10,
                   spreadRadius: 1,
                 )
               ]
             // ボタンが押されていない時
             : [
                 BoxShadow(
-                  color: Colors.grey.shade500,
+                  color: HexColor('#b6b6b6'),
                   offset: Offset(6, 6),
-                  blurRadius: 15,
+                  blurRadius: 10,
                   spreadRadius: 1,
                 ),
                 BoxShadow(
-                  color: Colors.white,
+                  color: HexColor('#ffffff'),
                   offset: Offset(-6, -6),
-                  blurRadius: 15,
+                  blurRadius: 10,
                   spreadRadius: 1,
                 )
               ],

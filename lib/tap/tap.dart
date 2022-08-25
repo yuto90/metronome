@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:metronome/property/hex.dart';
 import 'package:provider/provider.dart';
 import '../size_config.dart';
 import 'tap_model.dart';
@@ -29,13 +30,8 @@ class Tap extends StatelessWidget {
                   size: SizeConfig.blockSizeVertical! * 10,
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: HexColor('#f0f0f0'),
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(
-                    color: model.isMainButtonTap
-                        ? Colors.grey.shade300
-                        : Colors.grey.shade200,
-                  ),
                   boxShadow: model.isMainButtonTap
                       ? [
                           // ボタン押下時は影を無くす
@@ -44,16 +40,17 @@ class Tap extends StatelessWidget {
                           BoxShadow(
                             color: model.isJustBeat
                                 ? Colors.green
-                                : Colors.grey.shade500,
+                                : HexColor('#b6b6b6'),
                             offset: Offset(6, 6),
-                            blurRadius: 15,
+                            blurRadius: 10,
                             spreadRadius: 1,
                           ),
                           BoxShadow(
-                            color:
-                                model.isJustBeat ? Colors.green : Colors.white,
+                            color: model.isJustBeat
+                                ? Colors.green
+                                : HexColor('#ffffff'),
                             offset: Offset(-6, -6),
-                            blurRadius: 15,
+                            blurRadius: 10,
                             spreadRadius: 1,
                           )
                         ],

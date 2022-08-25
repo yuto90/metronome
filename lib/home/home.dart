@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:metronome/home/rhythm/rhythm.dart';
+import 'package:metronome/property/hex.dart';
 import 'package:provider/provider.dart';
 import 'home_model.dart';
 import 'footer/footer.dart';
@@ -33,16 +34,13 @@ class Home extends StatelessWidget {
             'JustBeat',
             style: TextStyle(color: Colors.black),
           ),
-          backgroundColor: Colors.grey[300],
+          backgroundColor: HexColor('#f0f0f0'),
           elevation: 0,
-          //backgroundColor: Colors.white,
-          //elevation: 6,
-          //shadowColor: Colors.grey.shade500,
         ),
         body: Consumer<HomeModel>(
           builder: (context, model, child) {
             return Container(
-              color: Colors.grey[300],
+              color: HexColor('#f0f0f0'),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
