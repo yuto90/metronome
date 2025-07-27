@@ -36,6 +36,8 @@ class Home extends StatelessWidget {
           ),
           backgroundColor: HexColor('#f0f0f0'),
           elevation: 0,
+          surfaceTintColor: Colors.transparent,
+          shadowColor: Colors.transparent,
         ),
         body: Consumer<HomeModel>(
           builder: (context, model, child) {
