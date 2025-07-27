@@ -61,7 +61,7 @@ class BPM extends StatelessWidget {
                         ),
                         Spacer(),
                         SizedBox(
-                          width: SizeConfig.blockSizeHorizontal! * 20,
+                          width: SizeConfig.blockSizeHorizontal! * 25,
                           height: SizeConfig.blockSizeVertical! * 5,
                           child: Focus(
                             // テキストフィールドからフォーカスが外れた時の処理
