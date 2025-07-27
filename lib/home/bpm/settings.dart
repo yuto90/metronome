@@ -29,42 +29,61 @@ class Settings extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             height: SizeConfig.blockSizeVertical! * 35,
-            child: ListView(
-              children: [
-                // todo 別ファイルに切り分け
-                CheckboxListTile(
-                  title: Text(AppLocalizations.of(context)!.option_beat),
-                  controlAffinity: ListTileControlAffinity.leading,
-                  value: model.isPendulum,
-                  onChanged: (value) => model.togglePendulum(context),
+            child: Theme(
+              data: Theme.of(context).copyWith(
+                unselectedWidgetColor: Colors.grey,
+                checkboxTheme: CheckboxThemeData(
+                  fillColor: MaterialStateProperty.resolveWith<Color?>(
+                      (Set<MaterialState> states) {
+                    if (states.contains(MaterialState.disabled)) {
+                      return null;
+                    }
+                    if (states.contains(MaterialState.selected)) {
+                      return Colors.blue;
+                    }
+                    return null;
+                  }),
+                  checkColor: MaterialStateProperty.all(Colors.white),
                 ),
-                CheckboxListTile(
-                  title: Text(AppLocalizations.of(context)!.option_pendulum),
-                  controlAffinity: ListTileControlAffinity.leading,
-                  value: model.isClick,
-                  onChanged: (value) => model.toggleClick(context),
-                ),
-                CheckboxListTile(
-                  title: Text(AppLocalizations.of(context)!.option_change_beat),
-                  controlAffinity: ListTileControlAffinity.leading,
-                  value: model.isAccent,
-                  onChanged: (value) => model.checkAccent(),
-                ),
-                CheckboxListTile(
-                  title:
-                      Text(AppLocalizations.of(context)!.option_just_vibration),
-                  controlAffinity: ListTileControlAffinity.leading,
-                  value: model.isVibration,
-                  onChanged: (value) => model.checkVibration(),
-                ),
-                ////* ジャスト判定可視化(デバッグオプション)
-                //CheckboxListTile(
-                //title: Text('ジャストタイミングの範囲を可視化する'),
-                //controlAffinity: ListTileControlAffinity.leading,
-                //value: model.isJustZone,
-                //onChanged: (value) => model.checkJustZone(context),
-                //),
-              ],
+              ),
+              child: ListView(
+                children: [
+                  // todo 別ファイルに切り分け
+                  CheckboxListTile(
+                    title: Text(AppLocalizations.of(context)!.option_beat),
+                    controlAffinity: ListTileControlAffinity.leading,
+                    value: model.isPendulum,
+                    onChanged: (value) => model.togglePendulum(context),
+                  ),
+                  CheckboxListTile(
+                    title: Text(AppLocalizations.of(context)!.option_pendulum),
+                    controlAffinity: ListTileControlAffinity.leading,
+                    value: model.isClick,
+                    onChanged: (value) => model.toggleClick(context),
+                  ),
+                  CheckboxListTile(
+                    title:
+                        Text(AppLocalizations.of(context)!.option_change_beat),
+                    controlAffinity: ListTileControlAffinity.leading,
+                    value: model.isAccent,
+                    onChanged: (value) => model.checkAccent(),
+                  ),
+                  CheckboxListTile(
+                    title: Text(
+                        AppLocalizations.of(context)!.option_just_vibration),
+                    controlAffinity: ListTileControlAffinity.leading,
+                    value: model.isVibration,
+                    onChanged: (value) => model.checkVibration(),
+                  ),
+                  ////* ジャスト判定可視化(デバッグオプション)
+                  //CheckboxListTile(
+                  //title: Text('ジャストタイミングの範囲を可視化する'),
+                  //controlAffinity: ListTileControlAffinity.leading,
+                  //value: model.isJustZone,
+                  //onChanged: (value) => model.checkJustZone(context),
+                  //),
+                ],
+              ),
             ),
           ),
           Text('Version 1.0'),

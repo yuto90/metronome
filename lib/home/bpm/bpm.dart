@@ -120,15 +120,23 @@ class BPM extends StatelessWidget {
                     Spacer(flex: 2),
                     AbsorbPointer(
                       absorbing: context.read<RhythmModel>().run,
-                      child: Slider(
-                        value: double.parse(model.controller.text),
-                        min: 40,
-                        max: 200,
-                        divisions: 200,
-                        label: model.controller.text,
-                        onChanged: (double value) {
-                          model.changeTempoSlider(value);
-                        },
+                      child: SliderTheme(
+                        data: SliderTheme.of(context).copyWith(
+                          activeTrackColor: Colors.blue,
+                          thumbColor: Colors.blue,
+                          overlayColor: Colors.blue.withAlpha(32),
+                          inactiveTrackColor: Colors.blue.withAlpha(80),
+                        ),
+                        child: Slider(
+                          value: double.parse(model.controller.text),
+                          min: 40,
+                          max: 200,
+                          divisions: 200,
+                          label: model.controller.text,
+                          onChanged: (double value) {
+                            model.changeTempoSlider(value);
+                          },
+                        ),
                       ),
                     ),
                     Spacer(flex: 1),
