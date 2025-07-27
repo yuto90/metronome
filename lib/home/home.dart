@@ -103,9 +103,9 @@ class Home extends StatelessWidget {
                         SizeConfig.blockSizeHorizontal! * 2,
                         SizeConfig.blockSizeVertical! * 1,
                       ),
-                      child: Adsense(
-                        model: model,
-                      ),
+                      // child: Adsense(
+                      //   model: model,
+                      // ),
                     ),
                   ),
                 ],
