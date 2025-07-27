@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../size_config.dart';
 import 'bpm_model.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../l10n/app_localizations.dart';
 
 class Settings extends StatelessWidget {
   const Settings({Key? key, required this.model}) : super(key: key);
