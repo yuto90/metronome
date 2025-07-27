@@ -51,6 +51,8 @@ class RhythmModel extends ChangeNotifier {
   int nowBeat = -1;
   // 現在のクリック
   int nowClick = -1;
+  // 振り子アニメーション更新フラグ
+  bool shouldUpdatePendulum = false;
   // late:初期化を遅らせるだけ。使う前には初期化が必要
   late Offset limitRight;
   late Offset limitLeft;
@@ -93,6 +95,9 @@ class RhythmModel extends ChangeNotifier {
       // 一旦beat数を初期化
       nowBeat = -1;
       nowClick = -1;
+      // 振り子位置を初期化
+      alignment = Alignment.bottomRight;
+      shouldUpdatePendulum = true;
       // メトロノームの初期化
       initMetronome();
       runMetronome(context);
@@ -135,6 +140,9 @@ class RhythmModel extends ChangeNotifier {
         this.alignment = this.alignment == Alignment.bottomRight
             ? this.alignment = Alignment.bottomLeft
             : this.alignment = Alignment.bottomRight;
+        
+        // 振り子アニメーション更新をトリガー
+        shouldUpdatePendulum = true;
       }
 
       if (nowBeat == bpmModel.selectedBeatType + 1) {
@@ -159,6 +167,11 @@ class RhythmModel extends ChangeNotifier {
       notifyListeners();
       await Future.delayed(Duration(milliseconds: tempoDuration));
     }
+  }
+
+  // 振り子アニメーション更新フラグをリセット
+  void resetPendulumUpdate() {
+    shouldUpdatePendulum = false;
   }
 
   // 画面更新用
