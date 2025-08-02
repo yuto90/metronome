@@ -31,7 +31,7 @@ class Home extends StatelessWidget {
         resizeToAvoidBottomInset: false, // キーボードを同じレイヤーではなく上端のレイヤーに乗せる設定
         appBar: AppBar(
           title: Text(
-            'JustBeat',
+            'Smooth Metronome',
             style: TextStyle(color: Colors.black),
           ),
           backgroundColor: HexColor('#f0f0f0'),
