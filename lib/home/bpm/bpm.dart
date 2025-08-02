@@ -126,6 +126,9 @@ class BPM extends StatelessWidget {
                           thumbColor: Colors.blue,
                           overlayColor: Colors.blue.withAlpha(32),
                           inactiveTrackColor: Colors.blue.withAlpha(80),
+                          valueIndicatorColor: Colors.blue,
+                          valueIndicatorTextStyle:
+                              TextStyle(color: Colors.white),
                         ),
                         child: Slider(
                           value: double.parse(model.controller.text),
