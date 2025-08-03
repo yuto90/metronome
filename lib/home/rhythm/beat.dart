@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:metronome/home/bpm/bpm_model.dart';
 import 'package:metronome/home/rhythm/rhythm_model.dart';
+import 'package:metronome/property/color_settings.dart';
 import 'package:provider/src/provider.dart';
 import '../../size_config.dart';
 
@@ -32,7 +33,7 @@ class Beat extends StatelessWidget {
                 color: context.read<BpmModel>().isClick
                     ? Colors.white
                     : model.nowBeat == beatIndex && model.nowClick == 0
-                        ? Colors.blue
+                        ? context.read<ColorSettings>().primaryColor
                         : Colors.grey[300],
                 shape: BoxShape.circle,
               ),
@@ -49,7 +50,7 @@ class Beat extends StatelessWidget {
                       ? Colors.white
                       : model.nowBeat == beatIndex &&
                               model.nowClick == noteIndex
-                          ? Colors.blue
+                          ? context.read<ColorSettings>().primaryColor
                           : Colors.grey[300],
                   shape: BoxShape.circle,
                 ),

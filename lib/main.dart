@@ -9,6 +9,7 @@ import 'home/footer/footer_model.dart';
 import 'home/home.dart';
 import 'home/home_model.dart';
 import 'home/rhythm/rhythm_model.dart';
+import 'property/color_settings.dart';
 import 'tap/tap_model.dart';
 
 void main() {
@@ -21,6 +22,9 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider<ColorSettings>(
+          create: (context) => ColorSettings(),
+        ),
         ChangeNotifierProvider<HomeModel>(
           create: (context) => HomeModel(context),
         ),
@@ -37,26 +41,30 @@ void main() {
           create: (context) => FooterModel(),
         ),
       ],
-      child: MaterialApp(
-        title: 'JustBeat',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-        // アプリの多言語対応の設定 ---------------------
-        localizationsDelegates: [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: [
-          const Locale('ja', ''), //日本語
-          const Locale('en', ''), //英語
-        ],
-        // -----------------------------------------
-        home: Home(),
+      child: Consumer<ColorSettings>(
+        builder: (context, colorSettings, child) {
+          return MaterialApp(
+            title: 'JustBeat',
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              primarySwatch: colorSettings.primarySwatch,
+              visualDensity: VisualDensity.adaptivePlatformDensity,
+            ),
+            // アプリの多言語対応の設定 ---------------------
+            localizationsDelegates: [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: [
+              const Locale('ja', ''), //日本語
+              const Locale('en', ''), //英語
+            ],
+            // -----------------------------------------
+            home: Home(),
+          );
+        },
       ),
     ),
   );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:metronome/home/bpm/bpm_model.dart';
+import 'package:metronome/property/color_settings.dart';
 import 'package:metronome/property/hex.dart';
 import 'package:provider/provider.dart';
 import '../../size_config.dart';
@@ -142,7 +143,7 @@ class _PendulumState extends State<Pendulum>
                       height: SizeConfig.blockSizeVertical! * 4,
                       color: context.read<BpmModel>().isPendulum
                           ? Colors.white
-                          : Colors.blue,
+                          : context.read<ColorSettings>().primaryColor,
                       key: model.pendulumGlobalKey, // 座標を取得したいWidgetにkeyを付けると、後から参照できる
                     ),
                   );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:metronome/home/rhythm/rhythm_model.dart';
+import 'package:metronome/property/color_settings.dart';
 import 'package:provider/provider.dart';
 import '../../size_config.dart';
 import '../home_model.dart';
@@ -19,6 +20,7 @@ class Footer extends StatelessWidget {
               child: model.homeProperty.smoothButton(
                 model.isMute,
                 Icons.volume_off,
+                context,
               ),
             ),
             Spacer(),
@@ -37,7 +39,7 @@ class Footer extends StatelessWidget {
                   color: Colors.white,
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: context.read<ColorSettings>().primaryColor,
                   shape: BoxShape.circle,
                   border: Border.all(
                     color: context.read<RhythmModel>().run
@@ -83,6 +85,7 @@ class Footer extends StatelessWidget {
               child: model.homeProperty.smoothButton(
                 context.read<HomeModel>().isSettings,
                 Icons.settings,
+                context,
               ),
             ),
             Spacer(),
