@@ -9,4 +9,4 @@ You can change the specifications of the app at our convenience. We will not be 
 
 ## inquiry
 
-techpodyuto@gmail.com
+ahirunagako@gmail.com

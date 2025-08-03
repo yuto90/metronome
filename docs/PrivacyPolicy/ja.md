@@ -9,4 +9,4 @@
 
 ## お問い合わせ
 
-techpodyuto@gmail.com
+ahirunagako@gmail.com
