@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.metronome.metronome">
+    package="com.yuto.smooth.metronome">
     <uses-permission android:name="android.permission.VIBRATE"/>
    <application
-        android:label="JustBeat"
+        android:label="Smooth Metronome"
         android:icon="@mipmap/ic_launcher">
         <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
         <meta-data

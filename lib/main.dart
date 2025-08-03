@@ -44,7 +44,7 @@ void main() {
       child: Consumer<ColorSettings>(
         builder: (context, colorSettings, child) {
           return MaterialApp(
-            title: 'JustBeat',
+            title: 'Smooth Metronome',
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
               primarySwatch: colorSettings.primarySwatch,
