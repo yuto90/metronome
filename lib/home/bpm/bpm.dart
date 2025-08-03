@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:metronome/home/bpm/settings.dart';
 import 'package:metronome/home/rhythm/rhythm_model.dart';
+import 'package:metronome/property/color_settings.dart';
 import 'package:provider/provider.dart';
 import '../../size_config.dart';
 import '../home_model.dart';
@@ -120,26 +121,30 @@ class BPM extends StatelessWidget {
                     Spacer(flex: 2),
                     AbsorbPointer(
                       absorbing: context.read<RhythmModel>().run,
-                      child: SliderTheme(
-                        data: SliderTheme.of(context).copyWith(
-                          activeTrackColor: Colors.blue,
-                          thumbColor: Colors.blue,
-                          overlayColor: Colors.blue.withAlpha(32),
-                          inactiveTrackColor: Colors.blue.withAlpha(80),
-                          valueIndicatorColor: Colors.blue,
-                          valueIndicatorTextStyle:
-                              TextStyle(color: Colors.white),
-                        ),
-                        child: Slider(
-                          value: double.parse(model.controller.text),
-                          min: 40,
-                          max: 200,
-                          divisions: 200,
-                          label: model.controller.text,
-                          onChanged: (double value) {
-                            model.changeTempoSlider(value);
-                          },
-                        ),
+                      child: Consumer<ColorSettings>(
+                        builder: (context, colorSettings, child) {
+                          return SliderTheme(
+                            data: SliderTheme.of(context).copyWith(
+                              activeTrackColor: colorSettings.primaryColor,
+                              thumbColor: colorSettings.primaryColor,
+                              overlayColor: colorSettings.primaryColor.withAlpha(32),
+                              inactiveTrackColor: colorSettings.primaryColor.withAlpha(80),
+                              valueIndicatorColor: colorSettings.primaryColor,
+                              valueIndicatorTextStyle:
+                                  TextStyle(color: Colors.white),
+                            ),
+                            child: Slider(
+                              value: double.parse(model.controller.text),
+                              min: 40,
+                              max: 200,
+                              divisions: 200,
+                              label: model.controller.text,
+                              onChanged: (double value) {
+                                model.changeTempoSlider(value);
+                              },
+                            ),
+                          );
+                        },
                       ),
                     ),
                     Spacer(flex: 1),

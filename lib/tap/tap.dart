@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:metronome/property/hex.dart';
+import 'package:metronome/property/color_settings.dart';
 import 'package:provider/provider.dart';
 import '../size_config.dart';
 import 'tap_model.dart';
@@ -7,8 +8,8 @@ import 'tap_model.dart';
 class Tap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Consumer<TapModel>(
-      builder: (context, model, child) {
+    return Consumer2<TapModel, ColorSettings>(
+      builder: (context, model, colorSettings, child) {
         return Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -26,7 +27,7 @@ class Tap extends StatelessWidget {
                 height: SizeConfig.blockSizeVertical! * 20,
                 child: Icon(
                   Icons.touch_app,
-                  color: model.isJustBeat ? Colors.green : Colors.blue,
+                  color: model.isJustBeat ? Colors.green : colorSettings.primaryColor,
                   size: SizeConfig.blockSizeVertical! * 10,
                 ),
                 decoration: BoxDecoration(
