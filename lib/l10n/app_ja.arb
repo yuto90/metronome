@@ -1,6 +1,10 @@
 {
   "@@locale": "ja",
   "hello": "ようこそ {name}",
+  "option_color_theme": "カラーテーマ",
+  "option_color_theme_subtitle": "タップしてアプリの色を変更",
+  "color_picker_title": "色を選択",
+  "color_picker_close": "閉じる",
   "option_beat": "拍子を非表示にする",
   "option_pendulum": "振り子を非表示にする",
   "option_change_beat": "最後の拍子で音を変える",

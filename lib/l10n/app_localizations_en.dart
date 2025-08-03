@@ -14,6 +14,18 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get option_color_theme => 'Color Theme';
+
+  @override
+  String get option_color_theme_subtitle => 'Tap to change app color';
+
+  @override
+  String get color_picker_title => 'Select Color';
+
+  @override
+  String get color_picker_close => 'Close';
+
+  @override
   String get option_beat => 'Hide the beat';
 
   @override

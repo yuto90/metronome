@@ -10,6 +10,10 @@
       }
     }
   },
+  "option_color_theme": "Color Theme",
+  "option_color_theme_subtitle": "Tap to change app color",
+  "color_picker_title": "Select Color",
+  "color_picker_close": "Close",
   "option_beat": "Hide the beat",
   "option_pendulum": "Hide the pendulum",
   "option_change_beat": "Change the sound with the last beat",

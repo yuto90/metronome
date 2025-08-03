@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metronome Color Customization Demo</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .demo-container {
+            display: flex;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+        .phone-mockup {
+            width: 300px;
+            height: 600px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            padding: 20px;
+            position: relative;
+        }
+        .app-header {
+            text-align: center;
+            padding: 20px 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .settings-screen {
+            background: white;
+        }
+        .settings-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .settings-item {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .color-indicator {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid #ddd;
+        }
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            border: 2px solid #ddd;
+        }
+        .checkbox.checked {
+            background-color: var(--primary-color, #2196F3);
+            border-color: var(--primary-color, #2196F3);
+        }
+        .beat-indicator {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            margin: 5px;
+            display: inline-block;
+        }
+        .beat-indicator.active {
+            background-color: var(--primary-color, #2196F3);
+        }
+        .play-button {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: var(--primary-color, #2196F3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 30px;
+            margin: 20px auto;
+        }
+        .pendulum-area {
+            height: 60px;
+            background: #f0f0f0;
+            position: relative;
+            margin: 20px 0;
+        }
+        .pendulum {
+            width: 20px;
+            height: 50px;
+            background-color: var(--primary-color, #2196F3);
+            position: absolute;
+            left: 50%;
+            top: 5px;
+            transform: translateX(-50%);
+        }
+        .color-picker-dialog {
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            padding: 20px;
+            z-index: 10;
+        }
+        .color-options {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid #ddd;
+            cursor: pointer;
+        }
+        .color-option:hover {
+            border-color: #333;
+        }
+        .title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+        
+        /* Different color themes */
+        .theme-blue { --primary-color: #2196F3; }
+        .theme-red { --primary-color: #F44336; }
+        .theme-green { --primary-color: #4CAF50; }
+        .theme-purple { --primary-color: #9C27B0; }
+    </style>
+</head>
+<body>
+    <h1 class="title">Metronome Color Customization Feature</h1>
+    <p class="subtitle">Interactive demonstration of the color customization feature</p>
+    
+    <div class="demo-container">
+        <!-- Default Blue Theme -->
+        <div class="phone-mockup theme-blue">
+            <div class="app-header">Default Blue Theme</div>
+            <div class="settings-screen">
+                <div class="settings-list">
+                    <div class="settings-item">
+                        <div class="color-indicator" style="background-color: #2196F3;"></div>
+                        <div>
+                            <div><strong>Color Theme</strong></div>
+                            <div style="font-size: 12px; color: #666;">Tap to change app color</div>
+                        </div>
+                    </div>
+                    <hr style="margin: 0; border: none; border-top: 1px solid #e0e0e0;">
+                    <div class="settings-item">
+                        <div class="checkbox checked" style="background-color: #2196F3; border-color: #2196F3;"></div>
+                        <div>Beat Display</div>
+                    </div>
+                    <div class="settings-item">
+                        <div class="checkbox"></div>
+                        <div>Pendulum Display</div>
+                    </div>
+                </div>
+                
+                <div style="margin: 20px 0;">
+                    <div class="beat-indicator active"></div>
+                    <div class="beat-indicator"></div>
+                    <div class="beat-indicator"></div>
+                    <div class="beat-indicator"></div>
+                </div>
+                
+                <div class="pendulum-area">
+                    <div class="pendulum"></div>
+                </div>
+                
+                <div class="play-button">▶</div>
+            </div>
+        </div>
+
+        <!-- Red Theme -->
+        <div class="phone-mockup theme-red">
+            <div class="app-header">Custom Red Theme</div>
+            <div class="settings-screen">
+                <div class="settings-list">
+                    <div class="settings-item">
+                        <div class="color-indicator" style="background-color: #F44336;"></div>
+                        <div>
+                            <div><strong>Color Theme</strong></div>
+                            <div style="font-size: 12px; color: #666;">Tap to change app color</div>
+                        </div>
+                    </div>
+                    <hr style="margin: 0; border: none; border-top: 1px solid #e0e0e0;">
+                    <div class="settings-item">
+                        <div class="checkbox checked" style="background-color: #F44336; border-color: #F44336;"></div>
+                        <div>Beat Display</div>
+                    </div>
+                    <div class="settings-item">
+                        <div class="checkbox"></div>
+                        <div>Pendulum Display</div>
+                    </div>
+                </div>
+                
+                <div style="margin: 20px 0;">
+                    <div class="beat-indicator active"></div>
+                    <div class="beat-indicator"></div>
+                    <div class="beat-indicator"></div>
+                    <div class="beat-indicator"></div>
+                </div>
+                
+                <div class="pendulum-area">
+                    <div class="pendulum"></div>
+                </div>
+                
+                <div class="play-button">▶</div>
+            </div>
+        </div>
+
+        <!-- Green Theme -->
+        <div class="phone-mockup theme-green">
+            <div class="app-header">Custom Green Theme</div>
+            <div class="settings-screen">
+                <div class="settings-list">
+                    <div class="settings-item">
+                        <div class="color-indicator" style="background-color: #4CAF50;"></div>
+                        <div>
+                            <div><strong>Color Theme</strong></div>
+                            <div style="font-size: 12px; color: #666;">Tap to change app color</div>
+                        </div>
+                    </div>
+                    <hr style="margin: 0; border: none; border-top: 1px solid #e0e0e0;">
+                    <div class="settings-item">
+                        <div class="checkbox checked" style="background-color: #4CAF50; border-color: #4CAF50;"></div>
+                        <div>Beat Display</div>
+                    </div>
+                    <div class="settings-item">
+                        <div class="checkbox"></div>
+                        <div>Pendulum Display</div>
+                    </div>
+                </div>
+                
+                <div style="margin: 20px 0;">
+                    <div class="beat-indicator active"></div>
+                    <div class="beat-indicator"></div>
+                    <div class="beat-indicator"></div>
+                    <div class="beat-indicator"></div>
+                </div>
+                
+                <div class="pendulum-area">
+                    <div class="pendulum"></div>
+                </div>
+                
+                <div class="play-button">▶</div>
+            </div>
+        </div>
+
+        <!-- Color Picker Demo -->
+        <div class="phone-mockup theme-purple">
+            <div class="app-header">Color Picker Dialog</div>
+            <div class="settings-screen">
+                <div class="settings-list">
+                    <div class="settings-item">
+                        <div class="color-indicator" style="background-color: #9C27B0;"></div>
+                        <div>
+                            <div><strong>Color Theme</strong></div>
+                            <div style="font-size: 12px; color: #666;">Tap to change app color</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="color-picker-dialog">
+                    <div style="font-weight: bold; margin-bottom: 10px;">Select Color</div>
+                    <div class="color-options">
+                        <div class="color-option" style="background-color: #2196F3;"></div>
+                        <div class="color-option" style="background-color: #F44336;"></div>
+                        <div class="color-option" style="background-color: #4CAF50;"></div>
+                        <div class="color-option" style="background-color: #FF9800;"></div>
+                        <div class="color-option" style="background-color: #9C27B0;"></div>
+                        <div class="color-option" style="background-color: #607D8B;"></div>
+                        <div class="color-option" style="background-color: #E91E63;"></div>
+                        <div class="color-option" style="background-color: #009688;"></div>
+                        <div class="color-option" style="background-color: #795548;"></div>
+                        <div class="color-option" style="background-color: #3F51B5;"></div>
+                        <div class="color-option" style="background-color: #8BC34A;"></div>
+                        <div class="color-option" style="background-color: #FFC107;"></div>
+                    </div>
+                    <button style="background: #2196F3; color: white; border: none; padding: 8px 16px; border-radius: 4px; float: right;">Close</button>
+                </div>
+                
+                <div style="margin: 80px 0 20px;">
+                    <div class="beat-indicator active"></div>
+                    <div class="beat-indicator"></div>
+                    <div class="beat-indicator"></div>
+                    <div class="beat-indicator"></div>
+                </div>
+                
+                <div class="play-button">▶</div>
+            </div>
+        </div>
+    </div>
+    
+    <div style="margin-top: 40px; text-align: center; color: #666;">
+        <p><strong>Features Demonstrated:</strong></p>
+        <ul style="display: inline-block; text-align: left;">
+            <li>Color selector in settings screen</li>
+            <li>Dynamic checkbox colors</li>
+            <li>Beat indicator color changes</li>
+            <li>Pendulum color customization</li>
+            <li>Play button color updates</li>
+            <li>Real-time color preview</li>
+        </ul>
+    </div>
+</body>
+</html>

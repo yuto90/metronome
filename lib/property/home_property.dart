@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:metronome/home/home_model.dart';
+import 'package:metronome/property/color_settings.dart';
+import 'package:provider/provider.dart';
 
 import '../size_config.dart';
 import 'hex.dart';
@@ -34,15 +36,16 @@ class HomeProperty {
   /// ※こっちでcolorプロパティ済み\
   /// @param bool isButtonTap ボタンがタップされているかフラグ
   /// @param IconData icon ボタンに表示するアイコン
+  /// @param BuildContext context コンテキスト（カラー設定取得用）
   /// @return AnimatedContainer
-  AnimatedContainer smoothButton(bool isButtonTap, IconData icon) {
+  AnimatedContainer smoothButton(bool isButtonTap, IconData icon, BuildContext context) {
     return AnimatedContainer(
       duration: Duration(milliseconds: 300),
       width: SizeConfig.blockSizeHorizontal! * 15,
       height: SizeConfig.blockSizeVertical! * 6,
       child: Icon(
         icon,
-        color: isButtonTap ? Colors.black : Colors.blue,
+        color: isButtonTap ? Colors.black : context.read<ColorSettings>().primaryColor,
       ),
       decoration: BoxDecoration(
         color: HexColor('#f0f0f0'),

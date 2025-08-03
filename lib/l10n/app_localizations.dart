@@ -104,6 +104,30 @@ abstract class AppLocalizations {
   /// **'Hello {name}'**
   String hello(Object name);
 
+  /// No description provided for @option_color_theme.
+  ///
+  /// In en, this message translates to:
+  /// **'Color Theme'**
+  String get option_color_theme;
+
+  /// No description provided for @option_color_theme_subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to change app color'**
+  String get option_color_theme_subtitle;
+
+  /// No description provided for @color_picker_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Color'**
+  String get color_picker_title;
+
+  /// No description provided for @color_picker_close.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get color_picker_close;
+
   /// No description provided for @option_beat.
   ///
   /// In en, this message translates to:
