@@ -24,4 +24,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get option_just_vibration => 'Sounds a vibe when just tapped';
+
+  @override
+  String get option_color_theme => 'Color Theme';
+
+  @override
+  String get option_color_theme_subtitle => 'Tap to change app color';
+
+  @override
+  String get color_picker_title => 'Select Color';
+
+  @override
+  String get color_picker_close => 'Close';
 }

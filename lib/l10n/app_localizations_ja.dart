@@ -24,4 +24,16 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get option_just_vibration => 'ジャストタイミングでタップした時にバイブを鳴らす';
+
+  @override
+  String get option_color_theme => 'カラーテーマ';
+
+  @override
+  String get option_color_theme_subtitle => 'タップしてアプリの色を変更';
+
+  @override
+  String get color_picker_title => '色を選択';
+
+  @override
+  String get color_picker_close => '閉じる';
 }

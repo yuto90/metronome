@@ -127,6 +127,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sounds a vibe when just tapped'**
   String get option_just_vibration;
+
+  /// No description provided for @option_color_theme.
+  ///
+  /// In en, this message translates to:
+  /// **'Color Theme'**
+  String get option_color_theme;
+
+  /// No description provided for @option_color_theme_subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to change app color'**
+  String get option_color_theme_subtitle;
+
+  /// No description provided for @color_picker_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Color'**
+  String get color_picker_title;
+
+  /// No description provided for @color_picker_close.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get color_picker_close;
 }
 
 class _AppLocalizationsDelegate

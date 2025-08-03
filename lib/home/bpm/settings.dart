@@ -55,8 +55,8 @@ class Settings extends StatelessWidget {
                     children: [
                       // Color picker section
                       ListTile(
-                        title: Text('Color Theme'),
-                        subtitle: Text('Tap to change app color'),
+                        title: Text(AppLocalizations.of(context)!.option_color_theme),
+                        subtitle: Text(AppLocalizations.of(context)!.option_color_theme_subtitle),
                         leading: Container(
                           width: 24,
                           height: 24,
@@ -120,7 +120,7 @@ class Settings extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Select Color'),
+          title: Text(AppLocalizations.of(context)!.color_picker_title),
           content: SingleChildScrollView(
             child: ColorPicker(
               pickerColor: colorSettings.primaryColor,
@@ -133,7 +133,7 @@ class Settings extends StatelessWidget {
           ),
           actions: <Widget>[
             TextButton(
-              child: Text('Close'),
+              child: Text(AppLocalizations.of(context)!.color_picker_close),
               onPressed: () {
                 Navigator.of(context).pop();
               },
