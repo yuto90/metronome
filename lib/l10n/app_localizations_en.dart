@@ -14,18 +14,6 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get option_beat => 'Hide the beat';
-
-  @override
-  String get option_pendulum => 'Hide the pendulum';
-
-  @override
-  String get option_change_beat => 'Change the sound with the last beat';
-
-  @override
-  String get option_just_vibration => 'Sounds a vibe when just tapped';
-
-  @override
   String get option_color_theme => 'Color Theme';
 
   @override
@@ -36,4 +24,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get color_picker_close => 'Close';
+
+  @override
+  String get option_beat => 'Hide the beat';
+
+  @override
+  String get option_pendulum => 'Hide the pendulum';
+
+  @override
+  String get option_change_beat => 'Change the sound with the last beat';
+
+  @override
+  String get option_just_vibration => 'Sounds a vibe when just tapped';
 }

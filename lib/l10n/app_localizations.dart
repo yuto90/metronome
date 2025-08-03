@@ -104,30 +104,6 @@ abstract class AppLocalizations {
   /// **'Hello {name}'**
   String hello(Object name);
 
-  /// No description provided for @option_beat.
-  ///
-  /// In en, this message translates to:
-  /// **'Hide the beat'**
-  String get option_beat;
-
-  /// No description provided for @option_pendulum.
-  ///
-  /// In en, this message translates to:
-  /// **'Hide the pendulum'**
-  String get option_pendulum;
-
-  /// No description provided for @option_change_beat.
-  ///
-  /// In en, this message translates to:
-  /// **'Change the sound with the last beat'**
-  String get option_change_beat;
-
-  /// No description provided for @option_just_vibration.
-  ///
-  /// In en, this message translates to:
-  /// **'Sounds a vibe when just tapped'**
-  String get option_just_vibration;
-
   /// No description provided for @option_color_theme.
   ///
   /// In en, this message translates to:
@@ -151,6 +127,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Close'**
   String get color_picker_close;
+
+  /// No description provided for @option_beat.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide the beat'**
+  String get option_beat;
+
+  /// No description provided for @option_pendulum.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide the pendulum'**
+  String get option_pendulum;
+
+  /// No description provided for @option_change_beat.
+  ///
+  /// In en, this message translates to:
+  /// **'Change the sound with the last beat'**
+  String get option_change_beat;
+
+  /// No description provided for @option_just_vibration.
+  ///
+  /// In en, this message translates to:
+  /// **'Sounds a vibe when just tapped'**
+  String get option_just_vibration;
 }
 
 class _AppLocalizationsDelegate

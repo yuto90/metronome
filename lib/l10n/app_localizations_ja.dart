@@ -14,18 +14,6 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
-  String get option_beat => '拍子を非表示にする';
-
-  @override
-  String get option_pendulum => '振り子を非表示にする';
-
-  @override
-  String get option_change_beat => '最後の拍子で音を変える';
-
-  @override
-  String get option_just_vibration => 'ジャストタイミングでタップした時にバイブを鳴らす';
-
-  @override
   String get option_color_theme => 'カラーテーマ';
 
   @override
@@ -36,4 +24,16 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get color_picker_close => '閉じる';
+
+  @override
+  String get option_beat => '拍子を非表示にする';
+
+  @override
+  String get option_pendulum => '振り子を非表示にする';
+
+  @override
+  String get option_change_beat => '最後の拍子で音を変える';
+
+  @override
+  String get option_just_vibration => 'ジャストタイミングでタップした時にバイブを鳴らす';
 }
