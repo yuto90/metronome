@@ -1,139 +1,139 @@
-# TestFlight Automation Setup Guide
+# TestFlight自動化セットアップガイド
 
-This guide explains how to set up the automated TestFlight distribution system for pull requests.
+このガイドでは、プルリクエスト向けのTestFlight自動配布システムのセットアップ方法を説明します。
 
-## Overview
+## 概要
 
-When a pull request is created or updated, GitHub Actions will automatically:
-1. Build the iOS app using Flutter
-2. Archive and code sign the app
-3. Upload to TestFlight
-4. Comment on the PR with build status
+プルリクエストが作成または更新されると、GitHub Actionsが自動的に以下を実行します：
+1. FlutterでiOSアプリをビルド
+2. アプリのアーカイブとコード署名
+3. TestFlightへのアップロード
+4. ビルドステータスのPRコメント投稿
 
-## Required GitHub Secrets
+## 必要なGitHubシークレット
 
-You need to configure the following secrets in your GitHub repository settings:
+GitHubリポジトリ設定で以下のシークレットを設定する必要があります：
 
-### Apple Developer Certificates
+### Apple Developer証明書
 
 1. **APPLE_CERTIFICATE_BASE64**
-   - Export your iOS distribution certificate (.p12) from Keychain Access
-   - Convert to base64: `base64 -i certificate.p12 | pbcopy`
-   - Paste the base64 string as the secret value
+   - キーチェーンアクセスからiOS配布証明書（.p12）をエクスポート
+   - base64に変換：`base64 -i certificate.p12 | pbcopy`
+   - base64文字列をシークレット値として貼り付け
 
 2. **APPLE_CERTIFICATE_PASSWORD**
-   - The password used when exporting the .p12 certificate
+   - .p12証明書をエクスポートする際に使用したパスワード
 
 3. **APPLE_PROVISIONING_PROFILE_BASE64**
-   - Download your App Store provisioning profile from Apple Developer Portal
-   - Convert to base64: `base64 -i profile.mobileprovision | pbcopy`
-   - Paste the base64 string as the secret value
+   - Apple Developer PortalからApp Storeプロビジョニングプロファイルをダウンロード
+   - base64に変換：`base64 -i profile.mobileprovision | pbcopy`
+   - base64文字列をシークレット値として貼り付け
 
 ### App Store Connect API
 
 4. **APP_STORE_CONNECT_API_KEY_ID**
-   - Create an API key in App Store Connect (Users and Access → Keys)
-   - Use the Key ID (e.g., "2X9R4HXF34")
+   - App Store ConnectでAPIキーを作成（ユーザーとアクセス → キー）
+   - キーID（例：「2X9R4HXF34」）を使用
 
 5. **APP_STORE_CONNECT_API_ISSUER_ID**
-   - Found in App Store Connect (Users and Access → Keys)
-   - Copy the Issuer ID (UUID format)
+   - App Store Connectで確認（ユーザーとアクセス → キー）
+   - 発行者ID（UUID形式）をコピー
 
 6. **APP_STORE_CONNECT_API_KEY_BASE64**
-   - Download the .p8 key file from App Store Connect
-   - Convert to base64: `base64 -i AuthKey_XXXXXXXXXX.p8 | pbcopy`
-   - Paste the base64 string as the secret value
+   - App Store Connectから.p8キーファイルをダウンロード
+   - base64に変換：`base64 -i AuthKey_XXXXXXXXXX.p8 | pbcopy`
+   - base64文字列をシークレット値として貼り付け
 
-## Setup Steps
+## セットアップ手順
 
-### 1. Apple Developer Account Setup
+### 1. Apple Developerアカウントセットアップ
 
-1. Ensure you have an active Apple Developer Program membership
-2. Create an App Store Connect record for your app if it doesn't exist
-3. Configure your app's bundle identifier: `com.yuto.smooth.metronome`
+1. Apple Developer Programの有効なメンバーシップを確保
+2. アプリのApp Store Connectレコードが存在しない場合は作成
+3. アプリのバンドル識別子を設定：`com.yuto.smooth.metronome`
 
-### 2. Certificates and Provisioning Profiles
+### 2. 証明書とプロビジョニングプロファイル
 
-1. Create an iOS Distribution certificate in Apple Developer Portal
-2. Create an App Store provisioning profile for your app
-3. Download both and convert to base64 as described above
+1. Apple Developer PortalでiOS配布証明書を作成
+2. アプリ用のApp Storeプロビジョニングプロファイルを作成
+3. 両方をダウンロードし、上記のようにbase64に変換
 
-### 3. App Store Connect API Key
+### 3. App Store Connect APIキー
 
-1. Go to App Store Connect → Users and Access → Keys
-2. Click the "+" button to create a new API key
-3. Give it a name (e.g., "CI/CD TestFlight")
-4. Select "Developer" role
-5. Download the .p8 file and note the Key ID and Issuer ID
+1. App Store Connect → ユーザーとアクセス → キーに移動
+2. 「+」ボタンをクリックして新しいAPIキーを作成
+3. 名前を付ける（例：「CI/CD TestFlight」）
+4. 「Developer」ロールを選択
+5. .p8ファイルをダウンロードし、キーIDと発行者IDをメモ
 
-### 4. GitHub Repository Configuration
+### 4. GitHubリポジトリ設定
 
-1. Go to your repository settings → Secrets and variables → Actions
-2. Add all the required secrets listed above
-3. Ensure the secrets are available to the workflow
+1. リポジトリ設定 → シークレットと変数 → Actionsに移動
+2. 上記のすべての必要なシークレットを追加
+3. シークレットがワークフローで利用可能であることを確認
 
-### 5. Team Configuration (Optional)
+### 5. チーム設定（オプション）
 
-Update the `ios/fastlane/Appfile` with your team information:
+`ios/fastlane/Appfile`をチーム情報で更新：
 ```ruby
 apple_id("your-apple-id@example.com")
 itc_team_id("YOUR_APP_STORE_CONNECT_TEAM_ID")
 team_id("YOUR_DEVELOPER_PORTAL_TEAM_ID")
 ```
 
-## Testing the Setup
+## セットアップのテスト
 
-1. Create a test pull request with a small change
-2. Check the Actions tab to see if the workflow runs
-3. Monitor the build logs for any issues
-4. Verify that TestFlight receives the build
+1. 小さな変更でテスト用プルリクエストを作成
+2. Actionsタブでワークフローが実行されるかを確認
+3. ビルドログで問題がないかを監視
+4. TestFlightがビルドを受信したことを確認
 
-## Troubleshooting
+## トラブルシューティング
 
-### Common Issues
+### よくある問題
 
-1. **Certificate Expired**
-   - Renew your iOS Distribution certificate
-   - Update the APPLE_CERTIFICATE_BASE64 secret
+1. **証明書の期限切れ**
+   - iOS配布証明書を更新
+   - APPLE_CERTIFICATE_BASE64シークレットを更新
 
-2. **Provisioning Profile Invalid**
-   - Ensure the profile includes the correct certificate
-   - Regenerate and update APPLE_PROVISIONING_PROFILE_BASE64
+2. **プロビジョニングプロファイルが無効**
+   - プロファイルに正しい証明書が含まれていることを確認
+   - 再生成してAPPLE_PROVISIONING_PROFILE_BASE64を更新
 
-3. **API Key Issues**
-   - Verify the API key has the correct permissions
-   - Check that the Key ID and Issuer ID match
+3. **APIキーの問題**
+   - APIキーが正しい権限を持っていることを確認
+   - キーIDと発行者IDが一致することを確認
 
-4. **Build Failures**
-   - Check Flutter version compatibility
-   - Ensure all dependencies are available
-   - Review the workflow logs for specific errors
+4. **ビルドの失敗**
+   - Flutterバージョンの互換性を確認
+   - すべての依存関係が利用可能であることを確認
+   - 具体的なエラーについてワークフローログを確認
 
-### Debug Tips
+### デバッグのヒント
 
-- Check the GitHub Actions logs for detailed error messages
-- Verify all secrets are properly configured and accessible
-- Test certificates and profiles locally with Xcode first
-- Use the workflow's failure comments to identify issues quickly
+- 詳細なエラーメッセージについてGitHub Actionsログを確認
+- すべてのシークレットが適切に設定され、アクセス可能であることを確認
+- 最初にXcodeで証明書とプロファイルをローカルでテスト
+- ワークフローの失敗コメントを使用して問題を迅速に特定
 
-## Security Considerations
+## セキュリティの考慮事項
 
-- Never commit certificates or API keys to the repository
-- Regularly rotate API keys and certificates
-- Limit API key permissions to only what's needed
-- Monitor access logs in App Store Connect
-- Consider using different certificates for CI vs. local development
+- 証明書やAPIキーをリポジトリにコミットしない
+- APIキーと証明書を定期的にローテーション
+- APIキーの権限を必要最小限に制限
+- App Store Connectのアクセスログを監視
+- CI用とローカル開発用で異なる証明書の使用を検討
 
-## Workflow Customization
+## ワークフローのカスタマイズ
 
-The workflow can be customized by modifying:
-- `.github/workflows/testflight-pr.yml` - Main workflow configuration
-- `ios/fastlane/Fastfile` - Build and upload logic
-- `ios/fastlane/Appfile` - App and team configuration
+以下を変更してワークフローをカスタマイズできます：
+- `.github/workflows/testflight-pr.yml` - メインワークフロー設定
+- `ios/fastlane/Fastfile` - ビルドとアップロードのロジック
+- `ios/fastlane/Appfile` - アプリとチームの設定
 
-## Additional Resources
+## 追加リソース
 
-- [Fastlane Documentation](https://docs.fastlane.tools/)
+- [Fastlaneドキュメント](https://docs.fastlane.tools/)
 - [App Store Connect API](https://developer.apple.com/documentation/appstoreconnectapi)
-- [GitHub Actions Documentation](https://docs.github.com/en/actions)
-- [Flutter CI/CD Best Practices](https://docs.flutter.dev/deployment/cd)
+- [GitHub Actionsドキュメント](https://docs.github.com/en/actions)
+- [Flutter CI/CDベストプラクティス](https://docs.flutter.dev/deployment/cd)

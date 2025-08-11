@@ -1,174 +1,174 @@
-# TestFlight Automation Implementation Summary
+# TestFlight自動化実装サマリー
 
-This document summarizes the TestFlight automation system implemented for the metronome Flutter app.
+このドキュメントは、メトロノームFlutterアプリ用に実装されたTestFlight自動化システムの概要をまとめています。
 
-## 🎯 Implementation Overview
+## 🎯 実装概要
 
-A complete CI/CD pipeline has been implemented that automatically builds and distributes iOS apps to TestFlight when pull requests are created or updated. The system provides automated feedback to developers and reviewers through PR comments.
+プルリクエストが作成または更新されたときに、iOSアプリを自動的にビルドしTestFlightに配布する完全なCI/CDパイプラインを実装しました。このシステムは、PRコメントを通じて開発者とレビュアーに自動的にフィードバックを提供します。
 
-## 📁 Files Added/Modified
+## 📁 追加/変更されたファイル
 
-### GitHub Actions Workflows
-- `.github/workflows/testflight-pr.yml` - Main PR-triggered TestFlight automation
-- `.github/workflows/ios-build-check.yml` - Basic build verification (fallback when certificates not configured)
-- `.github/workflows/manual-testflight.yml` - Manual TestFlight upload via GitHub UI
+### GitHub Actionsワークフロー
+- `.github/workflows/testflight-pr.yml` - メインのPRトリガーTestFlight自動化
+- `.github/workflows/ios-build-check.yml` - 基本的なビルド検証（証明書未設定時のフォールバック）
+- `.github/workflows/manual-testflight.yml` - GitHub UIからの手動TestFlightアップロード
 
-### Fastlane Configuration
-- `ios/Gemfile` - Ruby dependencies for fastlane
-- `ios/fastlane/Fastfile` - Build and upload automation logic
-- `ios/fastlane/Appfile` - App Store Connect configuration
+### Fastlane設定
+- `ios/Gemfile` - fastlane用のRuby依存関係
+- `ios/fastlane/Fastfile` - ビルドとアップロードの自動化ロジック
+- `ios/fastlane/Appfile` - App Store Connect設定
 
-### Documentation
-- `docs/testflight-setup.md` - Comprehensive setup guide
-- `.github/pull_request_template.md` - PR template with TestFlight guidance
-- `README.md` - Updated with TestFlight automation info
+### ドキュメント
+- `docs/testflight-setup.md` - 包括的なセットアップガイド
+- `.github/pull_request_template.md` - TestFlightガイダンス付きPRテンプレート
+- `README.md` - TestFlight自動化情報で更新
 
-### Project Configuration
-- `.gitignore` - Added iOS build artifacts, certificates, and fastlane outputs
+### プロジェクト設定
+- `.gitignore` - iOSビルド成果物、証明書、fastlane出力を追加
 
-## 🔧 Technical Features
+## 🔧 技術機能
 
-### Automated Build Pipeline
-- **Multi-trigger support**: PR creation, updates, and manual dispatch
-- **Incremental build numbers**: Based on git commit count
-- **Proper code signing**: Certificate and provisioning profile management
-- **Build optimization**: No bitcode, proper export methods
+### 自動ビルドパイプライン
+- **マルチトリガーサポート**: PR作成、更新、手動ディスパッチ
+- **インクリメンタルビルド番号**: gitコミット数に基づく
+- **適切なコード署名**: 証明書とプロビジョニングプロファイル管理
+- **ビルド最適化**: bitcodeなし、適切なエクスポート方法
 
-### TestFlight Integration
-- **Automated uploads** to App Store Connect
-- **Dynamic changelogs** based on PR information or manual input
-- **Internal testing ready** immediately after Apple processing
-- **External testing** requires manual Apple review activation
+### TestFlight統合
+- **自動アップロード** to App Store Connect
+- **動的変更ログ** PR情報または手動入力に基づく
+- **内部テスト** Apple処理後すぐに利用可能
+- **外部テスト** 手動のAppleレビュー承認が必要
 
-### Security & Best Practices
-- **Secrets-based authentication**: No credentials in code
-- **Keychain management**: Temporary keychain for CI builds
-- **API key handling**: App Store Connect API with proper permissions
-- **Build isolation**: Clean build environment for each run
+### セキュリティとベストプラクティス
+- **シークレットベース認証**: コード内に認証情報なし
+- **キーチェーン管理**: CIビルド用の一時的なキーチェーン
+- **APIキーハンドリング**: 適切な権限を持つApp Store Connect API
+- **ビルド分離**: 各実行で清潔なビルド環境
 
-### Developer Experience
-- **PR comments** with build status and TestFlight links
-- **Error notifications** with troubleshooting guidance
-- **Manual controls** for release builds
-- **Template guidance** for consistent PR reviews
+### 開発者体験
+- **PRコメント** ビルドステータスとTestFlightリンク付き
+- **エラー通知** トラブルシューティングガイダンス付き
+- **手動コントロール** リリースビルド用
+- **テンプレートガイダンス** 一貫したPRレビュー用
 
-## 🔐 Required Configuration
+## 🔐 必要な設定
 
-### GitHub Secrets (6 required)
-1. `APPLE_CERTIFICATE_BASE64` - iOS Distribution certificate (base64)
-2. `APPLE_CERTIFICATE_PASSWORD` - Certificate password
-3. `APPLE_PROVISIONING_PROFILE_BASE64` - App Store provisioning profile (base64)
-4. `APP_STORE_CONNECT_API_KEY_ID` - API key identifier
-5. `APP_STORE_CONNECT_API_ISSUER_ID` - API issuer UUID
-6. `APP_STORE_CONNECT_API_KEY_BASE64` - API key file content (base64)
+### GitHubシークレット（6つ必要）
+1. `APPLE_CERTIFICATE_BASE64` - iOS配布証明書（base64）
+2. `APPLE_CERTIFICATE_PASSWORD` - 証明書パスワード
+3. `APPLE_PROVISIONING_PROFILE_BASE64` - App Storeプロビジョニングプロファイル（base64）
+4. `APP_STORE_CONNECT_API_KEY_ID` - APIキー識別子
+5. `APP_STORE_CONNECT_API_ISSUER_ID` - API発行者UUID
+6. `APP_STORE_CONNECT_API_KEY_BASE64` - APIキーファイル内容（base64）
 
-### Apple Developer Requirements
-- Active Apple Developer Program membership
-- App Store Connect app record
-- iOS Distribution certificate
-- App Store provisioning profile
-- App Store Connect API key with Developer role
+### Apple Developer要件
+- 有効なApple Developer Programメンバーシップ
+- App Store Connectアプリレコード
+- iOS配布証明書
+- App Storeプロビジョニングプロファイル
+- Developerロール付きApp Store Connect APIキー
 
-## 🚀 Usage Workflows
+## 🚀 使用ワークフロー
 
-### Automatic (PR-triggered)
-1. Developer creates/updates PR with iOS changes
-2. GitHub Actions builds app automatically
-3. App uploads to TestFlight if configured
-4. PR comment posted with status/links
-5. Reviewers test via TestFlight
+### 自動（PRトリガー）
+1. 開発者がiOS変更を含むPRを作成/更新
+2. GitHub Actionsが自動的にアプリをビルド
+3. 設定済みの場合、アプリがTestFlightにアップロード
+4. ステータス/リンク付きのPRコメントが投稿
+5. レビュアーがTestFlight経由でテスト
 
-### Manual (On-demand)
-1. Navigate to Actions → Manual TestFlight Upload
-2. Select branch and enter changelog
-3. Trigger workflow manually
-4. Monitor build progress
-5. Optional GitHub release creation
+### 手動（オンデマンド）
+1. Actions → Manual TestFlight Uploadに移動
+2. ブランチを選択し変更ログを入力
+3. 手動でワークフローをトリガー
+4. ビルド進行状況を監視
+5. オプションでGitHubリリース作成
 
-### Build Verification (Fallback)
-1. Basic iOS build without code signing
-2. Dart analysis and testing
-3. PR feedback for build status
-4. Preparation for full TestFlight setup
+### ビルド検証（フォールバック）
+1. コード署名なしの基本的なiOSビルド
+2. Dart解析とテスト
+3. ビルドステータスのPRフィードバック
+4. 完全なTestFlightセットアップの準備
 
-## 📊 Workflow Decision Matrix
+## 📊 ワークフロー決定マトリックス
 
-| Scenario | Workflow Used | TestFlight Upload | PR Comments |
-|----------|---------------|-------------------|-------------|
-| PR with full secrets | `testflight-pr.yml` | ✅ Yes | ✅ Yes |
-| PR without secrets | `ios-build-check.yml` | ❌ No | ✅ Build status |
-| Manual release | `manual-testflight.yml` | ✅ Yes | ❌ No |
-| Non-iOS changes | None triggered | ❌ No | ❌ No |
+| シナリオ | 使用されるワークフロー | TestFlightアップロード | PRコメント |
+|----------|----------------------|------------------------|------------|
+| 完全なシークレット付きPR | `testflight-pr.yml` | ✅ はい | ✅ はい |
+| シークレットなしPR | `ios-build-check.yml` | ❌ いいえ | ✅ ビルドステータス |
+| 手動リリース | `manual-testflight.yml` | ✅ はい | ❌ いいえ |
+| iOS以外の変更 | トリガーなし | ❌ いいえ | ❌ いいえ |
 
-## 🔄 Migration Path
+## 🔄 移行パス
 
-### Phase 1: Basic Build Verification (Current)
-- iOS build check workflow active
-- No TestFlight upload yet
-- PR feedback for build status
+### フェーズ1: 基本ビルド検証（現在）
+- iOSビルドチェックワークフロー有効
+- TestFlightアップロードなし
+- ビルドステータスのPRフィードバック
 
-### Phase 2: TestFlight Setup (Next)
-- Configure GitHub Secrets
-- Enable full TestFlight workflow
-- Test with sample PR
+### フェーズ2: TestFlightセットアップ（次）
+- GitHubシークレットを設定
+- 完全なTestFlightワークフローを有効化
+- サンプルPRでテスト
 
-### Phase 3: Production Use (Future)
-- All PRs auto-upload to TestFlight
-- External tester configuration
-- Release automation integration
+### フェーズ3: 本番使用（将来）
+- すべてのPRが自動的にTestFlightにアップロード
+- 外部テスター設定
+- リリース自動化統合
 
-## 🎯 Success Metrics
+## 🎯 成功指標
 
-### Technical Metrics
-- ✅ Build success rate (target: >95%)
-- ✅ Upload success rate (target: >90%)
-- ✅ Build time (target: <10 minutes)
-- ✅ Certificate/profile validity monitoring
+### 技術指標
+- ✅ ビルド成功率（目標: >95%）
+- ✅ アップロード成功率（目標: >90%）
+- ✅ ビルド時間（目標: <10分）
+- ✅ 証明書/プロファイル有効性監視
 
-### Process Metrics
-- ✅ PR review efficiency improvement
-- ✅ Bug detection in testing phase
-- ✅ Faster feedback cycles
-- ✅ Reduced manual distribution effort
+### プロセス指標
+- ✅ PRレビュー効率改善
+- ✅ テストフェーズでのバグ検出
+- ✅ より速いフィードバックサイクル
+- ✅ 手動配布労力の削減
 
-## 🛠️ Maintenance Requirements
+## 🛠️ メンテナンス要件
 
-### Regular Tasks
-- Monitor certificate expiration (annual)
-- Rotate API keys (as needed)
-- Update provisioning profiles (as needed)
-- Review workflow performance
+### 定期タスク
+- 証明書期限の監視（年次）
+- APIキーのローテーション（必要に応じて）
+- プロビジョニングプロファイルの更新（必要に応じて）
+- ワークフローパフォーマンスの確認
 
-### Updates Required
-- Flutter version compatibility
-- GitHub Actions updates
-- Fastlane updates
-- Xcode version changes
+### 必要な更新
+- Flutterバージョン互換性
+- GitHub Actionsアップデート
+- Fastlaneアップデート
+- Xcodeバージョン変更
 
-## 📞 Support & Troubleshooting
+## 📞 サポートとトラブルシューティング
 
-### Common Issues
-1. **Certificate expiration** → Renew and update secrets
-2. **Provisioning profile issues** → Regenerate profile
-3. **API key permissions** → Verify Developer role
-4. **Build failures** → Check workflow logs
+### よくある問題
+1. **証明書期限切れ** → 更新してシークレットを更新
+2. **プロビジョニングプロファイル問題** → プロファイルを再生成
+3. **APIキー権限** → Developerロールを確認
+4. **ビルド失敗** → ワークフローログを確認
 
-### Getting Help
-- Review `docs/testflight-setup.md` for detailed setup
-- Check GitHub Actions logs for specific errors
-- Verify all secrets are properly configured
-- Test certificates locally in Xcode first
+### ヘルプを得る
+- 詳細なセットアップについて`docs/testflight-setup.md`を確認
+- 具体的なエラーについてGitHub Actionsログを確認
+- すべてのシークレットが適切に設定されていることを確認
+- 最初にXcodeで証明書をローカルでテスト
 
-## 🎉 Summary
+## 🎉 まとめ
 
-The TestFlight automation system is now fully implemented and ready for use. The modular design allows for gradual adoption:
+TestFlight自動化システムが完全に実装され、使用準備が整いました。モジュラー設計により段階的な採用が可能です：
 
-1. **Start** with build verification (no setup required)
-2. **Upgrade** to TestFlight when certificates are ready
-3. **Scale** to full automation with external testing
+1. **開始** ビルド検証から（セットアップ不要）
+2. **アップグレード** 証明書準備完了時のTestFlightへ
+3. **スケール** 外部テストを含む完全自動化へ
 
-This system will significantly improve the development workflow by providing immediate access to builds for testing and review, reducing manual overhead, and ensuring consistent quality through automated processes.
+このシステムは、テストとレビュー用のビルドへの即座のアクセスを提供し、手動オーバーヘッドを削減し、自動化されたプロセスを通じて一貫した品質を確保することで、開発ワークフローを大幅に改善します。
 
 ---
 
-*Implementation completed for yuto90/metronome repository - Ready for Apple Developer credential configuration.*
+*yuto90/metronomeリポジトリの実装完了 - Apple Developer認証情報設定の準備完了*

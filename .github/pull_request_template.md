@@ -1,28 +1,28 @@
-## 📱 Changes Description
+## 📱 変更内容の説明
 
-Briefly describe what this PR changes:
+このPRで変更された内容を簡潔に説明してください：
 
 - 
 
-## ✅ Testing Checklist
+## ✅ テストチェックリスト
 
-- [ ] Code compiles without errors
-- [ ] All tests pass
-- [ ] Manual testing completed on simulator/device
-- [ ] UI/UX changes verified across different screen sizes
+- [ ] コードがエラーなしでコンパイルできる
+- [ ] すべてのテストが通る
+- [ ] シミュレーター/実機での手動テストが完了している
+- [ ] UI/UX変更が異なる画面サイズで確認されている
 
-## 🚀 TestFlight Build
+## 🚀 TestFlightビルド
 
-This PR will automatically trigger a TestFlight build when:
-- iOS-related files are changed (`lib/`, `ios/`, `pubspec.yaml`)
-- TestFlight automation is properly configured
+このPRは以下の場合に自動的にTestFlightビルドをトリガーします：
+- iOS関連ファイルが変更された場合（`lib/`, `ios/`, `pubspec.yaml`）
+- TestFlight自動化が適切に設定されている場合
 
-**For Reviewers:**
-- Wait for the automated build comment
-- Download from TestFlight if available
-- Test the app on physical devices
-- Leave feedback in this PR or through TestFlight
+**レビュアーの方へ：**
+- 自動ビルドコメントをお待ちください
+- 利用可能な場合はTestFlightからダウンロードしてください
+- 実機でアプリをテストしてください
+- このPRまたはTestFlightを通じてフィードバックをお願いします
 
-## 📋 Additional Notes
+## 📋 追加メモ
 
-Any additional context, screenshots, or special testing instructions:
+追加のコンテキスト、スクリーンショット、または特別なテスト手順：

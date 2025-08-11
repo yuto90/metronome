@@ -1,45 +1,45 @@
-# Color Customization Feature
+# カラーカスタマイズ機能
 
-## Overview
-This feature allows users to customize the primary blue color used throughout the metronome app. Users can select any color from a color picker in the settings screen, and their choice will be applied to all UI elements that previously used the hardcoded blue color.
+## 概要
+この機能により、ユーザーはメトロノームアプリ全体で使用されるプライマリブルーカラーをカスタマイズできます。ユーザーは設定画面のカラーピッカーから任意の色を選択でき、その選択はハードコードされたブルーカラーを使用していたすべてのUI要素に適用されます。
 
-## Implementation Details
+## 実装詳細
 
-### New Files Added
-- `lib/property/color_settings.dart` - Manages color state and persistence using SharedPreferences
+### 追加された新ファイル
+- `lib/property/color_settings.dart` - SharedPreferencesを使用したカラー状態と永続化の管理
 
-### Modified Files
-- `pubspec.yaml` - Added dependencies: `shared_preferences: ^2.0.15` and `flutter_colorpicker: ^1.0.3`
-- `lib/main.dart` - Added ColorSettings provider and made theme dynamic
-- `lib/home/bpm/settings.dart` - Added color picker UI
-- `lib/home/rhythm/pendulum.dart` - Uses dynamic color instead of hardcoded blue
-- `lib/home/rhythm/beat.dart` - Uses dynamic color for beat indicators
-- `lib/property/home_property.dart` - Uses dynamic color for button icons
-- `lib/home/footer/footer.dart` - Uses dynamic color for footer buttons
+### 変更されたファイル
+- `pubspec.yaml` - 依存関係を追加：`shared_preferences: ^2.0.15`および`flutter_colorpicker: ^1.0.3`
+- `lib/main.dart` - ColorSettingsプロバイダーを追加し、テーマを動的にした
+- `lib/home/bpm/settings.dart` - カラーピッカーUIを追加
+- `lib/home/rhythm/pendulum.dart` - ハードコードされたブルーの代わりに動的カラーを使用
+- `lib/home/rhythm/beat.dart` - ビートインジケーターに動的カラーを使用
+- `lib/property/home_property.dart` - ボタンアイコンに動的カラーを使用
+- `lib/home/footer/footer.dart` - フッターボタンに動的カラーを使用
 
-### Features
-1. **Color Picker**: Added to the settings screen with an intuitive UI
-2. **Persistent Storage**: User's color choice is saved using SharedPreferences
-3. **Dynamic Theme**: App theme updates automatically when color changes
-4. **Real-time Updates**: Color changes are immediately reflected throughout the app
+### 機能
+1. **カラーピッカー**: 直感的なUIで設定画面に追加
+2. **永続ストレージ**: SharedPreferencesを使用してユーザーのカラー選択を保存
+3. **動的テーマ**: カラー変更時にアプリテーマが自動的に更新
+4. **リアルタイム更新**: カラー変更がアプリ全体に即座に反映
 
-### Usage
-1. Open the settings screen by tapping the settings icon
-2. Tap on the "Color Theme" option at the top of the settings list
-3. Select your preferred color using the color picker dialog
-4. The color will be immediately applied to all blue UI elements
-5. Your color choice will be preserved when you restart the app
+### 使用方法
+1. 設定アイコンをタップして設定画面を開く
+2. 設定リストの上部にある「カラーテーマ」オプションをタップ
+3. カラーピッカーダイアログを使用してお好みの色を選択
+4. カラーがすべてのブルーUI要素に即座に適用される
+5. アプリを再起動してもカラー選択が保持される
 
-### Technical Implementation
-- Uses Provider pattern for state management
-- ColorSettings class extends ChangeNotifier
-- SharedPreferences for persistent storage
-- MaterialColor swatch generation for theme compatibility
-- Consumer/Provider widgets for reactive UI updates
+### 技術実装
+- 状態管理にProviderパターンを使用
+- ColorSettingsクラスがChangeNotifierを継承
+- 永続ストレージにSharedPreferences
+- テーマ互換性のためのMaterialColorスウォッチ生成
+- リアクティブUI更新のためのConsumer/Providerウィジェット
 
-### Benefits
-- Enhanced user customization
-- Improved user experience
-- Maintains app consistency
-- Follows Flutter best practices
-- Minimal performance impact
+### メリット
+- ユーザーカスタマイズの向上
+- ユーザー体験の改善
+- アプリの一貫性を維持
+- Flutterのベストプラクティスに従う
+- パフォーマンスへの影響が最小限
