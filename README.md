@@ -1,51 +1,51 @@
-# JustBeat Metronome
+# JustBeat メトロノーム
 
-A Flutter-based metronome application with customizable color theming.
+カスタマイズ可能なカラーテーマを備えたFlutterベースのメトロノームアプリケーションです。
 
-## Features
+## 機能
 
-- **Precision Metronome**: Accurate beat timing with customizable BPM
-- **Visual Feedback**: Beat indicators and pendulum display
-- **Sound Options**: Configurable click sounds and vibration
-- **Color Customization**: Personalize the app's blue theme with any color of your choice
-- **Multilingual Support**: Japanese and English language support
+- **精密メトロノーム**: カスタマイズ可能なBPMによる正確なビートタイミング
+- **視覚的フィードバック**: ビートインジケーターと振り子表示
+- **サウンドオプション**: 設定可能なクリック音とバイブレーション
+- **カラーカスタマイズ**: お好みの色でアプリのブルーテーマをパーソナライズ
+- **多言語サポート**: 日本語と英語の言語サポート
 
-## Color Customization
+## カラーカスタマイズ
 
-The app now includes a comprehensive color customization feature that allows users to:
+アプリには包括的なカラーカスタマイズ機能が含まれており、ユーザーは以下のことができます：
 
-- Select any color from a color picker in the settings screen
-- Apply the chosen color to all UI elements (checkboxes, beat indicators, pendulum, buttons)
-- Automatically save color preferences for persistence across app restarts
-- Enjoy a unified visual experience with the selected theme
+- 設定画面のカラーピッカーから任意の色を選択
+- 選択した色をすべてのUI要素（チェックボックス、ビートインジケーター、振り子、ボタン）に適用
+- アプリ再起動時にも設定が保持されるよう自動保存
+- 選択したテーマで統一された視覚体験を楽しむ
 
-To customize colors:
-1. Open Settings by tapping the gear icon
-2. Tap on "Color Theme" at the top of the settings list
-3. Choose your preferred color from the color picker
-4. Your selection is applied immediately and saved automatically
+カラーをカスタマイズするには：
+1. 歯車アイコンをタップして設定を開く
+2. 設定リストの一番上にある「カラーテーマ」をタップ
+3. カラーピッカーからお好みの色を選択
+4. 選択内容は即座に適用され、自動的に保存されます
 
-## Getting Started
+## はじめに
 
-This project is a starting point for a Flutter application.
+このプロジェクトはFlutterアプリケーションの開発起点となります。
 
-### Development Workflow
+### 開発ワークフロー
 
-This project includes automated TestFlight distribution for pull requests:
+このプロジェクトには、プルリクエスト用の自動TestFlight配布機能が含まれています：
 
-- **Automatic Builds**: Every PR triggers an iOS build verification
-- **TestFlight Distribution**: When properly configured, PRs automatically upload to TestFlight
-- **PR Feedback**: Build status and TestFlight links are automatically posted to PRs
+- **自動ビルド**: すべてのPRでiOSビルド検証がトリガーされます
+- **TestFlight配布**: 適切に設定されている場合、PRは自動的にTestFlightにアップロードされます
+- **PRフィードバック**: ビルドステータスとTestFlightリンクが自動的にPRに投稿されます
 
-To enable full TestFlight automation, see the [TestFlight Setup Guide](docs/testflight-setup.md).
+完全なTestFlight自動化を有効にするには、[TestFlightセットアップガイド](docs/testflight-setup.md)をご覧ください。
 
-### Flutter Resources
+### Flutterリソース
 
-A few resources to get you started if this is your first Flutter project:
+初めてFlutterプロジェクトに取り組む方向けのリソース：
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- [Lab: 最初のFlutterアプリを作成](https://flutter.dev/docs/get-started/codelab)
+- [Cookbook: 便利なFlutterサンプル](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Flutterの使い方については、チュートリアル、サンプル、
+モバイル開発のガイダンス、完全なAPIリファレンスを提供する
+[オンラインドキュメント](https://flutter.dev/docs)をご覧ください。
