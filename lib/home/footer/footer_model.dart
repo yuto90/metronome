@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:metronome/home/bpm/bpm_model.dart';
-import 'package:metronome/home/rhythm/rhythm_model.dart';
 import 'package:metronome/property/home_property.dart';
-import 'package:provider/src/provider.dart';
-import '../home_model.dart';
 
 class FooterModel extends ChangeNotifier {
   // プロパティ用のclassをインスタンス化

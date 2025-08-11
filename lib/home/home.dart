@@ -7,7 +7,7 @@ import 'home_model.dart';
 import 'footer/footer.dart';
 import '../tap/tap.dart';
 import 'bpm/bpm.dart';
-import 'adsense.dart';
+// import 'adsense.dart';
 import '../size_config.dart';
 
 class Home extends StatelessWidget {
