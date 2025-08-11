@@ -47,3 +47,24 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Fastlane and iOS build artifacts
+ios/fastlane/report.xml
+ios/fastlane/Preview.html
+ios/fastlane/screenshots
+ios/fastlane/test_output
+ios/build/
+*.ipa
+*.dSYM.zip
+
+# Ruby/Bundler
+ios/vendor/
+ios/.bundle/
+ios/Gemfile.lock
+
+# Certificates and keys (security)
+*.p12
+*.p8
+*.mobileprovision
+*.cer
+private_keys/

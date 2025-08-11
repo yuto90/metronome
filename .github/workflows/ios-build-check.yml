@@ -1,0 +1,100 @@
+name: iOS Build Check (PR)
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - 'lib/**'
+      - 'ios/**'
+      - 'pubspec.yaml'
+      - 'pubspec.lock'
+
+jobs:
+  ios-build-check:
+    name: iOS Build Verification
+    runs-on: macos-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Setup FVM
+        uses: kuhnroyal/flutter-fvm-config-action@v2
+        
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version-file: .fvm/fvm_config.json
+          cache: true
+          
+      - name: Install dependencies
+        run: flutter pub get
+        
+      - name: Analyze Dart code
+        run: flutter analyze
+        
+      - name: Run tests
+        run: flutter test
+        
+      - name: Build iOS (without code signing)
+        run: |
+          flutter build ios --release --no-codesign
+          
+      - name: Comment on PR with build status
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const comment = `✅ **iOS Build Successful**
+            
+            Your PR has been successfully built for iOS!
+            
+            **Build Information:**
+            - Branch: \`${{ github.head_ref }}\`
+            - Commit: \`${{ github.sha }}\`
+            - Build Date: ${new Date().toLocaleString()}
+            
+            **What was tested:**
+            - ✅ Flutter analysis passed
+            - ✅ All tests passed  
+            - ✅ iOS build completed successfully
+            
+            > 🚀 To enable TestFlight automation, follow the setup guide in \`docs/testflight-setup.md\``;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+            
+      - name: Comment on PR with build failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const comment = `❌ **iOS Build Failed**
+            
+            The iOS build for this PR failed.
+            
+            **Build Information:**
+            - Branch: \`${{ github.head_ref }}\`
+            - Commit: \`${{ github.sha }}\`
+            - Build Date: ${new Date().toLocaleString()}
+            
+            **Next Steps:**
+            1. Check the [workflow logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) for details
+            2. Fix any issues and push new commits to retry
+            
+            **Common Issues:**
+            - Dart analysis errors
+            - Test failures
+            - Build configuration issues
+            - Missing dependencies`;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
