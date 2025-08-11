@@ -1,0 +1,156 @@
+name: TestFlight PR Build
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - 'lib/**'
+      - 'ios/**'
+      - 'android/**'
+      - 'pubspec.yaml'
+      - 'pubspec.lock'
+
+jobs:
+  build-and-upload-testflight:
+    name: Build and Upload to TestFlight
+    runs-on: macos-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Setup FVM
+        uses: kuhnroyal/flutter-fvm-config-action@v2
+        
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version-file: .fvm/fvm_config.json
+          cache: true
+          
+      - name: Install dependencies
+        run: flutter pub get
+        
+      - name: Setup Ruby for fastlane
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+          bundler-cache: true
+          working-directory: ios
+          
+      - name: Install fastlane
+        run: |
+          cd ios
+          gem install fastlane
+          
+      - name: Setup Apple certificates
+        env:
+          APPLE_CERTIFICATE_BASE64: ${{ secrets.APPLE_CERTIFICATE_BASE64 }}
+          APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+          APPLE_PROVISIONING_PROFILE_BASE64: ${{ secrets.APPLE_PROVISIONING_PROFILE_BASE64 }}
+        run: |
+          # Create certificates directory
+          mkdir -p ~/certificates
+          
+          # Decode and install certificate
+          echo $APPLE_CERTIFICATE_BASE64 | base64 --decode > ~/certificates/certificate.p12
+          
+          # Decode and install provisioning profile
+          echo $APPLE_PROVISIONING_PROFILE_BASE64 | base64 --decode > ~/certificates/profile.mobileprovision
+          
+          # Install certificate
+          security create-keychain -p "" build.keychain
+          security import ~/certificates/certificate.p12 -k ~/build.keychain -P "$APPLE_CERTIFICATE_PASSWORD" -A
+          security list-keychains -s ~/build.keychain
+          security default-keychain -s ~/build.keychain
+          security unlock-keychain -p "" ~/build.keychain
+          
+          # Install provisioning profile
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          cp ~/certificates/profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
+          
+      - name: Build iOS app
+        run: |
+          flutter build ios --release --no-codesign
+          
+      - name: Archive and upload to TestFlight
+        env:
+          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          APP_STORE_CONNECT_API_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_ISSUER_ID }}
+          APP_STORE_CONNECT_API_KEY_BASE64: ${{ secrets.APP_STORE_CONNECT_API_KEY_BASE64 }}
+        run: |
+          cd ios
+          
+          # Setup App Store Connect API key
+          mkdir -p ~/private_keys
+          echo $APP_STORE_CONNECT_API_KEY_BASE64 | base64 --decode > ~/private_keys/AuthKey_$APP_STORE_CONNECT_API_KEY_ID.p8
+          
+          # Run fastlane to build and upload
+          fastlane build_and_upload_testflight
+          
+      - name: Comment on PR with TestFlight link
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { context, github } = require('@actions/github');
+            
+            const comment = `🚀 **TestFlight Build Available**
+            
+            Your PR has been successfully built and uploaded to TestFlight!
+            
+            **Build Information:**
+            - Branch: \`${{ github.head_ref }}\`
+            - Commit: \`${{ github.sha }}\`
+            - Build Date: ${new Date().toLocaleString()}
+            
+            **Next Steps:**
+            1. Check your TestFlight app for the new build
+            2. The build will be available for internal testing once Apple processes it (usually 1-2 minutes)
+            3. External testing requires Apple review (24-48 hours)
+            
+            **Feedback:**
+            Please test the app and leave feedback in this PR or through TestFlight directly.
+            
+            > 💡 TestFlight builds are automatically available to all internal testers in your Apple Developer team.`;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+            
+      - name: Comment on PR with failure notice
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { context, github } = require('@actions/github');
+            
+            const comment = `❌ **TestFlight Build Failed**
+            
+            The TestFlight build for this PR failed to complete.
+            
+            **Build Information:**
+            - Branch: \`${{ github.head_ref }}\`
+            - Commit: \`${{ github.sha }}\`
+            - Build Date: ${new Date().toLocaleString()}
+            
+            **Next Steps:**
+            1. Check the [workflow logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) for details
+            2. Fix any issues and push new commits to retry
+            
+            **Common Issues:**
+            - Certificate/provisioning profile expiration
+            - Code signing configuration
+            - Build dependencies or Flutter version issues
+            
+            > 🔍 Check the workflow logs above for detailed error information.`;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });

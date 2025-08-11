@@ -29,6 +29,18 @@ To customize colors:
 
 This project is a starting point for a Flutter application.
 
+### Development Workflow
+
+This project includes automated TestFlight distribution for pull requests:
+
+- **Automatic Builds**: Every PR triggers an iOS build verification
+- **TestFlight Distribution**: When properly configured, PRs automatically upload to TestFlight
+- **PR Feedback**: Build status and TestFlight links are automatically posted to PRs
+
+To enable full TestFlight automation, see the [TestFlight Setup Guide](docs/testflight-setup.md).
+
+### Flutter Resources
+
 A few resources to get you started if this is your first Flutter project:
 
 - [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)

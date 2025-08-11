@@ -1,0 +1,66 @@
+# Fastfile for iOS TestFlight automation
+
+default_platform(:ios)
+
+platform :ios do
+  before_all do
+    setup_circle_ci if is_ci
+  end
+
+  desc "Build and upload to TestFlight"
+  lane :build_and_upload_testflight do
+    # Increment build number based on commit count or timestamp
+    increment_build_number(
+      xcodeproj: "Runner.xcodeproj",
+      build_number: number_of_commits
+    )
+
+    # Build the app
+    build_app(
+      scheme: "Runner",
+      workspace: "Runner.xcworkspace",
+      configuration: "Release",
+      export_method: "app-store",
+      export_options: {
+        provisioningProfiles: {
+          "com.yuto.smooth.metronome" => "match AppStore com.yuto.smooth.metronome"
+        }
+      },
+      output_directory: "./build",
+      output_name: "metronome.ipa",
+      clean: true,
+      include_bitcode: false
+    )
+
+    # Upload to TestFlight
+    upload_to_testflight(
+      api_key_path: "~/private_keys/AuthKey_#{ENV['APP_STORE_CONNECT_API_KEY_ID']}.p8",
+      api_key: {
+        key_id: ENV["APP_STORE_CONNECT_API_KEY_ID"],
+        issuer_id: ENV["APP_STORE_CONNECT_API_ISSUER_ID"],
+        key_filepath: "~/private_keys/AuthKey_#{ENV['APP_STORE_CONNECT_API_KEY_ID']}.p8"
+      },
+      skip_waiting_for_build_processing: true,
+      skip_submission: true,
+      distribute_external: false,
+      notify_external_testers: false,
+      changelog: ENV['FASTLANE_CHANGELOG'] || "Automated build from PR - #{ENV['GITHUB_HEAD_REF'] || ENV['GITHUB_REF_NAME'] || 'main'}"
+    )
+
+    UI.success("Successfully uploaded to TestFlight! 🚀")
+  end
+
+  desc "Setup code signing"
+  lane :setup_code_signing do
+    # This lane can be used for local development setup
+    match(
+      type: "appstore",
+      app_identifier: "com.yuto.smooth.metronome",
+      readonly: true
+    )
+  end
+
+  error do |lane, exception|
+    UI.error("Error in lane #{lane}: #{exception.message}")
+  end
+end
